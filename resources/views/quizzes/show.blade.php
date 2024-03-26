@@ -23,7 +23,12 @@
         <h2>{{ $quiz->id }}</h2>
         <p>
             <strong>Content:</strong> {{ $quiz->content }}<br>
-            <strong>Explaination:</strong> {{ $quiz->explaination }}
+            <strong>Explaination:</strong> {{ $quiz->explaination }}<br>
+            <strong>Answers:</strong>
+            
+            @foreach ($quiz->answers as $answer) 
+                <div>{{ $answer->content }}</div>
+            @endforeach
         </p>
     </div>
 

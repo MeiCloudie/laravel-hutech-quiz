@@ -56,6 +56,13 @@ class QuizController extends Controller
             $quiz->explaination      = $request->explaination;
             $quiz->save();
 
+            foreach ($request->answers as $index => $answer) {
+                $quiz->answers()->create([
+                    'content' => $answer,
+                    'isCorrect' => isset($request->isCorrect[$index]),
+                ]);
+            }
+
             // redirect
             // Session::flash('message', 'Successfully created quiz!');
             return Redirect::to('quizzes');

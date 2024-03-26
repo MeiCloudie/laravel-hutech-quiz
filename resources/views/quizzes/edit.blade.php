@@ -33,13 +33,14 @@
     @method('PUT')
 
     <div class="form-group">
-        <label for="content">Name</label>
+        <label for="content">Content</label>
         <input type="text" id="content" name="content" value="{{ $quiz->content }}" class="form-control">
     </div>
 
     <div class="form-group">
-        <label for="explaination">Email</label>
-        <input type="text" id="explaination" name="explaination" value="{{ $quiz->explaination }}" class="form-control">
+        <label for="explaination">Explaination</label>
+        <input type="text" id="explaination" name="explaination" value="{{ $quiz->explaination }}"
+            class="form-control">
     </div>
 
     <button type="submit" class="btn btn-primary">Edit the Quiz!</button>

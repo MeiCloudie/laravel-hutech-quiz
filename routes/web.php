@@ -21,6 +21,7 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::resource('quizzes', App\Http\Controllers\QuizController::class);
+Route::resource('quizCollections', App\Http\Controllers\QuizCollectionController::class);
 Route::resource('answers', App\Http\Controllers\AnswerController::class);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

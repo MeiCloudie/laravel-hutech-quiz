@@ -98,7 +98,7 @@ class QuizController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateQuizRequest $request, Quiz $quiz)
+    public function update(UpdateQuizRequest $request, $id)
     {
         //
         $rules = array(
@@ -114,7 +114,7 @@ class QuizController extends Controller
                 ->withInput();
         } else {
             // store
-            $quiz = Quiz::find($quiz->id);
+            $quiz = Quiz::find($id);
             $quiz->content       = $request->content;
             $quiz->explaination      = $request->explaination;
             $quiz->save();

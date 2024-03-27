@@ -12,10 +12,10 @@ class Answer extends Model
 
     protected $table = 'answers';
 
-    protected $fillable = ['content', 'isCorrect'];
+    protected $fillable = ['content', 'is_correct'];
 
     protected $attributes = [
-        'isCorrect' => false
+        'is_correct' => false
     ];
 
     public function quiz() {

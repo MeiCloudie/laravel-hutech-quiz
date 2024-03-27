@@ -21,13 +21,13 @@ class Quiz extends Model
         return $this->hasMany(Answer::class);
     }
 
-    public function quizToQuizCollections()
-    {
-        return $this->hasMany(QuizToQuizCollection::class);
-    }
-
     public function quizCollections()
     {
         return $this->belongsToMany(QuizCollection::class, 'quiz_to_quiz_collections', 'quiz_id','quiz_collection_id');
+    }
+
+    public function rooms()
+    {
+        return $this->hasMany(Room::class);
     }
 }

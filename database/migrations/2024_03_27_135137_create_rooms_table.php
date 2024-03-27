@@ -11,17 +11,24 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('answers', function (Blueprint $table) {
+        Schema::create('rooms', function (Blueprint $table) {
             $table->id();
-            $table->string('content');
-            $table->boolean('is_correct')->default(false);
+            $table->string('code');
+            $table->string('owner_id');
             $table->timestamps();
             $table->softDeletes();
 
-            $table->unsignedBigInteger('quiz_id');
-            $table->foreign('quiz_id')
+            
+            $table->unsignedBigInteger('current_quiz_id');
+            $table->unsignedBigInteger('quiz_collection_id');
+
+            $table->foreign('current_quiz_id')
             ->references('id')
             ->on('quizzes')
+            ->onDelete('cascade');
+            $table->foreign('quiz_collection_id')
+            ->references('id')
+            ->on('quiz_collections')
             ->onDelete('cascade');
         });
     }
@@ -31,6 +38,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('answers');
+        Schema::dropIfExists('rooms');
     }
 };

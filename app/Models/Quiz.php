@@ -14,14 +14,20 @@ class Quiz extends Model
 
     protected $fillable = ['content', 'explaination'];
 
-    protected $attributes = [
-    ];
+    protected $attributes = [];
 
-    public function answers() {
+    public function answers()
+    {
         return $this->hasMany(Answer::class);
     }
 
-    public function quizToQuizCollections() {
+    public function quizToQuizCollections()
+    {
         return $this->hasMany(QuizToQuizCollection::class);
+    }
+
+    public function quizCollections()
+    {
+        return $this->belongsToMany(QuizCollection::class, 'quiz_to_quiz_collections', 'quiz_id','quiz_collection_id');
     }
 }

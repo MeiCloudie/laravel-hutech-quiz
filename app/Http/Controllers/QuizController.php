@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Quiz;
 use App\Http\Requests\StoreQuizRequest;
 use App\Http\Requests\UpdateQuizRequest;
+use App\Models\QuizCollection;
 use Illuminate\Contracts\Session\Session;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
@@ -76,6 +77,11 @@ class QuizController extends Controller
     {
         //
         $quiz = Quiz::find($id);
+
+        $quizCollection = new QuizCollection;
+        $quizCollection->name = "hi";
+        $quizCollection->save();
+        $quiz->quizCollections()->attach($quizCollection);
 
         // show the view and pass the quiz to it
         return view('quizzes.show')

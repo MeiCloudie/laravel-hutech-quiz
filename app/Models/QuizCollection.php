@@ -17,4 +17,8 @@ class QuizCollection extends Model
     public function quizToQuizCollections() {
         return $this->hasMany(QuizToQuizCollection::class);
     }
+
+    public function quizzes() {
+        return $this->belongsToMany(Quiz::class, 'quiz_to_quiz_collections', 'quiz_collection_id','quiz_id');
+    }
 }

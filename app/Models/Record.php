@@ -6,24 +6,26 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Answer extends Model
+class Record extends Model
 {
     use HasFactory, SoftDeletes;
 
-    protected $table = 'answers';
+    protected $table = 'records';
 
-    protected $fillable = ['content', 'is_correct'];
+    protected $fillable = ['user_id'];
 
     protected $attributes = [
-        'is_correct' => false
     ];
 
     public function quiz() {
         return $this->belongsTo(Quiz::class);
     }
 
-    public function records()
-    {
-        return $this->hasMany(Record::class);
+    public function room() {
+        return $this->belongsTo(Room::class);
+    }
+
+    public function answer() {
+        return $this->belongsTo(Answer::class);
     }
 }

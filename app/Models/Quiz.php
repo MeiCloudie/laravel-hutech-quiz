@@ -30,4 +30,9 @@ class Quiz extends Model
     {
         return $this->hasMany(Room::class);
     }
+
+    public function records()
+    {
+        return $this->hasMany(Record::class);
+    }
 }

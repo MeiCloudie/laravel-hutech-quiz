@@ -64,6 +64,18 @@
             width: 100%;
             z-index: 1000;
         }
+
+        .footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            text-align: center;
+            background-color: #eaeaea;
+            padding: 10px 0;
+            border-top: 1px solid #ddd;
+            font-size: 12px;
+        }
     </style>
 </head>
 
@@ -99,6 +111,14 @@
                 </div>
             </div>
         </div>
+
+        <footer class="footer pb-0">
+            <div class="container">
+                <span class="text-muted">© 2024 Khoa Công nghệ thông tin | Trường ĐH Công nghệ TP.HCM
+                    (HUTECH)</span><br>
+                <span class="text-muted fst-italic">(Đồ án PHP do sinh viên thực hiện)</span>
+            </div>
+        </footer>
     </div>
 </body>
 

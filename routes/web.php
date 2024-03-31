@@ -18,10 +18,14 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Auth::routes();
+// Auth::routes();
+
+Route::get('/login', [App\Http\Controllers\Auth\LoginController::class, 'login'])->name('login');
+Route::post('/login', [App\Http\Controllers\Auth\LoginController::class, 'authenticate'])->name('login.auth');
 
 Route::resource('quizzes', App\Http\Controllers\QuizController::class);
 Route::resource('quizCollections', App\Http\Controllers\QuizCollectionController::class);
 Route::resource('answers', App\Http\Controllers\AnswerController::class);
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::middleware('auth')->group(function () {
+    Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+});

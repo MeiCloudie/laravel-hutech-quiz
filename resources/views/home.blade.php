@@ -8,7 +8,9 @@
                 <div class="mb-4">
                     <h2 class="fw-bold">GIỚI THIỆU HỆ THỐNG</h2>
                     <p style="text-align: justify;" class="text-justify">
-                        HUTECH QUIZ là một phần mở rộng của hệ thống HUTECH CLASSROOM, tập trung đặc biệt vào quản lý và
+                        HUTECH QUIZ là một phần mở rộng của hệ thống <a href="https://hutech-classroom-edu.vercel.app/"
+                            target="_blank">HUTECH CLASSROOM</a>, tập trung đặc biệt vào quản
+                        lý và
                         tổ chức các bài kiểm tra trắc nghiệm trực tuyến. Được phát triển bởi đội ngũ Sinh Viên Khoa Công
                         nghệ thông tin tại Trường Đại học Công nghệ TPHCM HUTECH, hệ thống này mang lại cho Giảng Viên
                         và Sinh Viên trải nghiệm học tập tối ưu và hiệu quả.
@@ -56,9 +58,23 @@
                 </div>
 
                 <!-- Phần thông báo -->
-                <div>
+                <hr />
+                <div class="mt-4">
+                    <h2 class="fw-bold">THÔNG BÁO</h2>
+                    <div class="mt-3">
+                        <h5 class="fw-bold text-danger"><i class="bi bi-bell-fill me-2"></i>Hệ Thống</h5>
+                        <p>Dữ liệu được cập nhật vào lúc:
+                            {{ now()->setTimezone('Asia/Ho_Chi_Minh')->format('d/m/Y H:i:s') }}
+                        </p>
+                        <p>Đang truy cập: {{ rand(1, 10) }}</p>
+                    </div>
 
+                    <div class="mt-4">
+                        <h5 class="fw-bold text-danger"><i class="bi bi-bookmark-fill me-2"></i>Việc Cần Làm</h5>
+                        <p>Không có</p>
+                    </div>
                 </div>
+
             </div>
         </div>
     </div>

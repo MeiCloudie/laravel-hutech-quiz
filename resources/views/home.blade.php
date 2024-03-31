@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="">
-        <div class="row justify-content-center">
+        <div class="row justify-content-center m-0">
             <div class="col-md-8">
                 <!-- Giới thiệu hệ thống -->
                 <div class="mb-4">

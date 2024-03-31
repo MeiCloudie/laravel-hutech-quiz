@@ -22,9 +22,13 @@
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
+                <!-- Logo -->
+                <a class="navbar-brand fw-bold d-flex align-items-center " href="{{ url('/home') }}">
+                    <img class="mx-2" src="{{ asset('images/logoHutech.png') }}" alt="HUTECH Quiz" width="30"
+                        height="34">
+                    HUTECH QUIZ
                 </a>
+
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                     aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
@@ -34,7 +38,14 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav me-auto">
-
+                        <li class="nav-item">
+                            <a class="nav-link{{ Request::is('home') ? ' active' : '' }}"
+                                href="{{ route('home') }}">Trang chủ</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link{{ Request::is('rooms') ? ' active' : '' }}" {{-- href="{{ route('rooms') }}">Phòng thi</a> --}}
+                                href="">Phòng thi</a>
+                        </li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->
@@ -60,10 +71,11 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="">Hồ Sơ</a>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                         onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
+                                        Đăng Xuất
                                     </a>
 
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
@@ -77,7 +89,7 @@
             </div>
         </nav>
 
-        <main class="py-4">
+        <main class="py-4 fs-5">
             @yield('content')
         </main>
     </div>

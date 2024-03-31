@@ -20,8 +20,10 @@ Route::get('/', function () {
 
 Auth::routes();
 
+Route::resource('rooms', App\Http\Controllers\RoomController::class);
 Route::resource('quizzes', App\Http\Controllers\QuizController::class);
 Route::resource('quizCollections', App\Http\Controllers\QuizCollectionController::class);
 Route::resource('answers', App\Http\Controllers\AnswerController::class);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/profile', [App\Http\Controllers\ProfileController::class, 'index'])->name('profile');

@@ -49,7 +49,8 @@
                                     năng lực của bản thân từ việc
                                     kiểm tra các kiến thức chuyên môn được soạn sẵn thông qua các bộ đề chất lượng, khoa học
                                     và hiệu quả.</p>
-                                <a href="" class="btn btn-primary"><i class="bi bi-mortarboard-fill me-2"></i>DANH
+                                <a href="{{ route('rooms.index') }}" class="btn btn-primary"><i
+                                        class="bi bi-mortarboard-fill me-2"></i>DANH
                                     SÁCH
                                     PHÒNG THI</a>
                             </div>

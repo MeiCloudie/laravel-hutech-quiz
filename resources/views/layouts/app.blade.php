@@ -65,8 +65,8 @@
                                 href="{{ route('home') }}">Trang chủ</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link{{ Request::is('rooms') ? ' active' : '' }}" {{-- href="{{ route('rooms') }}">Phòng thi</a> --}}
-                                href="">Phòng thi</a>
+                            <a class="nav-link{{ Request::is('rooms') ? ' active' : '' }}"
+                                href="{{ route('rooms.index') }}">Phòng thi</a>
                         </li>
                     </ul>
 
@@ -96,7 +96,7 @@
 
 
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="">Hồ Sơ</a>
+                                    <a class="dropdown-item" href="{{ route('profile') }}">Hồ Sơ</a>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                         onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">

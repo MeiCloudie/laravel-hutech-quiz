@@ -38,6 +38,19 @@
             border-top: 1px solid #ddd;
             font-size: 12px;
         }
+
+        .dropdown-item {
+            color: #000;
+        }
+
+        .dropdown-item:hover {
+            background-color: #eaeaea;
+            transition: background-color 0.3s ease;
+        }
+
+        .dropdown-item:visited {
+            color: #000;
+        }
     </style>
 </head>
 
@@ -64,12 +77,13 @@
                         <!-- Left Side Of Navbar -->
                         <ul class="navbar-nav me-auto">
                             <li class="nav-item">
-                                <a class="nav-link{{ Request::is('home') ? ' active' : '' }}"
-                                    href="{{ route('home') }}">Trang chủ</a>
+                                <a class="nav-link{{ Request::is('home') ? ' active' : '' }}" href="{{ route('home') }}"><i
+                                        class="bi bi-house-fill me-1"></i>Trang chủ</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link{{ Request::is('rooms') ? ' active' : '' }}"
-                                    href="{{ route('rooms.index') }}">Phòng thi</a>
+                                    href="{{ route('rooms.index') }}"><i class="bi bi-mortarboard-fill me-1"></i>Phòng
+                                    thi</a>
                             </li>
                         </ul>
                     @endguest
@@ -89,10 +103,13 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('profile') }}">Hồ Sơ</a>
+                                    <a class="dropdown-item" href="{{ route('profile') }}">
+                                        <i class="bi bi-person-lines-fill me-2"></i>
+                                        Hồ Sơ
+                                    </a>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
-                                        onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
+                                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                        <i class="bi bi-box-arrow-left me-2"></i>
                                         Đăng Xuất
                                     </a>
 

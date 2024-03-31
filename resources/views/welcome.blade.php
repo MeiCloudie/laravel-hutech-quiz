@@ -90,9 +90,11 @@
                     <h1 class="fw-bold">HUTECH QUIZ</h1>
                     <p>HỆ THỐNG QUẢN LÝ CÁC BÀI KIỂM TRA TRẮC NGHIỆM</p>
                     @if (Auth::check())
-                        <a href="{{ route('home') }}" class="btn btn-primary btn-login">ĐẾN TRANG CHỦ</a>
+                        <a href="{{ route('home') }}" class="btn btn-primary btn-login"><i
+                                class="bi bi-house-fill me-2"></i>ĐẾN TRANG CHỦ</a>
                     @else
-                        <a href="{{ route('login') }}" class="btn btn-primary btn-login">ĐĂNG NHẬP</a>
+                        <a href="{{ route('login') }}" class="btn btn-primary btn-login"><i
+                                class="bi bi-door-open-fill me-2"></i>ĐĂNG NHẬP</a>
                     @endif
                 </div>
             </div>

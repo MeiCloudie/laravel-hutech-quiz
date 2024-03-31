@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="px-2">
+    <div class="">
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <!-- Giới thiệu hệ thống -->

@@ -20,10 +20,11 @@
 
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+        <nav class="navbar navbar-expand-md navbar-dark bg-dark
+         shadow-sm">
             <div class="container">
                 <!-- Logo -->
-                <a class="navbar-brand fw-bold d-flex align-items-center " href="{{ url('/home') }}">
+                <a class="navbar-brand fw-bold d-flex align-items-center" href="{{ url('/home') }}">
                     <img class="mx-2" src="{{ asset('images/logoHutech.png') }}" alt="HUTECH Quiz" width="30"
                         height="34">
                     HUTECH QUIZ
@@ -65,10 +66,13 @@
                             @endif
                         @else
                             <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
-                                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }}
+                                <a id="navbarDropdown" class="nav-link dropdown-toggle d-flex align-items-center"
+                                    href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true"
+                                    aria-expanded="false" v-pre>
+                                    <i class="bi bi-person-circle me-2 fs-5"></i>{{ Auth::user()->name }}
                                 </a>
+
+
 
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="">Hồ Sơ</a>

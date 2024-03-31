@@ -21,6 +21,7 @@ class DatabaseSeeder extends Seeder
         $this->call([
             QuizCollectionSeeder::class,
             QuizSeeder::class,
+            AnswerSeeder::class,
             QuizToQuizCollectionSeeder::class
         ]);
     }

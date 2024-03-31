@@ -25,3 +25,4 @@ Route::resource('quizCollections', App\Http\Controllers\QuizCollectionController
 Route::resource('answers', App\Http\Controllers\AnswerController::class);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/profile', [App\Http\Controllers\ProfileController::class, 'index'])->name('profile');

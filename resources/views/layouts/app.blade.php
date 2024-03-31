@@ -58,33 +58,27 @@
                 </button>
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav me-auto">
-                        <li class="nav-item">
-                            <a class="nav-link{{ Request::is('home') ? ' active' : '' }}"
-                                href="{{ route('home') }}">Trang chủ</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link{{ Request::is('rooms') ? ' active' : '' }}"
-                                href="{{ route('rooms.index') }}">Phòng thi</a>
-                        </li>
-                    </ul>
+                    @guest
+                    @else
+                        <!-- Left Side Of Navbar -->
+                        <ul class="navbar-nav me-auto">
+                            <li class="nav-item">
+                                <a class="nav-link{{ Request::is('home') ? ' active' : '' }}"
+                                    href="{{ route('home') }}">Trang chủ</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link{{ Request::is('rooms') ? ' active' : '' }}"
+                                    href="{{ route('rooms.index') }}">Phòng thi</a>
+                            </li>
+                        </ul>
+                    @endguest
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ms-auto">
                         <!-- Authentication Links -->
                         @guest
-                            @if (Route::has('login'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                                </li>
-                            @endif
-
-                            @if (Route::has('register'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                                </li>
-                            @endif
+                            <a class="nav-link{{ Request::is('login') ? ' active' : '' }}" href="{{ route('login') }}">Hãy
+                                Đăng Nhập!</a>
                         @else
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle d-flex align-items-center"
@@ -92,8 +86,6 @@
                                     aria-expanded="false" v-pre>
                                     <i class="bi bi-person-circle me-2 fs-5"></i>{{ Auth::user()->name }}
                                 </a>
-
-
 
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="{{ route('profile') }}">Hồ Sơ</a>

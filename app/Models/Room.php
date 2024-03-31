@@ -16,11 +16,13 @@ class Room extends Model
 
     protected $attributes = [];
 
-    public function currentQuiz() {
+    public function currentQuiz()
+    {
         return $this->belongsTo(Quiz::class);
     }
 
-    public function quizCollection() {
+    public function quizCollection()
+    {
         return $this->belongsTo(QuizCollection::class);
     }
 

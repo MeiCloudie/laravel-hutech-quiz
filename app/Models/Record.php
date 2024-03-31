@@ -14,18 +14,20 @@ class Record extends Model
 
     protected $fillable = ['user_id'];
 
-    protected $attributes = [
-    ];
+    protected $attributes = [];
 
-    public function quiz() {
+    public function quiz()
+    {
         return $this->belongsTo(Quiz::class);
     }
 
-    public function room() {
+    public function room()
+    {
         return $this->belongsTo(Room::class);
     }
 
-    public function answer() {
+    public function answer()
+    {
         return $this->belongsTo(Answer::class);
     }
 }

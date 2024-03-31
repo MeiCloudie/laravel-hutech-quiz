@@ -18,7 +18,8 @@ class Answer extends Model
         'is_correct' => false
     ];
 
-    public function quiz() {
+    public function quiz()
+    {
         return $this->belongsTo(Quiz::class);
     }
 

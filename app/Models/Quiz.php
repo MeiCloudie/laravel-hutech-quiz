@@ -23,7 +23,7 @@ class Quiz extends Model
 
     public function quizCollections()
     {
-        return $this->belongsToMany(QuizCollection::class, 'quiz_to_quiz_collections', 'quiz_id','quiz_collection_id');
+        return $this->belongsToMany(QuizCollection::class, 'quiz_to_quiz_collections', 'quiz_id', 'quiz_collection_id');
     }
 
     public function rooms()

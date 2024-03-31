@@ -12,11 +12,13 @@ class QuizToQuizCollection extends Model
 
     protected $table = 'quizToquizCollections';
 
-    public function quiz() {
+    public function quiz()
+    {
         return $this->belongsTo(Quiz::class);
     }
 
-    public function quizCollection() {
+    public function quizCollection()
+    {
         return $this->belongsTo(QuizCollection::class);
     }
 }

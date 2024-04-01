@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\LoginRequest;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
 
@@ -49,7 +50,7 @@ class LoginController extends Controller
     {
         //
         $rules = array(
-            'email' => 'required|string|min:55',
+            'email' => 'required|string',
             'password' => 'required|string',
         );
         $validator = Validator::make($request->all(), $rules);
@@ -62,6 +63,14 @@ class LoginController extends Controller
                 ->withInput();
         } else {
             // validate
+            $url = 'https://hutechclassroom.azurewebsites.net/api/';
+            $response = Http::post($url.'v1/Account/login', [
+                'userName' => $request->email,
+                'password' => $request->password
+            ]);
+            $data = json_decode($response->body(), true);
+
+            dd($data);
             
 
             return redirect('home');

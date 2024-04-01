@@ -18,7 +18,7 @@ class Authenticate extends Middleware
         // }
     
         // Check if user is authenticated with JWT token
-        if ($request->cookie('jwt')) {
+        if ($request->cookie('accessToken')) {
             return null;
         }
     

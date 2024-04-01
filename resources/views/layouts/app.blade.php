@@ -92,8 +92,14 @@
                     <ul class="navbar-nav ms-auto">
                         <!-- Authentication Links -->
                         @guest
-                            <a class="nav-link{{ Request::is('login') ? ' active' : '' }}" href="{{ route('login') }}">Hãy
-                                Đăng Nhập!</a>
+                            <div class="d-flex gap-2">
+                                <a class="btn btn-outline-secondary nav-link{{ Request::is('register') ? ' active' : '' }}"
+                                    href="{{ route('register') }}">
+                                    <i class="bi bi-r-circle-fill me-2"></i>Đăng Ký</a>
+                                <a class="btn btn-outline-secondary nav-link{{ Request::is('login') ? ' active' : '' }}"
+                                    href="{{ route('login') }}">
+                                    <i class="bi bi-door-open-fill me-2"></i>Đăng Nhập</a>
+                            </div>
                         @else
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle d-flex align-items-center"

@@ -26,6 +26,6 @@ Route::post('/login', [App\Http\Controllers\Auth\LoginController::class, 'authen
 Route::resource('quizzes', App\Http\Controllers\QuizController::class);
 Route::resource('quizCollections', App\Http\Controllers\QuizCollectionController::class);
 Route::resource('answers', App\Http\Controllers\AnswerController::class);
-Route::middleware('auth')->group(function () {
+Route::middleware('authWithApi')->group(function () {
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 });

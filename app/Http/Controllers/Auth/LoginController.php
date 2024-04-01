@@ -8,6 +8,7 @@ use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
+use Tymon\JWTAuth\Facades\JWTAuth;
 
 class LoginController extends Controller
 {
@@ -64,16 +65,32 @@ class LoginController extends Controller
         } else {
             // validate
             $url = 'https://hutechclassroom.azurewebsites.net/api/';
-            $response = Http::post($url.'v1/Account/login', [
+            $response = Http::post($url . 'v1/Account/login', [
                 'userName' => $request->email,
                 'password' => $request->password
             ]);
             $data = json_decode($response->body(), true);
-
-            dd($data);
+            if ($response->status() >= 400) {
+                return redirect('login')
+                    ->withErrors(['email' => $data['title']])
+                    ->withInput();
+            }
+            $id = $data['id'];
+            $userName = $data['userName'];
+            $email = $data['email'];
+            $firstName = $data['firstName'];
+            $lastName = $data['lastName'];
+            $class = $data['class'];
+            $token = $data['token'];
             
+            $jwtCookie = $response->cookies()->getCookieByName('accessToken')->getValue();
+            
+            // dd(JWTAuth::user());
 
-            return redirect('home');
+            // Store JWT token in client's browser
+            return redirect('home')->withCookie(cookie('accessToken', $jwtCookie, 0));
+
+            // return redirect('home');
         }
     }
 }

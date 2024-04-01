@@ -105,8 +105,12 @@
                         <a href="{{ route('home') }}" class="btn btn-primary btn-login"><i
                                 class="bi bi-house-fill me-2"></i>ĐẾN TRANG CHỦ</a>
                     @else
-                        <a href="{{ route('login') }}" class="btn btn-primary btn-login"><i
-                                class="bi bi-door-open-fill me-2"></i>ĐĂNG NHẬP</a>
+                        <div class="d-flex">
+                            <a href="{{ route('register') }}" class="btn btn-lg btn-primary flex-fill me-2"><i
+                                    class="bi bi-r-circle-fill me-2"></i>ĐĂNG KÝ</a>
+                            <a href="{{ route('login') }}" class="btn btn-lg btn-outline-primary flex-fill"><i
+                                    class="bi bi-door-open-fill me-2"></i>ĐĂNG NHẬP</a>
+                        </div>
                     @endif
                 </div>
             </div>

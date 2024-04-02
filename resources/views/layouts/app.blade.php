@@ -105,7 +105,7 @@
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle d-flex align-items-center"
                                     href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true"
                                     aria-expanded="false" v-pre>
-                                    <i class="bi bi-person-circle me-2 fs-5"></i>{{ Auth::user()->name }}
+                                    <i class="bi bi-person-circle me-2 fs-5"></i>{{ Auth::user()->username }}
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">

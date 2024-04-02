@@ -13,12 +13,18 @@ return new class extends Migration
     {
         Schema::create('records', function (Blueprint $table) {
             $table->id();
-            $table->string('user_id');
             $table->timestamps();
-
+            
+            $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('room_id');
             $table->unsignedBigInteger('quiz_id');
             $table->unsignedBigInteger('answer_id');
+
+            $table->foreign('user_id')
+            ->references('id')
+            ->on('users')
+            ->onDelete('cascade');
+
             
             $table->foreign('room_id')
             ->references('id')

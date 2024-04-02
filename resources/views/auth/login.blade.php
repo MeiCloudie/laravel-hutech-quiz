@@ -97,7 +97,8 @@
                             <div class="mb-2">
                                 <div class="">
                                     <p class="text-center fs-5 fst-italic text-muted">Bạn chưa có tài khoản?<a
-                                            class="btn btn-link btn-md fst-normal">ĐĂNG KÝ NGAY</a></p>
+                                            href="{{ route('register') }}" class="btn btn-link btn-md fst-normal">ĐĂNG KÝ
+                                            NGAY</a></p>
                                 </div>
                             </div>
                         </form>

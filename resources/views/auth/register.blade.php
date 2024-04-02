@@ -104,7 +104,8 @@
                             <div class="mb-2">
                                 <div class="">
                                     <p class="text-center fs-5 fst-italic text-muted">Bạn đã có tài khoản?<a
-                                            class="btn btn-link btn-md fst-normal">ĐĂNG NHẬP NGAY</a></p>
+                                            href="{{ route('login') }}" class="btn btn-link btn-md fst-normal">ĐĂNG NHẬP
+                                            NGAY</a></p>
                                 </div>
                             </div>
                         </form>

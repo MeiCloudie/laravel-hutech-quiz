@@ -28,7 +28,7 @@
                             {{-- TODO: Sửa "email" thành "username" --}}
                             {{-- Tài khoản --}}
                             <div class="row mb-3">
-                                <label for="email" class="col-md-2 col-form-label text-md-start"><i
+                                <label for="username" class="col-md-2 col-form-label text-md-start"><i
                                         class="bi bi-person-fill me-2"></i>{{ __('Tài khoản') }}</label>
 
                                 <div class="col-md-10">

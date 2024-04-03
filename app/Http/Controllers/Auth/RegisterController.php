@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Faculty;
 use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
@@ -82,6 +83,14 @@ class RegisterController extends Controller
             'username' => $data['userName'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+            'faculty_id' => $data['faculty'],
         ]);
+    }
+
+    public function showRegistrationForm()
+    {
+        $faculties = Faculty::all();
+
+        return view('auth.register', compact('faculties'));
     }
 }

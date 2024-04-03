@@ -23,7 +23,7 @@ class User extends Authenticatable
         'username',
         'email',
         'password',
-        // TODO: faculty
+        'faculty_id'
     ];
 
     /**
@@ -46,7 +46,7 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
-    
+
 
     public function faculty()
     {

@@ -125,7 +125,6 @@
                             </div>
 
                             {{-- Faculty --}}
-                            {{-- TODO: Chưa chỉnh logic model --}}
                             <div class="row mb-3">
                                 <label for="faculty" class="col-md-3 col-form-label text-md-start"><i
                                         class="bi bi-mortarboard-fill me-2"></i>{{ __('Khoa') }}</label>
@@ -133,9 +132,10 @@
                                     <select id="faculty" class="form-select @error('faculty') is-invalid @enderror"
                                         name="faculty" required autofocus>
                                         <option value="" selected disabled>Chọn khoa</option>
-                                        <option value="Công nghệ thông tin">Khoa Công nghệ thông tin</option>
-                                        <option value="Tiếng Anh">Khoa Tiếng Anh</option>
-                                        <option value="Xây dựng">Khoa Xây dựng</option>
+                                        {{-- Duyệt qua danh sách các khoa từ controller và tạo option cho mỗi khoa --}}
+                                        @foreach ($faculties as $faculty)
+                                            <option value="{{ $faculty->id }}">{{ $faculty->name }}</option>
+                                        @endforeach
                                     </select>
 
                                     @error('faculty')
@@ -145,6 +145,7 @@
                                     @enderror
                                 </div>
                             </div>
+
 
                             {{-- Nút đăng ký --}}
                             <div class="mb-2">

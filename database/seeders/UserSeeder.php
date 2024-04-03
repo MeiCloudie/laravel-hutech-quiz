@@ -23,6 +23,8 @@ class UserSeeder extends Seeder
             'username' => '2080600914',
             'email' => 'thai@gmail.com',
             'password' => Hash::make($password),
+
+            'faculty_id' => 1
         ]);
         User::create([
             'id' => 2,
@@ -31,6 +33,8 @@ class UserSeeder extends Seeder
             'username' => '2080600803',
             'email' => 'mei@gmail.com',
             'password' => Hash::make($password),
+
+            'faculty_id' => 1
         ]);
     }
 }

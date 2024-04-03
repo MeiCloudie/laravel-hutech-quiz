@@ -45,4 +45,11 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    
+
+    public function faculty()
+    {
+        return $this->belongsTo(Faculty::class);
+    }
 }

@@ -76,11 +76,11 @@
                                 </div>
 
                                 {{-- Quên mật khẩu --}}
-                                @if (Route::has('password.request'))
+                                {{-- @if (Route::has('password.request'))
                                     <a class="col-md-4 btn btn-link text-end" href="{{ route('password.request') }}">
                                         {{ __('Quên mật khẩu?') }}
                                     </a>
-                                @endif
+                                @endif --}}
                             </div>
 
                             {{-- Nút đăng nhập --}}

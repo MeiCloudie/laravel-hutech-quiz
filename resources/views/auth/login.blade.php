@@ -28,15 +28,15 @@
                             {{-- TODO: Sửa "email" thành "username" --}}
                             {{-- Tài khoản --}}
                             <div class="row mb-3">
-                                <label for="email" class="col-md-2 col-form-label text-md-start"><i
+                                <label for="username" class="col-md-2 col-form-label text-md-start"><i
                                         class="bi bi-person-fill me-2"></i>{{ __('Tài khoản') }}</label>
 
                                 <div class="col-md-10">
-                                    <input id="email" type="email"
-                                        class="form-control @error('email') is-invalid @enderror" name="email"
-                                        value="{{ old('email') }}" required autocomplete="email" autofocus>
+                                    <input id="username" type="text"
+                                        class="form-control @error('username') is-invalid @enderror" name="username"
+                                        value="{{ old('username') }}" required autocomplete="username" autofocus>
 
-                                    @error('email')
+                                    @error('username')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
@@ -76,11 +76,11 @@
                                 </div>
 
                                 {{-- Quên mật khẩu --}}
-                                @if (Route::has('password.request'))
+                                {{-- @if (Route::has('password.request'))
                                     <a class="col-md-4 btn btn-link text-end" href="{{ route('password.request') }}">
                                         {{ __('Quên mật khẩu?') }}
                                     </a>
-                                @endif
+                                @endif --}}
                             </div>
 
                             {{-- Nút đăng nhập --}}

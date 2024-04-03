@@ -24,7 +24,8 @@ class DatabaseSeeder extends Seeder
             QuizCollectionSeeder::class,
             QuizSeeder::class,
             AnswerSeeder::class,
-            QuizToQuizCollectionSeeder::class
+            QuizToQuizCollectionSeeder::class,
+            RoomSeeder::class,
         ]);
     }
 }

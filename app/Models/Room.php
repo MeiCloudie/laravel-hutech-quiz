@@ -26,6 +26,11 @@ class Room extends Model
         return $this->belongsTo(QuizCollection::class);
     }
 
+    public function owner()
+    {
+        return $this->belongsTo(User::class);
+    }
+
     public function records()
     {
         return $this->hasMany(Record::class);

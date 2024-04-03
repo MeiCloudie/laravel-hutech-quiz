@@ -25,100 +25,32 @@
                         <form method="POST" action="{{ route('register') }}">
                             @csrf
 
-                            {{-- !: Field cũ --}}
-                            {{-- Name --}}
-                            {{-- <div class="row mb-3">
-                                <label for="name" class="col-md-3 col-form-label text-md-start"><i
-                                        class="bi bi-person-fill me-2"></i>{{ __('Họ Tên') }}</label>
-
-                                <div class="col-md-9">
-                                    <input id="name" type="text"
-                                        class="form-control @error('name') is-invalid @enderror" name="name"
-                                        value="{{ old('name') }}" required autocomplete="name" autofocus>
-
-                                    @error('name')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                            </div> --}}
-
-                            {{-- Email --}}
-                            {{-- <div class="row mb-3">
-                                <label for="email" class="col-md-3 col-form-label text-md-start"><i
-                                        class="bi bi-envelope-fill me-2"></i>{{ __('Email') }}</label>
-
-                                <div class="col-md-9">
-                                    <input id="email" type="email"
-                                        class="form-control @error('email') is-invalid @enderror" name="email"
-                                        value="{{ old('email') }}" required autocomplete="email">
-
-                                    @error('email')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                            </div> --}}
-
-                            {{-- Password --}}
-                            {{-- <div class="row mb-3">
-                                <label for="password" class="col-md-3 col-form-label text-md-start"><i
-                                        class="bi bi-shield-lock-fill me-2"></i>{{ __('Mật khẩu') }}</label>
-
-                                <div class="col-md-9">
-                                    <input id="password" type="password"
-                                        class="form-control @error('password') is-invalid @enderror" name="password"
-                                        required autocomplete="new-password">
-
-                                    @error('password')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                            </div> --}}
-
-                            {{-- Confirm Password --}}
-                            {{-- <div class="row mb-3">
-                                <label for="password-confirm" class="col-md-3 col-form-label text-md-start"><i
-                                        class="bi bi-lock-fill me-2"></i>{{ __('Xác nhận mật khẩu') }}</label>
-
-                                <div class="col-md-9">
-                                    <input id="password-confirm" type="password" class="form-control"
-                                        name="password_confirmation" required autocomplete="new-password">
-                                </div>
-                            </div> --}}
-                            {{-- !: HẾT Field cũ --}}
-
-                            {{-- !: Field Mới --}}
                             {{-- Firstname and Lastname --}}
                             <div class="row mb-3">
-                                {{-- Firstname --}}
-                                <label for="firstName" class="col-md-3 col-form-label text-md-start"><i
-                                        class="bi bi-pen-fill me-2"></i>{{ __('Họ và lót') }}</label>
-                                <div class="col-md-4">
-                                    <input id="firstName" type="text"
-                                        class="form-control @error('firstName') is-invalid @enderror" name="firstName"
-                                        value="{{ old('firstName') }}" required autocomplete="firstName" autofocus>
-
-                                    @error('firstName')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-
                                 {{-- Lastname --}}
-                                <label for="lastName" class="col-md-2 col-form-label text-md-end"><i
-                                        class="bi bi-person-fill me-2"></i>{{ __('Tên') }}</label>
-                                <div class="col-md-3">
+                                <label for="lastName" class="col-md-3 col-form-label text-md-start"><i
+                                        class="bi bi-person-fill me-2"></i>{{ __('Họ và lót') }}</label>
+                                <div class="col-md-4">
                                     <input id="lastName" type="text"
                                         class="form-control @error('lastName') is-invalid @enderror" name="lastName"
                                         value="{{ old('lastName') }}" required autocomplete="lastName" autofocus>
 
                                     @error('lastName')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+
+                                {{-- Firstname --}}
+                                <label for="firstName" class="col-md-2 col-form-label text-md-end"><i
+                                        class="bi bi-pen-fill me-2"></i>{{ __('Tên') }}</label>
+                                <div class="col-md-3">
+                                    <input id="firstName" type="text"
+                                        class="form-control @error('firstName') is-invalid @enderror" name="firstName"
+                                        value="{{ old('firstName') }}" required autocomplete="firstName" autofocus>
+
+                                    @error('firstName')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
@@ -213,7 +145,6 @@
                                     @enderror
                                 </div>
                             </div>
-                            {{-- !: HẾT Field Mới --}}
 
                             {{-- Nút đăng ký --}}
                             <div class="mb-2">

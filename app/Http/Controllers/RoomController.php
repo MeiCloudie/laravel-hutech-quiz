@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Room;
 use App\Http\Requests\StoreRoomRequest;
 use App\Http\Requests\UpdateRoomRequest;
+use App\Models\QuizCollection;
+use App\Models\User;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
 
@@ -30,6 +32,12 @@ class RoomController extends Controller
     public function create()
     {
         //
+        $users = User::all();
+        $quizCollections = QuizCollection::all();
+        return view('rooms.create')->with([
+            'users' => $users,
+            'quizCollections' => $quizCollections
+        ]);
     }
 
     /**
@@ -41,12 +49,14 @@ class RoomController extends Controller
         $rules = array(
             // 'code'       => 'required',
             'ownerId'      => 'required',
+            'currentQuizId'      => 'required',
+            'quizCollectionId'      => 'required',
         );
         $validator = Validator::make($request->all(), $rules);
 
         // process the login
         if ($validator->fails()) {
-            return redirect('quizzes/create')
+            return redirect('rooms/create')
                 ->withErrors($validator)
                 ->withInput();
         } else {
@@ -54,6 +64,8 @@ class RoomController extends Controller
             $room = new Room();
             $room->code       = Room::generateCode();
             $room->owner_id      = $request->ownerId;
+            $room->current_quiz_id      = $request->currentQuizId;
+            $room->quiz_collection_id      = $request->quizCollectionId;
             $room->save();
 
             // redirect

@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Room;
 use App\Http\Requests\StoreRoomRequest;
 use App\Http\Requests\UpdateRoomRequest;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Validator;
 
 class RoomController extends Controller
 {
@@ -36,6 +38,28 @@ class RoomController extends Controller
     public function store(StoreRoomRequest $request)
     {
         //
+        $rules = array(
+            // 'code'       => 'required',
+            'ownerId'      => 'required',
+        );
+        $validator = Validator::make($request->all(), $rules);
+
+        // process the login
+        if ($validator->fails()) {
+            return redirect('quizzes/create')
+                ->withErrors($validator)
+                ->withInput();
+        } else {
+            // store
+            $room = new Room();
+            $room->code       = Room::generateCode();
+            $room->owner_id      = $request->ownerId;
+            $room->save();
+
+            // redirect
+            // Session::flash('message', 'Successfully created room!');
+            return Redirect::to('rooms');
+        }
     }
 
     /**

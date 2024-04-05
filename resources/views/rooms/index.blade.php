@@ -20,7 +20,7 @@
                         <td>{{ $value->id }}</td>
                         <td>{{ $value->code }}</td>
                         <td>{{ $value->owner->username }}</td>
-                        <td>{{ $value->currentQuiz->content }}</td>
+                        <td>{{ $value->currentQuiz ? $value->currentQuiz->content : '' }}</td>
                         <td>{{ $value->quizCollection->name }}</td>
 
                         <!-- we will also add show, edit, and delete buttons -->

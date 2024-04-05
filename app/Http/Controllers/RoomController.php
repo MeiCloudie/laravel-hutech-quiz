@@ -49,7 +49,7 @@ class RoomController extends Controller
         $rules = array(
             // 'code'       => 'required',
             'ownerId'      => 'required',
-            'currentQuizId'      => 'required',
+            // 'currentQuizId'      => 'required',
             'quizCollectionId'      => 'required',
         );
         $validator = Validator::make($request->all(), $rules);

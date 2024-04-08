@@ -77,6 +77,22 @@
                 <div class="col-md-4 mb-4">
                     <div class="card card-hover">
                         <div class="card-body">
+                            <!-- Dropdown trigger button -->
+                            <div class="dropdown position-absolute top-1 end-0 me-3">
+                                <button class="btn btn-sm btn-light p-0" type="button" id="dropdownMenuButton"
+                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                    <!-- Icon for dropdown menu -->
+                                    <i class="bi bi-three-dots-vertical fs-5"></i>
+                                </button>
+                                <!-- Dropdown menu -->
+                                {{-- TODO: Chưa có logic và xét role để hiển thị phần Dropdown --}}
+                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                    <li><a class="dropdown-item" href="#">Xoá phòng</a></li>
+                                    <li><a class="dropdown-item" href="#">Đóng phòng</a></li>
+                                </ul>
+                            </div>
+
+                            <!-- Card content -->
                             <div class="d-flex align-items-center mb-3">
                                 <div class="icon bg-primary rounded-circle px-3 py-2">
                                     <i class="bi bi-mortarboard-fill text-white fs-4 fw-bold"></i>
@@ -91,6 +107,7 @@
                             <img src="{{ asset('images/banner-hutech-quiz.png') }}" class="img-fluid rounded border mb-3"
                                 alt="Banner">
 
+                            <!-- Button -->
                             {{-- TODO: KIỂM TRA LẠI PHẦN NÚT CLOSED --}}
                             @if ($room->is_closed)
                                 <button class="btn btn-primary d-block w-100" disabled>
@@ -103,6 +120,7 @@
                             @endif
                         </div>
                     </div>
+
                 </div>
             @endforeach
         </div>

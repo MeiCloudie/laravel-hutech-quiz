@@ -128,14 +128,11 @@
         <style>
             .card {
                 transition: box-shadow 0.3s ease;
-                /* Thêm transition cho hiệu ứng */
                 box-shadow: 0px 0px 10px rgba(0, 0, 0, 0);
-                /* Bắt đầu với shadow không */
             }
 
             .card:hover {
                 box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
-                /* Thêm shadow khi hover */
             }
         </style>
     </div>

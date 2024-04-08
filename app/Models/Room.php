@@ -26,8 +26,22 @@ class Room extends Model
         return $this->belongsTo(QuizCollection::class);
     }
 
+    public function owner()
+    {
+        return $this->belongsTo(User::class);
+    }
+
     public function records()
     {
         return $this->hasMany(Record::class);
+    }
+
+    
+
+    public static function generateCode($length = 6)
+    {
+        $pool = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+
+        return substr(str_shuffle(str_repeat($pool, 5)), 0, $length);
     }
 }

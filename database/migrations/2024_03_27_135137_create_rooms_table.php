@@ -13,13 +13,13 @@ return new class extends Migration
     {
         Schema::create('rooms', function (Blueprint $table) {
             $table->id();
-            $table->string('code');
+            $table->string('code')->unique();
             $table->timestamps();
             $table->softDeletes();
             
             
             $table->unsignedBigInteger('owner_id');
-            $table->unsignedBigInteger('current_quiz_id');
+            $table->unsignedBigInteger('current_quiz_id')->nullable();
             $table->unsignedBigInteger('quiz_collection_id');
 
             $table->foreign('owner_id')
@@ -28,6 +28,7 @@ return new class extends Migration
             ->onDelete('cascade');
 
             $table->foreign('current_quiz_id')
+            ->nullable()
             ->references('id')
             ->on('quizzes')
             ->onDelete('cascade');

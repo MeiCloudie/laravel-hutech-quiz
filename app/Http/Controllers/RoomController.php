@@ -5,6 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\Room;
 use App\Http\Requests\StoreRoomRequest;
 use App\Http\Requests\UpdateRoomRequest;
+use App\Models\QuizCollection;
+use App\Models\User;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Validator;
 
 class RoomController extends Controller
 {
@@ -14,6 +18,11 @@ class RoomController extends Controller
     public function index()
     {
         //
+        $rooms = Room::all();
+
+        return view('rooms.index')
+            ->with('rooms', $rooms);
+
         return view('rooms.index');
     }
 
@@ -23,6 +32,12 @@ class RoomController extends Controller
     public function create()
     {
         //
+        $users = User::all();
+        $quizCollections = QuizCollection::all();
+        return view('rooms.create')->with([
+            'users' => $users,
+            'quizCollections' => $quizCollections
+        ]);
     }
 
     /**
@@ -31,6 +46,32 @@ class RoomController extends Controller
     public function store(StoreRoomRequest $request)
     {
         //
+        $rules = array(
+            // 'code'       => 'required',
+            'ownerId'      => 'required',
+            // 'currentQuizId'      => 'required',
+            'quizCollectionId'      => 'required',
+        );
+        $validator = Validator::make($request->all(), $rules);
+
+        // process the login
+        if ($validator->fails()) {
+            return redirect('rooms/create')
+                ->withErrors($validator)
+                ->withInput();
+        } else {
+            // store
+            $room = new Room();
+            $room->code       = Room::generateCode();
+            $room->owner_id      = $request->ownerId;
+            $room->current_quiz_id      = $request->currentQuizId;
+            $room->quiz_collection_id      = $request->quizCollectionId;
+            $room->save();
+
+            // redirect
+            // Session::flash('message', 'Successfully created room!');
+            return Redirect::to('rooms');
+        }
     }
 
     /**

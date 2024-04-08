@@ -33,6 +33,7 @@
                                         </select>
                                     </div>
                                     <button type="submit" class="btn btn-primary">XÁC NHẬN</button>
+                                    <a href="{{ url('rooms/create') }}" class="btn btn-outline-secondary">ĐẾN TRANG</a>
                                 </form>
                             </div>
                         </div>

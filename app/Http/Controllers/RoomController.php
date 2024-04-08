@@ -18,7 +18,7 @@ class RoomController extends Controller
     public function index()
     {
         //
-        $rooms = Room::all();
+        $rooms = Room::where('is_closed', false)->get();
 
         return view('rooms.index')
             ->with('rooms', $rooms);

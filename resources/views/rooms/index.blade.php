@@ -115,6 +115,7 @@
                                     PHÒNG THI ĐÃ ĐÓNG<i class="bi bi-dash-circle-fill ms-2"></i>
                                 </button>
                             @else
+                                {{-- !: Chưa có Controller show để test - thêm sau --}}
                                 <a href="{{ URL::to('rooms/' . $room->id) }}" class="btn btn-primary d-block w-100">
                                     VÀO PHÒNG<i class="bi bi-arrow-right-circle-fill ms-2"></i>
                                 </a>

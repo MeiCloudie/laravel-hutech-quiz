@@ -19,11 +19,11 @@ class RoomController extends Controller
     {
         //
         $rooms = Room::where('is_closed', false)->get();
+        $quizCollections = QuizCollection::all();
 
         return view('rooms.index')
-            ->with('rooms', $rooms);
-
-        return view('rooms.index');
+            ->with('rooms', $rooms)
+            ->with('quizCollections', $quizCollections);
     }
 
     /**

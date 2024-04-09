@@ -25,10 +25,11 @@
                                 <form id="createRoomForm">
                                     <div class="mb-3">
                                         <label for="selectExam" class="form-label">Chọn Bộ Đề Thi</label>
-                                        {{-- !: Phần này còn hard code --}}
                                         <select class="form-select" id="selectExam" required>
                                             <option value="" disabled selected>Chọn bộ đề</option>
-                                            <option value="Toán">Toán</option>
+                                            @foreach ($quizCollections as $quizCollection)
+                                                <option value="{{ $quizCollection->id }}">{{ $quizCollection->name }}</option>
+                                            @endforeach
                                             <option value="Tiếng Việt">Tiếng Việt</option>
                                         </select>
                                     </div>

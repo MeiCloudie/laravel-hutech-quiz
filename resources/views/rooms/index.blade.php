@@ -25,12 +25,14 @@
                                 <form id="createRoomForm" action="{{ url('rooms') }}" method="POST">
                                     @csrf
                                     <div class="mb-3">
-                                        <input type="hidden" id="ownerId" name="ownerId" value="{{ Auth::user()->id }}" class="form-control">
+                                        <input type="hidden" id="ownerId" name="ownerId" value="{{ Auth::user()->id }}"
+                                            class="form-control">
                                         <label for="quizCollectionId" class="form-label">Chọn Bộ Đề Thi</label>
                                         <select class="form-select" id="quizCollectionId" name="quizCollectionId" required>
                                             <option value="" disabled selected>Chọn bộ đề</option>
                                             @foreach ($quizCollections as $quizCollection)
-                                                <option value="{{ $quizCollection->id }}">{{ $quizCollection->name }}</option>
+                                                <option value="{{ $quizCollection->id }}">{{ $quizCollection->name }}
+                                                </option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -90,8 +92,17 @@
                                 <!-- Dropdown menu -->
                                 {{-- TODO: Chưa có logic và xét role để hiển thị phần Dropdown --}}
                                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                    <li><a class="dropdown-item" href="#">Xoá phòng</a></li>
-                                    <li><a class="dropdown-item" href="#">Đóng phòng</a></li>
+                                    <li>
+                                        <a class="dropdown-item" href="#" data-bs-toggle="modal"
+                                            data-bs-target="#deleteRoomModal">Xoá phòng</a>
+                                    </li>
+                                    {{-- Chỉ hiển thị nếu phòng chưa đóng --}}
+                                    @if (!$room->is_closed)
+                                        <li>
+                                            <a class="dropdown-item" href="#" data-bs-toggle="modal"
+                                                data-bs-target="#closeRoomModal">Đóng phòng</a>
+                                        </li>
+                                    @endif
                                 </ul>
                             </div>
 
@@ -113,7 +124,7 @@
                             <!-- Button -->
                             {{-- TODO: KIỂM TRA LẠI PHẦN NÚT CLOSED --}}
                             @if ($room->is_closed)
-                                <button class="btn btn-primary d-block w-100" disabled>
+                                <button class="btn btn-secondary d-block w-100" disabled>
                                     PHÒNG THI ĐÃ ĐÓNG<i class="bi bi-dash-circle-fill ms-2"></i>
                                 </button>
                             @else
@@ -129,6 +140,46 @@
             @endforeach
         </div>
 
+        {{-- Modal for confirming actions --}}
+        <div class="modal fade" id="deleteRoomModal" tabindex="-1" aria-labelledby="deleteRoomModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="deleteRoomModalLabel">Xác nhận XOÁ PHÒNG</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Bạn có chắc chắn muốn xoá phòng này không?</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Huỷ</button>
+                        <button type="button" class="btn btn-danger">Xác nhận xoá</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {{-- Modal for closing room --}}
+        <div class="modal fade" id="closeRoomModal" tabindex="-1" aria-labelledby="closeRoomModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="closeRoomModalLabel">Xác nhận ĐÓNG PHÒNG</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Bạn có chắc chắn muốn đóng phòng này không?</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Huỷ</button>
+                        <button type="button" class="btn btn-danger">Xác nhận đóng</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <style>
             .card {
                 transition: box-shadow 0.3s ease;
@@ -139,5 +190,6 @@
                 box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
             }
         </style>
+
     </div>
 @endsection

@@ -22,10 +22,12 @@
                                     aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
-                                <form id="createRoomForm">
+                                <form id="createRoomForm" action="{{ url('rooms') }}" method="POST">
+                                    @csrf
                                     <div class="mb-3">
-                                        <label for="selectExam" class="form-label">Chọn Bộ Đề Thi</label>
-                                        <select class="form-select" id="selectExam" required>
+                                        <input type="hidden" id="ownerId" name="ownerId" value="{{ Auth::user()->id }}" class="form-control">
+                                        <label for="quizCollectionId" class="form-label">Chọn Bộ Đề Thi</label>
+                                        <select class="form-select" id="quizCollectionId" name="quizCollectionId" required>
                                             <option value="" disabled selected>Chọn bộ đề</option>
                                             @foreach ($quizCollections as $quizCollection)
                                                 <option value="{{ $quizCollection->id }}">{{ $quizCollection->name }}</option>

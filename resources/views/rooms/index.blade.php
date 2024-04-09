@@ -4,6 +4,15 @@
     <div class="container">
         <div class="d-flex justify-content-between">
             <h1 class="mb-4 fw-bold">DANH SÁCH PHÒNG</h1>
+            {{-- ! Tạm thời lỗi để đây --}}
+            @if ($errors->any())
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            @endif
+            
             <div>
                 {{-- NÚT TẠO PHÒNG --}}
                 {{-- TODO: Check lại logic  --}}
@@ -61,12 +70,13 @@
                                     aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
-                                <form id="findRoomForm">
-                                    <div class="mb-3">
-                                        <label for="inputCode" class="form-label">Nhập CODE phòng thi tại đây!</label>
-                                        <input type="text" class="form-control" id="inputCode" maxlength="6" required>
-                                    </div>
-                                    <button type="submit" class="btn btn-primary">XÁC NHẬN</button>
+                                <form id="findRoomForm" action="{{ url('rooms/find') }}" method="POST">
+                                        @csrf
+                                        <div class="mb-3">
+                                            <label for="inputCode" class="form-label">Nhập CODE phòng thi tại đây!</label>
+                                            <input type="text" class="form-control" id="inputCode" maxlength="6" required>
+                                        </div>
+                                        <button type="submit" class="btn btn-primary">XÁC NHẬN</button>
                                 </form>
                             </div>
                         </div>

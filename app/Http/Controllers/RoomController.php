@@ -8,6 +8,7 @@ use App\Http\Requests\UpdateRoomRequest;
 use App\Models\QuizCollection;
 use App\Models\User;
 use Illuminate\Support\Facades\Redirect;
+use \Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
 class RoomController extends Controller
@@ -105,5 +106,17 @@ class RoomController extends Controller
     public function destroy(Room $room)
     {
         //
+    }
+
+    public function find(Request $request)
+    {
+        $rooms = Room::where('code', $request->code)->get();
+        if ($rooms->count() > 0) {
+            $id = $rooms[0]->id;
+            return redirect()->route('rooms.show', [$id]);
+        }
+        return redirect()->route('rooms.index')
+            ->withErrors(['errors' => 'Không tìm thấy phòng'])
+            ->withInput();
     }
 }

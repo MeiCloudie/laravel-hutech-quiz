@@ -1,65 +1,59 @@
-<!DOCTYPE html>
-<html>
+@extends('layouts.app')
 
-<head>
-    <title>Shark App</title>
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
-</head>
-
-<body>
+@section('content')
     <div class="container">
-
-        <nav class="navbar navbar-inverse">
-            <div class="navbar-header">
-                <a class="navbar-brand" href="{{ URL::to('rooms') }}">room Alert</a>
+        <div class="card">
+            <div class="card-header">
+                <h1 class="card-title fw-bold mt-2">TẠO PHÒNG THI</h1>
             </div>
-            <ul class="nav navbar-nav">
-                <li><a href="{{ URL::to('rooms') }}">View All rooms</a></li>
-                <li><a href="{{ URL::to('rooms/create') }}">Create a room</a>
-            </ul>
-        </nav>
+            <div class="card-body">
+                <!-- Form for creating a room -->
+                <form action="{{ url('rooms') }}" method="POST">
+                    @csrf
 
-        <h1>Create a room</h1>
+                    <!-- Select owner of the room -->
+                    <div class="mb-3">
+                        <label for="ownerId" class="form-label">Chủ Phòng</label>
+                        <select id="ownerId" class="form-select @error('ownerId') is-invalid @enderror" name="ownerId"
+                            required>
+                            <option value="" selected disabled>Chọn chủ phòng</option>
+                            @foreach ($users as $owner)
+                                <option value="{{ $owner->id }}">{{ $owner->username }}</option>
+                            @endforeach
+                        </select>
+                        @error('ownerId')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
 
-        <!-- if there are creation errors, they will show here -->
-        @if ($errors->any())
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        @endif
+                    <!-- Select quiz collection for the room -->
+                    <div class="mb-3">
+                        <label for="quizCollectionId" class="form-label">Bộ Đề Thi</label>
+                        <select id="quizCollectionId" class="form-select @error('quizCollectionId') is-invalid @enderror"
+                            name="quizCollectionId" required>
+                            <option value="" selected disabled>Chọn bộ đề thi</option>
+                            @foreach ($quizCollections as $quizCollection)
+                                <option value="{{ $quizCollection->id }}">{{ $quizCollection->name }}</option>
+                            @endforeach
+                        </select>
+                        @error('quizCollectionId')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
 
-        <form action="{{ url('rooms') }}" method="POST">
-            @csrf
+                    <!-- Input for current quiz ID -->
+                    {{-- TODO: Phần này handle thế nào chưa hiểu? --}}
+                    <div class="mb-3">
+                        <label for="currentQuizId" class="form-label">Current Quiz ID</label>
+                        <input type="text" id="currentQuizId" name="currentQuizId" value="{{ old('currentQuizId') }}"
+                            class="form-control">
+                    </div>
 
-            <select id="ownerId" class="form-select @error('ownerId') is-invalid @enderror" name="ownerId" required
-                autofocus>
-                <option value="" selected disabled>Chọn chủ phòng</option>
-                @foreach ($users as $owner)
-                    <option value="{{ $owner->id }}">{{ $owner->username }}</option>
-                @endforeach
-            </select>
-
-            <select id="quizCollectionId" class="form-select @error('quizCollectionId') is-invalid @enderror" name="quizCollectionId" required
-                autofocus>
-                <option value="" selected disabled>Chọn tập câu hỏi</option>
-                @foreach ($quizCollections as $quizCollection)
-                    <option value="{{ $quizCollection->id }}">{{ $quizCollection->name }}</option>
-                @endforeach
-            </select>
-
-            <div class="form-group">
-                <label for="currentQuizId">Quiz Collection id</label>
-                <input type="text" id="currentQuizId" name="currentQuizId"
-                    value="{{ old('currentQuizId') }}" class="form-control">
+                    <!-- Submit button -->
+                    <button type="submit" class="btn btn-primary">XÁC NHẬN TẠO PHÒNG THI</button>
+                    <a href="{{ url('rooms') }}" class="btn btn-outline-secondary">VỀ DANH SÁCH</a>
+                </form>
             </div>
-
-            <button type="submit" class="btn btn-primary">Create</button>
-        </form>
-
-
+        </div>
     </div>
-</body>
-
-</html>
+@endsection

@@ -41,14 +41,6 @@
                         @enderror
                     </div>
 
-                    <!-- Input for current quiz ID -->
-                    {{-- TODO: Phần này handle thế nào chưa hiểu? --}}
-                    <div class="mb-3">
-                        <label for="currentQuizId" class="form-label">Current Quiz ID</label>
-                        <input type="text" id="currentQuizId" name="currentQuizId" value="{{ old('currentQuizId') }}"
-                            class="form-control">
-                    </div>
-
                     <!-- Submit button -->
                     <button type="submit" class="btn btn-primary">XÁC NHẬN TẠO PHÒNG THI</button>
                     <a href="{{ url('rooms') }}" class="btn btn-outline-secondary">VỀ DANH SÁCH</a>

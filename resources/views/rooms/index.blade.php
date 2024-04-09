@@ -32,7 +32,6 @@
                                             @foreach ($quizCollections as $quizCollection)
                                                 <option value="{{ $quizCollection->id }}">{{ $quizCollection->name }}</option>
                                             @endforeach
-                                            <option value="Tiếng Việt">Tiếng Việt</option>
                                         </select>
                                     </div>
                                     <button type="submit" class="btn btn-primary">XÁC NHẬN</button>

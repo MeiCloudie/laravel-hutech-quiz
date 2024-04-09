@@ -18,7 +18,8 @@ class RoomController extends Controller
     public function index()
     {
         //
-        $rooms = Room::where('is_closed', false)->get();
+        // $rooms = Room::where('is_closed', false)->get();
+        $rooms = Room::all();
         $quizCollections = QuizCollection::all();
 
         return view('rooms.index')

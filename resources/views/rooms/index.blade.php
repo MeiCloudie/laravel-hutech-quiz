@@ -4,15 +4,6 @@
     <div class="container">
         <div class="d-flex justify-content-between">
             <h1 class="mb-4 fw-bold">DANH SÁCH PHÒNG</h1>
-            {{-- ! Tạm thời lỗi để đây --}}
-            @if ($errors->any())
-                <ul>
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            @endif
-
             <div>
                 {{-- NÚT TẠO PHÒNG --}}
                 {{-- TODO: Check lại logic  --}}
@@ -74,8 +65,13 @@
                                     @csrf
                                     <div class="mb-3">
                                         <label for="code" class="form-label">Nhập CODE phòng thi tại đây!</label>
-                                        <input type="text" class="form-control" id="code" maxlength="6"
-                                            name="code" required>
+                                        <input type="text" class="form-control @error('code') is-invalid @enderror"
+                                            id="code" maxlength="6" name="code" required>
+                                        @error('code')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
                                     </div>
                                     <button type="submit" class="btn btn-primary">XÁC NHẬN</button>
                                 </form>
@@ -221,11 +217,7 @@
                     </div>
                 </div>
             @endforeach
-
-
         </div>
-
-
 
         <style>
             .card {

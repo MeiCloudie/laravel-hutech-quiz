@@ -116,7 +116,7 @@ class RoomController extends Controller
             return redirect()->route('rooms.show', [$id]);
         }
         return redirect()->route('rooms.index')
-            ->withErrors(['errors' => 'Không tìm thấy phòng'])
+            ->withErrors(['code' => 'Không tìm thấy phòng'])
             ->withInput();
     }
 

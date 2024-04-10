@@ -6,11 +6,11 @@
             <h1 class="mb-4 fw-bold">DANH SÁCH PHÒNG</h1>
             <div>
                 {{-- NÚT TẠO PHÒNG --}}
-                @if (Auth::user()->role == 'ADMIN')
+                {{-- @if (Auth::user()->role == 'ADMIN') --}}
                     <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createRoomModal">
                         <i class="bi bi-plus-circle"></i> TẠO PHÒNG
                     </a>
-                @endif
+                {{-- @endif --}}
 
                 {{-- MODAL NÚT TẠO PHÒNG --}}
                 <div class="modal fade" id="createRoomModal" tabindex="-1" aria-labelledby="createRoomModalLabel"

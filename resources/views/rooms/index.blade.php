@@ -90,7 +90,7 @@
                     <div class="card">
                         <div class="card-body">
                             <!-- Dropdown trigger button -->
-                            @if (Auth::user()->role == 'ADMIN')
+                            @if (Auth::user()->role == 'ADMIN' || Auth::user()->id == $room->owner_id)
                                 <div class="dropdown position-absolute top-1 end-0 me-3">
                                     <button class="btn btn-sm btn-light p-0" type="button" id="dropdownMenuButton"
                                         data-bs-toggle="dropdown" aria-expanded="false">

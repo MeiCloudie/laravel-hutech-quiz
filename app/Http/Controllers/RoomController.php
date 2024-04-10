@@ -83,8 +83,15 @@ class RoomController extends Controller
     public function show(Room $room)
     {
         //
+
+        $quizCollections = QuizCollection::all();
         return view('rooms.show')
-            ->with('room', $room);
+            ->with(
+                [
+                    'room' => $room,
+                    'quizCollections' => $quizCollections
+                ]
+            );
     }
 
     /**
@@ -119,7 +126,7 @@ class RoomController extends Controller
 
         // process the login
         if ($validator->fails()) {
-            return redirect('quizzes/create')
+            return redirect('rooms/'.$id)
                 ->withErrors($validator)
                 ->withInput();
         } else {
@@ -130,7 +137,7 @@ class RoomController extends Controller
 
             // redirect
             // Session::flash('message', 'Successfully updated room!');
-            return Redirect::to('quizzes');
+            return Redirect::to('rooms');
         }
     }
 

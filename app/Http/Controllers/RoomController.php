@@ -90,17 +90,42 @@ class RoomController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Room $room)
+    public function edit($id)
     {
         //
+        $room = Room::find($id);
+
+        // show the view and pass the room to it
+        return view('rooms.edit')
+            ->with('room', $room);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateRoomRequest $request, Room $room)
+    public function update(UpdateRoomRequest $request, $id)
     {
         //
+        $rules = array(
+            'quizCollectionId'       => 'required',
+        );
+        $validator = Validator::make($request->all(), $rules);
+
+        // process the login
+        if ($validator->fails()) {
+            return redirect('quizzes/create')
+                ->withErrors($validator)
+                ->withInput();
+        } else {
+            // store
+            $room = Room::find($id);
+            $room->quiz_collection_id      = $request->quizCollectionId;
+            $room->save();
+
+            // redirect
+            // Session::flash('message', 'Successfully updated room!');
+            return Redirect::to('quizzes');
+        }
     }
 
     /**

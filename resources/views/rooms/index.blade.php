@@ -6,7 +6,6 @@
             <h1 class="mb-4 fw-bold">DANH SÁCH PHÒNG</h1>
             <div>
                 {{-- NÚT TẠO PHÒNG --}}
-                {{-- TODO: Check lại logic  --}}
                 <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createRoomModal">
                     <i class="bi bi-plus-circle"></i> TẠO PHÒNG
                 </a>
@@ -45,7 +44,6 @@
                 </div>
 
                 {{-- NÚT TÌM PHÒNG --}}
-                {{-- TODO: Check lại logic chỗ này luôn  --}}
                 <a href="#" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#findRoomModal">
                     <i class="bi bi-search"></i> TÌM PHÒNG
                 </a>
@@ -136,13 +134,11 @@
                                 alt="Banner">
 
                             <!-- Button -->
-                            {{-- TODO: KIỂM TRA LẠI PHẦN NÚT CLOSED --}}
                             @if ($room->is_closed)
                                 <button class="btn btn-secondary d-block w-100" disabled>
                                     PHÒNG THI ĐÃ ĐÓNG<i class="bi bi-dash-circle-fill ms-2"></i>
                                 </button>
                             @else
-                                {{-- !: Chưa có Controller show để test - thêm sau --}}
                                 <a href="{{ URL::to('rooms/' . $room->id) }}" class="btn btn-primary d-block w-100">
                                     VÀO PHÒNG<i class="bi bi-arrow-right-circle-fill ms-2"></i>
                                 </a>
@@ -166,8 +162,13 @@
                                 <p>Bạn có chắc chắn muốn xoá phòng này không?</p>
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Huỷ</button>
-                                <button type="button" class="btn btn-danger">Xác nhận xoá</button>
+                                <form action="{{ url('rooms/' . $room->id) }}" method="POST" class="pull-right">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Huỷ</button>
+                                    <button type="submit" class="btn btn-danger">Xác nhận xoá</button>
+                                </form>
+                                {{-- <button type="button" class="btn btn-danger">Xác nhận xoá</button> --}}
                             </div>
                         </div>
                     </div>

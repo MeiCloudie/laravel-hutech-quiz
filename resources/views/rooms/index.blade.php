@@ -73,8 +73,9 @@
                                 <form id="findRoomForm" action="{{ url('rooms/find') }}" method="POST">
                                     @csrf
                                     <div class="mb-3">
-                                        <label for="inputCode" class="form-label">Nhập CODE phòng thi tại đây!</label>
-                                        <input type="text" class="form-control" id="inputCode" maxlength="6" required>
+                                        <label for="code" class="form-label">Nhập CODE phòng thi tại đây!</label>
+                                        <input type="text" class="form-control" id="code" maxlength="6"
+                                            name="code" required>
                                     </div>
                                     <button type="submit" class="btn btn-primary">XÁC NHẬN</button>
                                 </form>
@@ -149,8 +150,8 @@
                 </div>
 
                 {{-- Modal for confirming actions --}}
-                <div class="modal fade" id="deleteRoomModal-{{ $room->id }}" tabindex="-1" aria-labelledby="deleteRoomModalLabel"
-                    aria-hidden="true">
+                <div class="modal fade" id="deleteRoomModal-{{ $room->id }}" tabindex="-1"
+                    aria-labelledby="deleteRoomModalLabel" aria-hidden="true">
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">
@@ -170,8 +171,8 @@
                 </div>
 
                 {{-- Modal for closing room --}}
-                <div class="modal fade" id="closeRoomModal-{{ $room->id }}" tabindex="-1" aria-labelledby="closeRoomModalLabel"
-                    aria-hidden="true">
+                <div class="modal fade" id="closeRoomModal-{{ $room->id }}" tabindex="-1"
+                    aria-labelledby="closeRoomModalLabel" aria-hidden="true">
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">

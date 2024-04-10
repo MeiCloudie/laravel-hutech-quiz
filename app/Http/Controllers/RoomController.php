@@ -120,7 +120,8 @@ class RoomController extends Controller
             ->withInput();
     }
 
-    public function close($id) {
+    public function close($id)
+    {
         $room = Room::find($id);
         $room->is_closed = 1;
         $room->save();
@@ -128,7 +129,8 @@ class RoomController extends Controller
         return redirect()->route('rooms.index');
     }
 
-    public function open($id) {
+    public function open($id)
+    {
         $room = Room::find($id);
         $room->is_closed = 0;
 

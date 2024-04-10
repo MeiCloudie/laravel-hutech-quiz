@@ -12,7 +12,7 @@
                     @endforeach
                 </ul>
             @endif
-            
+
             <div>
                 {{-- NÚT TẠO PHÒNG --}}
                 {{-- TODO: Check lại logic  --}}
@@ -71,12 +71,12 @@
                             </div>
                             <div class="modal-body">
                                 <form id="findRoomForm" action="{{ url('rooms/find') }}" method="POST">
-                                        @csrf
-                                        <div class="mb-3">
-                                            <label for="inputCode" class="form-label">Nhập CODE phòng thi tại đây!</label>
-                                            <input type="text" class="form-control" id="inputCode" maxlength="6" required>
-                                        </div>
-                                        <button type="submit" class="btn btn-primary">XÁC NHẬN</button>
+                                    @csrf
+                                    <div class="mb-3">
+                                        <label for="inputCode" class="form-label">Nhập CODE phòng thi tại đây!</label>
+                                        <input type="text" class="form-control" id="inputCode" maxlength="6" required>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary">XÁC NHẬN</button>
                                 </form>
                             </div>
                         </div>
@@ -104,13 +104,13 @@
                                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                     <li>
                                         <a class="dropdown-item" href="#" data-bs-toggle="modal"
-                                            data-bs-target="#deleteRoomModal">Xoá phòng</a>
+                                            data-bs-target="#deleteRoomModal-{{ $room->id }}">Xoá phòng</a>
                                     </li>
                                     {{-- Chỉ hiển thị nếu phòng chưa đóng --}}
                                     @if (!$room->is_closed)
                                         <li>
                                             <a class="dropdown-item" href="#" data-bs-toggle="modal"
-                                                data-bs-target="#closeRoomModal">Đóng phòng</a>
+                                                data-bs-target="#closeRoomModal-{{ $room->id }}">Đóng phòng</a>
                                         </li>
                                     @endif
                                 </ul>
@@ -147,48 +147,55 @@
                     </div>
 
                 </div>
+
+                {{-- Modal for confirming actions --}}
+                <div class="modal fade" id="deleteRoomModal-{{ $room->id }}" tabindex="-1" aria-labelledby="deleteRoomModalLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="deleteRoomModalLabel">Xác nhận XOÁ PHÒNG</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <p>Bạn có chắc chắn muốn xoá phòng này không?</p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Huỷ</button>
+                                <button type="button" class="btn btn-danger">Xác nhận xoá</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                {{-- Modal for closing room --}}
+                <div class="modal fade" id="closeRoomModal-{{ $room->id }}" tabindex="-1" aria-labelledby="closeRoomModalLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="closeRoomModalLabel">Xác nhận ĐÓNG PHÒNG</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <p>Bạn có chắc chắn muốn đóng phòng này không?</p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Huỷ</button>
+                                <a type="button" class="btn btn-danger"
+                                    href="{{ URL::to('/rooms/close/' . $room->id) }}">Xác nhận đóng</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             @endforeach
+
+
         </div>
 
-        {{-- Modal for confirming actions --}}
-        <div class="modal fade" id="deleteRoomModal" tabindex="-1" aria-labelledby="deleteRoomModalLabel"
-            aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="deleteRoomModalLabel">Xác nhận XOÁ PHÒNG</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <p>Bạn có chắc chắn muốn xoá phòng này không?</p>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Huỷ</button>
-                        <button type="button" class="btn btn-danger">Xác nhận xoá</button>
-                    </div>
-                </div>
-            </div>
-        </div>
 
-        {{-- Modal for closing room --}}
-        <div class="modal fade" id="closeRoomModal" tabindex="-1" aria-labelledby="closeRoomModalLabel"
-            aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="closeRoomModalLabel">Xác nhận ĐÓNG PHÒNG</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <p>Bạn có chắc chắn muốn đóng phòng này không?</p>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Huỷ</button>
-                        <button type="button" class="btn btn-danger">Xác nhận đóng</button>
-                    </div>
-                </div>
-            </div>
-        </div>
 
         <style>
             .card {

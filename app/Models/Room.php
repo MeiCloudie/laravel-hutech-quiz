@@ -15,7 +15,6 @@ class Room extends Model
     protected $fillable = ['code', 'is_closed', 'owner_id'];
 
     protected $attributes = [
-        'is_closed' => false
     ];
 
     public function currentQuiz()

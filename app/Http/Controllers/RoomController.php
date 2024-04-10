@@ -119,4 +119,21 @@ class RoomController extends Controller
             ->withErrors(['errors' => 'Không tìm thấy phòng'])
             ->withInput();
     }
+
+    public function close($id) {
+        $room = Room::find($id);
+        $room->is_closed = 1;
+        $room->save();
+
+        return redirect()->route('rooms.index');
+    }
+
+    public function open($id) {
+        $room = Room::find($id);
+        $room->is_closed = 0;
+
+        $room->save();
+
+        return redirect()->route('rooms.index');
+    }
 }

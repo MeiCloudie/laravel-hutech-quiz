@@ -78,10 +78,10 @@ class QuizController extends Controller
         //
         $quiz = Quiz::find($id);
 
-        $quizCollection = new QuizCollection;
-        $quizCollection->name = "hi";
-        $quizCollection->save();
-        $quiz->quizCollections()->attach($quizCollection);
+        // $quizCollection = new QuizCollection;
+        // $quizCollection->name = "hi";
+        // $quizCollection->save();
+        // $quiz->quizCollections()->attach($quizCollection);
 
         // show the view and pass the quiz to it
         return view('quizzes.show')

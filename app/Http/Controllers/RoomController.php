@@ -8,6 +8,7 @@ use App\Http\Requests\UpdateRoomRequest;
 use App\Models\QuizCollection;
 use App\Models\User;
 use Illuminate\Support\Facades\Redirect;
+use \Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
 class RoomController extends Controller
@@ -18,12 +19,13 @@ class RoomController extends Controller
     public function index()
     {
         //
+        // $rooms = Room::where('is_closed', false)->get();
         $rooms = Room::all();
+        $quizCollections = QuizCollection::all();
 
         return view('rooms.index')
-            ->with('rooms', $rooms);
-
-        return view('rooms.index');
+            ->with('rooms', $rooms)
+            ->with('quizCollections', $quizCollections);
     }
 
     /**
@@ -101,8 +103,43 @@ class RoomController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Room $room)
+    public function destroy($id)
     {
         //
+        $room = Room::find($id);
+        $room->delete();
+
+        return Redirect::to('rooms');
+    }
+
+    public function find(Request $request)
+    {
+        $rooms = Room::where('code', $request->code)->get();
+        if ($rooms->count() > 0) {
+            $id = $rooms[0]->id;
+            return redirect()->route('rooms.show', [$id]);
+        }
+        return redirect()->route('rooms.index')
+            ->withErrors(['code' => 'Không tìm thấy phòng'])
+            ->withInput();
+    }
+
+    public function close($id)
+    {
+        $room = Room::find($id);
+        $room->is_closed = 1;
+        $room->save();
+
+        return redirect()->route('rooms.index');
+    }
+
+    public function open($id)
+    {
+        $room = Room::find($id);
+        $room->is_closed = 0;
+
+        $room->save();
+
+        return redirect()->route('rooms.index');
     }
 }

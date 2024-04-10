@@ -12,9 +12,10 @@ class Room extends Model
 
     protected $table = 'rooms';
 
-    protected $fillable = ['code', 'owner_id'];
+    protected $fillable = ['code', 'is_closed', 'owner_id'];
 
-    protected $attributes = [];
+    protected $attributes = [
+    ];
 
     public function currentQuiz()
     {

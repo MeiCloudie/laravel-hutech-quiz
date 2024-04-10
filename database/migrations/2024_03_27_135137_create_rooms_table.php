@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('rooms', function (Blueprint $table) {
             $table->id();
             $table->string('code')->unique();
+            $table->boolean('is_closed')->default(false);
             $table->timestamps();
             $table->softDeletes();
             

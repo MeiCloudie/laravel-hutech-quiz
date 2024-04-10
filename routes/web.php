@@ -20,10 +20,16 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::resource('rooms', App\Http\Controllers\RoomController::class);
-Route::resource('quizzes', App\Http\Controllers\QuizController::class);
-Route::resource('quizCollections', App\Http\Controllers\QuizCollectionController::class);
-Route::resource('answers', App\Http\Controllers\AnswerController::class);
+Route::prefix('rooms')->group(function () {
+    Route::post('find', [App\Http\Controllers\RoomController::class, 'find'])->name('find');
+    Route::get('close/{id}', [App\Http\Controllers\RoomController::class, 'close'])->name('close');
+    Route::get('open/{id}', [App\Http\Controllers\RoomController::class, 'open'])->name('open');
+})->middleware('auth');
+
+Route::resource('quizzes', App\Http\Controllers\QuizController::class)->middleware('auth');
+Route::resource('quizCollections', App\Http\Controllers\QuizCollectionController::class)->middleware('auth');
+Route::resource('answers', App\Http\Controllers\AnswerController::class)->middleware('auth');
+Route::resource('rooms', App\Http\Controllers\RoomController::class)->middleware('auth');
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/profile', [App\Http\Controllers\ProfileController::class, 'index'])->name('profile');

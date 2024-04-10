@@ -9,6 +9,7 @@ use App\Models\QuizCollection;
 use App\Models\User;
 use Illuminate\Support\Facades\Redirect;
 use \Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
 class RoomController extends Controller
@@ -143,5 +144,19 @@ class RoomController extends Controller
         $room->save();
 
         return redirect()->route('rooms.index');
+    }
+
+    public function join($id) {
+        $room = Room::find($id);
+        $ids = $room->users->map((function ($user, $key) {
+            return $user->id;
+        }));
+
+        if (!$ids->contains(Auth::user()->id)) {
+            $user = User::find(Auth::user()->id);
+            $room->users()->attach($user);
+        }
+
+        return Redirect::to('rooms/' . $room->id);
     }
 }

@@ -24,6 +24,7 @@ Route::prefix('rooms')->group(function () {
     Route::post('find', [App\Http\Controllers\RoomController::class, 'find'])->name('find');
     Route::get('close/{id}', [App\Http\Controllers\RoomController::class, 'close'])->name('close');
     Route::get('open/{id}', [App\Http\Controllers\RoomController::class, 'open'])->name('open');
+    Route::get('join/{id}', [App\Http\Controllers\RoomController::class, 'join'])->name('join');
 })->middleware('auth');
 
 Route::resource('quizzes', App\Http\Controllers\QuizController::class)->middleware('auth');

@@ -13,7 +13,7 @@
             {{-- CÁC NÚT --}}
             {{-- TODO: Chưa xét quyền hiển thị nút --}}
             <div class="col-md-2 text-end">
-                <div class="d-grid gap-2">
+                <div class="d-grid gap-2 mt-2">
                     <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#editRoomModal">
                         <i class="bi bi-pencil"></i> CHỈNH SỬA
                     </button>
@@ -24,7 +24,7 @@
             </div>
 
             <div class="col-md-2 text-end">
-                <div class="d-grid gap-2">
+                <div class="d-grid gap-2 mt-2">
                     <a href="{{ url('rooms') }}" class="btn btn-danger">
                         <i class="bi bi-box-arrow-left"></i> RỜI PHÒNG
                     </a>

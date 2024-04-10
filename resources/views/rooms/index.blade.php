@@ -114,6 +114,13 @@
                                                 data-bs-target="#closeRoomModal-{{ $room->id }}">Đóng phòng</a>
                                         </li>
                                     @endif
+
+                                    @if ($room->is_closed)
+                                        <li>
+                                            <a class="dropdown-item" href="#" data-bs-toggle="modal"
+                                                data-bs-target="#openRoomModal-{{ $room->id }}">Mở phòng</a>
+                                        </li>
+                                    @endif
                                 </ul>
                             </div>
 
@@ -187,6 +194,28 @@
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Huỷ</button>
                                 <a type="button" class="btn btn-danger"
                                     href="{{ URL::to('/rooms/close/' . $room->id) }}">Xác nhận đóng</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                {{-- Modal for opening room --}}
+                <div class="modal fade" id="openRoomModal-{{ $room->id }}" tabindex="-1"
+                    aria-labelledby="openRoomModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="openRoomModalLabel">Xác nhận MỞ PHÒNG</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <p>Bạn có chắc chắn muốn MỞ phòng này không?</p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Huỷ</button>
+                                <a type="button" class="btn btn-danger"
+                                    href="{{ URL::to('/rooms/open/' . $room->id) }}">Xác nhận mở</a>
                             </div>
                         </div>
                     </div>

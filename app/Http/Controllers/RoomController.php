@@ -159,4 +159,18 @@ class RoomController extends Controller
 
         return Redirect::to('rooms/' . $room->id);
     }
+
+    public function leave($id) {
+        $room = Room::find($id);
+        $ids = $room->users->map((function ($user, $key) {
+            return $user->id;
+        }));
+
+        if ($ids->contains(Auth::user()->id)) {
+            $user = User::find(Auth::user()->id);
+            $room->users()->detach($user);
+        }
+
+        return Redirect::to('rooms');
+    }
 }

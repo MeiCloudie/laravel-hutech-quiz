@@ -25,7 +25,7 @@
 
             <div class="col-md-2 text-end">
                 <div class="d-grid gap-2 mt-2">
-                    <a href="{{ url('rooms') }}" class="btn btn-danger">
+                    <a href="{{ url('rooms/leave/'.$room->id) }}" class="btn btn-danger">
                         <i class="bi bi-box-arrow-left"></i> RỜI PHÒNG
                     </a>
                     {{-- TODO: Chưa xét quyền hiển thị nút BẮT ĐẦU --}}

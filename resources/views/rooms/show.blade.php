@@ -13,25 +13,28 @@
             {{-- CÁC NÚT --}}
             {{-- TODO: Chưa xét quyền hiển thị nút --}}
             <div class="col-md-2 text-end">
-                <div class="d-grid gap-2 mt-2">
-                    <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#editRoomModal">
-                        <i class="bi bi-pencil"></i> CHỈNH SỬA
-                    </button>
-                    <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteRoomModal">
-                        <i class="bi bi-trash"></i> XOÁ
-                    </button>
-                </div>
+                @if (Auth::user()->role == 'ADMIN')
+                    <div class="d-grid gap-2 mt-2">
+                        <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#editRoomModal">
+                            <i class="bi bi-pencil"></i> CHỈNH SỬA
+                        </button>
+                        <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteRoomModal">
+                            <i class="bi bi-trash"></i> XOÁ
+                        </button>
+                    </div>
+                @endif
             </div>
 
             <div class="col-md-2 text-end">
                 <div class="d-grid gap-2 mt-2">
-                    <a href="{{ url('rooms/leave/'.$room->id) }}" class="btn btn-danger">
+                    <a href="{{ url('rooms/leave/' . $room->id) }}" class="btn btn-danger">
                         <i class="bi bi-box-arrow-left"></i> RỜI PHÒNG
                     </a>
-                    {{-- TODO: Chưa xét quyền hiển thị nút BẮT ĐẦU --}}
-                    <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#confirmStartModal">
-                        <i class="bi bi-play-circle"></i> BẮT ĐẦU
-                    </button>
+                    @if (Auth::user()->role == 'ADMIN')
+                        <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#confirmStartModal">
+                            <i class="bi bi-play-circle"></i> BẮT ĐẦU
+                        </button>
+                    @endif
                 </div>
             </div>
 

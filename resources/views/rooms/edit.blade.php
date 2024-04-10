@@ -4,7 +4,7 @@
     <div class="container">
         <div class="card">
             <div class="card-header">
-                <h1 class="card-title fw-bold mt-2">TẠO PHÒNG THI</h1>
+                <h1 class="card-title fw-bold mt-2">CHỈNH SỬA PHÒNG THI</h1>
             </div>
             <div class="card-body">
                 <!-- Form for creating a room -->
@@ -42,7 +42,7 @@
                     </div>
 
                     <!-- Submit button -->
-                    <button type="submit" class="btn btn-primary">XÁC NHẬN TẠO PHÒNG THI</button>
+                    <button type="submit" class="btn btn-primary">CẬP NHẬT PHÒNG THI</button>
                     <a href="{{ url('rooms') }}" class="btn btn-outline-secondary">VỀ DANH SÁCH</a>
                 </form>
             </div>

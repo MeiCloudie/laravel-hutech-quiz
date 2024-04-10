@@ -94,10 +94,16 @@ class RoomController extends Controller
     {
         //
         $room = Room::find($id);
+        $users = User::all();
+        $quizCollections = QuizCollection::all();
 
         // show the view and pass the room to it
         return view('rooms.edit')
-            ->with('room', $room);
+            ->with([
+                'room' => $room,
+                'users' => $users,
+                'quizCollections' => $quizCollections
+            ]);
     }
 
     /**
@@ -171,7 +177,8 @@ class RoomController extends Controller
         return redirect()->route('rooms.index');
     }
 
-    public function join($id) {
+    public function join($id)
+    {
         $room = Room::find($id);
         $ids = $room->users->map((function ($user, $key) {
             return $user->id;
@@ -185,7 +192,8 @@ class RoomController extends Controller
         return Redirect::to('rooms/' . $room->id);
     }
 
-    public function leave($id) {
+    public function leave($id)
+    {
         $room = Room::find($id);
         $ids = $room->users->map((function ($user, $key) {
             return $user->id;

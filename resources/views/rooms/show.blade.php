@@ -2,6 +2,7 @@
 
 @section('content')
     <div class="container">
-        <h1>{{ $rooms->id }}</h1>
+        <h1>{{ $room->id }}</h1>
+        <p>{{ $room->quizCollection->name }}</p>
     </div>
 @endsection

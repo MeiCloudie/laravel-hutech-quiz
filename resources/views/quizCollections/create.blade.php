@@ -1,48 +1,35 @@
-<!DOCTYPE html>
-<html>
+@extends('layouts.app')
 
-<head>
-    <title>Shark App</title>
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
-</head>
-
-<body>
+@section('content')
     <div class="container">
+        <h1 class="fw-bold mb-2">TẠO MỚI BỘ ĐỀ THI</h1>
 
-        <nav class="navbar navbar-inverse">
-            <div class="navbar-header">
-                <a class="navbar-brand" href="{{ URL::to('quizCollections') }}">quiz collection Alert</a>
-            </div>
-            <ul class="nav navbar-nav">
-                <li><a href="{{ URL::to('quizCollections') }}">View All quiz collections</a></li>
-                <li><a href="{{ URL::to('quizCollections/create') }}">Create a quiz collection</a>
-            </ul>
-        </nav>
-
-        <h1>Create a quiz</h1>
-
-        <!-- if there are creation errors, they will show here -->
-        @if ($errors->any())
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        @endif
+        <hr class="mb-4" />
 
         <form action="{{ url('quizCollections') }}" method="POST">
             @csrf
 
             <div class="form-group">
-                <label for="name">Name</label>
+                <label for="name">Tên Bộ Đề Thi</label>
                 <input type="text" id="name" name="name" value="{{ old('name') }}" class="form-control">
             </div>
 
-            <button type="submit" class="btn btn-primary">Create</button>
+            <!-- Hiển thị thông báo lỗi nếu có -->
+            @if ($errors->any())
+                <div class="alert alert-danger mt-3 mb-0">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+
+            <div class="d-flex justify-content-start">
+                <button type="submit" class="btn btn-primary mt-4 me-2">XÁC NHẬN TẠO MỚI</button>
+                <a href="{{ url('quizCollections') }}" class="btn btn-outline-secondary mt-4">VỀ DANH SÁCH</a>
+            </div>
         </form>
 
-
     </div>
-</body>
-
-</html>
+@endsection

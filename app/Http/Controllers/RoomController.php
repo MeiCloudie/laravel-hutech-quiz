@@ -137,7 +137,7 @@ class RoomController extends Controller
 
             // redirect
             // Session::flash('message', 'Successfully updated room!');
-            return Redirect::to('rooms');
+            return Redirect::to('rooms/'.$id);
         }
     }
 

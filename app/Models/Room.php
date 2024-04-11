@@ -37,6 +37,11 @@ class Room extends Model
         return $this->hasMany(Record::class);
     }
 
+    public function users()
+    {
+        return $this->belongsToMany(User::class, 'user_to_rooms', 'room_id', 'user_id');
+    }
+
     
 
     public static function generateCode($length = 6)

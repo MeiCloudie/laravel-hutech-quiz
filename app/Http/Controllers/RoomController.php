@@ -9,6 +9,7 @@ use App\Models\QuizCollection;
 use App\Models\User;
 use Illuminate\Support\Facades\Redirect;
 use \Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
 class RoomController extends Controller
@@ -82,24 +83,62 @@ class RoomController extends Controller
     public function show(Room $room)
     {
         //
+
+        $quizCollections = QuizCollection::all();
         return view('rooms.show')
-            ->with('room', $room);
+            ->with(
+                [
+                    'room' => $room,
+                    'quizCollections' => $quizCollections
+                ]
+            );
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Room $room)
+    public function edit($id)
     {
         //
+        $room = Room::find($id);
+        $users = User::all();
+        $quizCollections = QuizCollection::all();
+
+        // show the view and pass the room to it
+        return view('rooms.edit')
+            ->with([
+                'room' => $room,
+                'users' => $users,
+                'quizCollections' => $quizCollections
+            ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateRoomRequest $request, Room $room)
+    public function update(UpdateRoomRequest $request, $id)
     {
         //
+        $rules = array(
+            'quizCollectionId'       => 'required',
+        );
+        $validator = Validator::make($request->all(), $rules);
+
+        // process the login
+        if ($validator->fails()) {
+            return redirect('rooms/'.$id)
+                ->withErrors($validator)
+                ->withInput();
+        } else {
+            // store
+            $room = Room::find($id);
+            $room->quiz_collection_id      = $request->quizCollectionId;
+            $room->save();
+
+            // redirect
+            // Session::flash('message', 'Successfully updated room!');
+            return Redirect::to('rooms/'.$id);
+        }
     }
 
     /**
@@ -143,5 +182,35 @@ class RoomController extends Controller
         $room->save();
 
         return redirect()->route('rooms.index');
+    }
+
+    public function join($id)
+    {
+        $room = Room::find($id);
+        $ids = $room->users->map((function ($user, $key) {
+            return $user->id;
+        }));
+
+        if (!$ids->contains(Auth::user()->id)) {
+            $user = User::find(Auth::user()->id);
+            $room->users()->attach($user);
+        }
+
+        return Redirect::to('rooms/' . $room->id);
+    }
+
+    public function leave($id)
+    {
+        $room = Room::find($id);
+        $ids = $room->users->map((function ($user, $key) {
+            return $user->id;
+        }));
+
+        if ($ids->contains(Auth::user()->id)) {
+            $user = User::find(Auth::user()->id);
+            $room->users()->detach($user);
+        }
+
+        return Redirect::to('rooms');
     }
 }

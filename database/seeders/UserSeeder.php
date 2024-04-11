@@ -36,5 +36,15 @@ class UserSeeder extends Seeder
 
             'faculty_id' => 1
         ]);
+
+        User::create([
+            'id' => 3,
+            'first_name' => 'Admin',
+            'last_name' => 'I am',
+            'username' => 'admin',
+            'email' => 'admin@gmail.com',
+            'password' => Hash::make($password),
+            'role' => 'ADMIN',
+        ]);
     }
 }

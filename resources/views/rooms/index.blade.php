@@ -6,9 +6,11 @@
             <h1 class="mb-4 fw-bold">DANH SÁCH PHÒNG</h1>
             <div>
                 {{-- NÚT TẠO PHÒNG --}}
-                <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createRoomModal">
-                    <i class="bi bi-plus-circle"></i> TẠO PHÒNG
-                </a>
+                {{-- @if (Auth::user()->role == 'ADMIN') --}}
+                    <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createRoomModal">
+                        <i class="bi bi-plus-circle"></i> TẠO PHÒNG
+                    </a>
+                {{-- @endif --}}
 
                 {{-- MODAL NÚT TẠO PHÒNG --}}
                 <div class="modal fade" id="createRoomModal" tabindex="-1" aria-labelledby="createRoomModalLabel"
@@ -88,35 +90,37 @@
                     <div class="card">
                         <div class="card-body">
                             <!-- Dropdown trigger button -->
-                            <div class="dropdown position-absolute top-1 end-0 me-3">
-                                <button class="btn btn-sm btn-light p-0" type="button" id="dropdownMenuButton"
-                                    data-bs-toggle="dropdown" aria-expanded="false">
-                                    <!-- Icon for dropdown menu -->
-                                    <i class="bi bi-three-dots-vertical fs-5"></i>
-                                </button>
-                                <!-- Dropdown menu -->
-                                {{-- TODO: Chưa có logic và xét role để hiển thị phần Dropdown --}}
-                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                    <li>
-                                        <a class="dropdown-item" href="#" data-bs-toggle="modal"
-                                            data-bs-target="#deleteRoomModal-{{ $room->id }}">Xoá phòng</a>
-                                    </li>
-                                    {{-- Chỉ hiển thị nếu phòng chưa đóng --}}
-                                    @if (!$room->is_closed)
-                                        <li>
-                                            <a class="dropdown-item" href="#" data-bs-toggle="modal"
-                                                data-bs-target="#closeRoomModal-{{ $room->id }}">Đóng phòng</a>
-                                        </li>
-                                    @endif
+                            @if (Auth::user()->role == 'ADMIN' || Auth::user()->id == $room->owner_id)
+                                <div class="dropdown position-absolute top-1 end-0 me-3">
+                                    <button class="btn btn-sm btn-light p-0" type="button" id="dropdownMenuButton"
+                                        data-bs-toggle="dropdown" aria-expanded="false">
+                                        <!-- Icon for dropdown menu -->
+                                        <i class="bi bi-three-dots-vertical fs-5"></i>
+                                    </button>
+                                    <!-- Dropdown menu -->
 
-                                    @if ($room->is_closed)
+                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                         <li>
                                             <a class="dropdown-item" href="#" data-bs-toggle="modal"
-                                                data-bs-target="#openRoomModal-{{ $room->id }}">Mở phòng</a>
+                                                data-bs-target="#deleteRoomModal-{{ $room->id }}">Xoá phòng</a>
                                         </li>
-                                    @endif
-                                </ul>
-                            </div>
+                                        {{-- Chỉ hiển thị nếu phòng chưa đóng --}}
+                                        @if (!$room->is_closed)
+                                            <li>
+                                                <a class="dropdown-item" href="#" data-bs-toggle="modal"
+                                                    data-bs-target="#closeRoomModal-{{ $room->id }}">Đóng phòng</a>
+                                            </li>
+                                        @endif
+
+                                        @if ($room->is_closed)
+                                            <li>
+                                                <a class="dropdown-item" href="#" data-bs-toggle="modal"
+                                                    data-bs-target="#openRoomModal-{{ $room->id }}">Mở phòng</a>
+                                            </li>
+                                        @endif
+                                    </ul>
+                                </div>
+                            @endif
 
                             <!-- Card content -->
                             <div class="d-flex align-items-center mb-3">
@@ -139,7 +143,7 @@
                                     PHÒNG THI ĐÃ ĐÓNG<i class="bi bi-dash-circle-fill ms-2"></i>
                                 </button>
                             @else
-                                <a href="{{ URL::to('rooms/' . $room->id) }}" class="btn btn-primary d-block w-100">
+                                <a href="{{ URL::to('rooms/join/' . $room->id) }}" class="btn btn-primary d-block w-100">
                                     VÀO PHÒNG<i class="bi bi-arrow-right-circle-fill ms-2"></i>
                                 </a>
                             @endif

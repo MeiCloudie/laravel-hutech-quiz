@@ -20,6 +20,7 @@ class AnswerSeeder extends Seeder
             [
                 'id' => 1,
                 'content' => '1',
+                'is_correct' => false,
                 'quiz_id' => 1,
                 "created_at" =>  \Carbon\Carbon::now(),
                 "updated_at" => \Carbon\Carbon::now(),
@@ -27,13 +28,16 @@ class AnswerSeeder extends Seeder
             [
                 'id' => 2,
                 'content' => '2',
+                'is_correct' => true,
                 'quiz_id' => 1,
                 "created_at" =>  \Carbon\Carbon::now(),
                 "updated_at" => \Carbon\Carbon::now(),
             ],
+
             [
                 'id' => 3,
                 'content' => '9',
+                'is_correct' => false,
                 'quiz_id' => 2,
                 "created_at" =>  \Carbon\Carbon::now(),
                 "updated_at" => \Carbon\Carbon::now(),
@@ -41,7 +45,42 @@ class AnswerSeeder extends Seeder
             [
                 'id' => 4,
                 'content' => '18',
+                'is_correct' => true,
                 'quiz_id' => 2,
+                "created_at" =>  \Carbon\Carbon::now(),
+                "updated_at" => \Carbon\Carbon::now(),
+            ],
+
+            [
+                'id' => 5,
+                'content' => '3',
+                'is_correct' => true,
+                'quiz_id' => 3,
+                "created_at" =>  \Carbon\Carbon::now(),
+                "updated_at" => \Carbon\Carbon::now(),
+            ],
+            [
+                'id' => 6,
+                'content' => '4',
+                'is_correct' => false,
+                'quiz_id' => 3,
+                "created_at" =>  \Carbon\Carbon::now(),
+                "updated_at" => \Carbon\Carbon::now(),
+            ],
+            
+            [
+                'id' => 7,
+                'content' => '3',
+                'is_correct' => false,
+                'quiz_id' => 4,
+                "created_at" =>  \Carbon\Carbon::now(),
+                "updated_at" => \Carbon\Carbon::now(),
+            ],
+            [
+                'id' => 8,
+                'content' => '4',
+                'is_correct' => true,
+                'quiz_id' => 4,
                 "created_at" =>  \Carbon\Carbon::now(),
                 "updated_at" => \Carbon\Carbon::now(),
             ],

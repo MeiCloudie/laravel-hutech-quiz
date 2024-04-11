@@ -29,11 +29,9 @@
                     <a href="{{ url('rooms/leave/' . $room->id) }}" class="btn btn-danger">
                         <i class="bi bi-box-arrow-left"></i> RỜI PHÒNG
                     </a>
-                    @if (Auth::user()->role == 'ADMIN' || Auth::user()->id == $room->owner_id)
-                        <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#confirmStartModal">
-                            <i class="bi bi-play-circle"></i> BẮT ĐẦU
-                        </button>
-                    @endif
+                    <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#confirmStartModal">
+                        <i class="bi bi-play-circle"></i> BẮT ĐẦU
+                    </button>
                 </div>
             </div>
 
@@ -130,7 +128,7 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <p>Bạn có chắc chắn muốn bắt đầu phòng thi này không?</p>
+                        <p>Bạn có chắc chắn muốn bắt đầu bài thi này không?</p>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">HUỶ</button>

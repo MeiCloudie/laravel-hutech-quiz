@@ -21,6 +21,8 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::prefix('rooms')->group(function () {
+    Route::get('{id}/play', [App\Http\Controllers\PlayController::class, 'index'])->name('play.index');
+
     Route::post('find', [App\Http\Controllers\RoomController::class, 'find'])->name('find');
     Route::get('close/{id}', [App\Http\Controllers\RoomController::class, 'close'])->name('close');
     Route::get('open/{id}', [App\Http\Controllers\RoomController::class, 'open'])->name('open');

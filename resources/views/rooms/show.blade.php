@@ -11,7 +11,6 @@
             </div>
 
             {{-- CÁC NÚT --}}
-            {{-- TODO: Chưa xét quyền hiển thị nút --}}
             <div class="col-md-2 text-end">
                 @if (Auth::user()->role == 'ADMIN' || Auth::user()->id == $room->owner_id)
                     <div class="d-grid gap-2 mt-2">
@@ -30,11 +29,9 @@
                     <a href="{{ url('rooms/leave/' . $room->id) }}" class="btn btn-danger">
                         <i class="bi bi-box-arrow-left"></i> RỜI PHÒNG
                     </a>
-                    @if (Auth::user()->role == 'ADMIN' || Auth::user()->id == $room->owner_id)
-                        <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#confirmStartModal">
-                            <i class="bi bi-play-circle"></i> BẮT ĐẦU
-                        </button>
-                    @endif
+                    <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#confirmStartModal">
+                        <i class="bi bi-play-circle"></i> BẮT ĐẦU
+                    </button>
                 </div>
             </div>
 
@@ -43,22 +40,6 @@
             {{-- PHẦN HIỂN THỊ CÁC THÀNH VIÊN TRONG PHÒNG --}}
             <div class="mt-2">
                 <div class="row row-cols-1 row-cols-md-4 g-4">
-                    {{-- @foreach ($room->users as $user) --}}
-                    {{-- !: Này là phần mẫu để test --}}
-                    {{-- <div class="col">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="d-md-flex">
-                                    <img src="{{ asset('images/avatar_hutech_quiz.png') }}"
-                                        class="rounded-circle mb-3 border" width="50" height="50" alt="Avatar">
-                                    <div class="ms-2">
-                                        <h5 class="card-title fw-bold mb-0 mt-1">Alo</h5>
-                                        <p class="card-text">2080600803</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div> --}}
                     @foreach ($room->users as $user)
                         <div class="col">
                             <div class="card">
@@ -76,22 +57,6 @@
                             </div>
                         </div>
                     @endforeach
-                    {{-- !: Sửa lại chỗ này cho phù hợp - xoá code bên trên --}}
-                    {{-- <div class="col">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="d-md-flex">
-                                    <img src="{{ asset('images/avatar_hutech_quiz.png') }}"
-                                        class="rounded-circle mb-3 border" width="50" height="50" alt="Avatar">
-                                    <div class="ms-2">
-                                        <h5 class="card-title fw-bold mb-0 mt-1">{{ $user->last_name }} {{ $user->first_name }}</h5>
-                                        <p class="card-text">{{ $user->username }}</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div> --}}
-                    {{-- @endforeach --}}
                 </div>
             </div>
 
@@ -163,7 +128,7 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <p>Bạn có chắc chắn muốn bắt đầu phòng thi này không?</p>
+                        <p>Bạn có chắc chắn muốn bắt đầu bài thi này không?</p>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">HUỶ</button>

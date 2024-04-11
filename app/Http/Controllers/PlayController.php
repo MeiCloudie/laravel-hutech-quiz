@@ -14,9 +14,20 @@ class PlayController extends Controller
         $room = Room::find($id);
         $quizCollections = QuizCollection::all();
         return view('play.index')
-        ->with([
-            'room' => $room,
-            'quizCollections' => $quizCollections
-        ]);
+            ->with([
+                'room' => $room,
+                'quizCollections' => $quizCollections
+            ]);
+    }
+
+    public function result($id)
+    {
+        $room = Room::find($id);
+        $quizCollections = QuizCollection::all();
+        return view('play.result')
+            ->with([
+                'room' => $room,
+                'quizCollections' => $quizCollections
+            ]);
     }
 }

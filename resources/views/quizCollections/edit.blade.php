@@ -29,5 +29,10 @@
             <button type="submit" class="btn btn-primary mt-4">LƯU THAY ĐỔI</button>
             <a href="{{ URL::to('quizCollections') }}" class="btn btn-outline-secondary mt-4">HỦY THAO TÁC</a>
         </form>
+
+        {{-- TODO: Chưa có list quiz --}}
+        <div>
+
+        </div>
     </div>
 @endsection

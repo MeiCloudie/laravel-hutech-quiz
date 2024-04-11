@@ -40,26 +40,25 @@
 
             <hr class="mt-1" />
 
-            {{-- PHẦN HIỂN THỊ CÁC THÀNH VIÊN TRONG PHÒNG --}}
             <div class="mt-2">
                 <div class="row row-cols-1 row-cols-md-4 g-4">
                     {{-- @foreach ($room->users as $user) --}}
                     {{-- !: Này là phần mẫu để test --}}
                     {{-- <div class="col">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="d-md-flex">
-                                    <img src="{{ asset('images/avatar_hutech_quiz.png') }}"
-                                        class="rounded-circle mb-3 border" width="50" height="50" alt="Avatar">
-                                    <div class="ms-2">
-                                        <h5 class="card-title fw-bold mb-0 mt-1">Alo</h5>
-                                        <p class="card-text">2080600803</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div> --}}
-                    @foreach ($room->users as $user)
+                      <div class="card">
+                          <div class="card-body">
+                              <div class="d-md-flex">
+                                  <img src="{{ asset('images/avatar_hutech_quiz.png') }}"
+                                      class="rounded-circle mb-3 border" width="50" height="50" alt="Avatar">
+                                  <div class="ms-2">
+                                      <h5 class="card-title fw-bold mb-0 mt-1">Alo</h5>
+                                      <p class="card-text">2080600803</p>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                  </div> --}}
+                    @foreach ($room->quizCollection->quizzes as $quiz)
                         <div class="col">
                             <div class="card">
                                 <div class="card-body">
@@ -68,8 +67,8 @@
                                             class="rounded-circle mb-3 border" width="50" height="50" alt="Avatar">
                                         <div class="ms-2">
                                             <h5 class="card-title fw-bold mb-0 mt-1">
-                                                {{ $user->last_name . ' ' . $user->first_name }}</h5>
-                                            <p class="card-text">{{ $user->username }}</p>
+                                                {{ $quiz->content }}</h5>
+                                            <p class="card-text">{{ $quiz->explaination }}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -78,24 +77,24 @@
                     @endforeach
                     {{-- !: Sửa lại chỗ này cho phù hợp - xoá code bên trên --}}
                     {{-- <div class="col">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="d-md-flex">
-                                    <img src="{{ asset('images/avatar_hutech_quiz.png') }}"
-                                        class="rounded-circle mb-3 border" width="50" height="50" alt="Avatar">
-                                    <div class="ms-2">
-                                        <h5 class="card-title fw-bold mb-0 mt-1">{{ $user->last_name }} {{ $user->first_name }}</h5>
-                                        <p class="card-text">{{ $user->username }}</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div> --}}
+                      <div class="card">
+                          <div class="card-body">
+                              <div class="d-md-flex">
+                                  <img src="{{ asset('images/avatar_hutech_quiz.png') }}"
+                                      class="rounded-circle mb-3 border" width="50" height="50" alt="Avatar">
+                                  <div class="ms-2">
+                                      <h5 class="card-title fw-bold mb-0 mt-1">{{ $user->last_name }} {{ $user->first_name }}</h5>
+                                      <p class="card-text">{{ $user->username }}</p>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                  </div> --}}
                     {{-- @endforeach --}}
                 </div>
             </div>
 
-        </div>
+            <hr class="mt-1" />
 
 
         {{-- MODAL CHỈNH SỬA BỘ ĐỀ THI --}}

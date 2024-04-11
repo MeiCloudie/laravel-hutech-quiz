@@ -19,7 +19,7 @@
                             required>
                             <option value="" disabled>Chọn chủ phòng</option>
                             @foreach ($users as $owner)
-                                <option value="{{ $owner->id }}" {{ $owner->id == $room->ownerId ? 'selected' : '' }}>
+                                <option value="{{ $owner->id }}" {{ $owner->id == $room->owner->id ? 'selected' : '' }}>
                                     {{ $owner->username }}
                                 </option>
                             @endforeach
@@ -37,7 +37,7 @@
                             <option value="" disabled>Chọn bộ đề thi</option>
                             @foreach ($quizCollections as $quizCollection)
                                 <option value="{{ $quizCollection->id }}"
-                                    {{ $quizCollection->id == $room->quizCollectionId ? 'selected' : '' }}>
+                                    {{ $quizCollection->id == $room->quizCollection->id ? 'selected' : '' }}>
                                     {{ $quizCollection->name }}
                                 </option>
                             @endforeach

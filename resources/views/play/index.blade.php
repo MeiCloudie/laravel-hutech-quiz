@@ -63,8 +63,6 @@
                 </div>
             </div>
 
-
-
             {{-- MODAL NỘP BÀI --}}
             <div class="modal fade" id="submitTestModal" tabindex="-1" aria-labelledby="submitTestModalLabel"
                 aria-hidden="true">
@@ -79,8 +77,8 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">HUỶ</button>
-                            <form action="" method="POST">
-                                {{-- @csrf --}}
+                            <form action="{{ url('rooms/' . $room->id . '/result') }}" method="POST">
+                                @csrf
                                 <button type="submit" class="btn btn-success">XÁC NHẬN NỘP BÀI</button>
                             </form>
                         </div>

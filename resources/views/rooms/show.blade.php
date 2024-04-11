@@ -11,7 +11,6 @@
             </div>
 
             {{-- CÁC NÚT --}}
-            {{-- TODO: Chưa xét quyền hiển thị nút --}}
             <div class="col-md-2 text-end">
                 @if (Auth::user()->role == 'ADMIN' || Auth::user()->id == $room->owner_id)
                     <div class="d-grid gap-2 mt-2">

@@ -4,178 +4,71 @@
     <div class="container">
         <div class="row">
             {{-- Info phòng --}}
-            <div class="col-md-8">
+            <div class="col-md-12">
                 <h1 class="fw-bold">PHÒNG THI • CODE: {{ $room->code }}</h1>
                 <h5>Người tổ chức: GV. {{ $room->owner->last_name }} {{ $room->owner->first_name }}</h5>
                 <p>Bộ đề thi: {{ $room->quizCollection->name }}</p>
             </div>
 
-            {{-- CÁC NÚT --}}
-            {{-- TODO: Chưa xét quyền hiển thị nút --}}
-            <div class="col-md-2 text-end">
-                @if (Auth::user()->role == 'ADMIN' || Auth::user()->id == $room->owner_id)
-                    <div class="d-grid gap-2 mt-2">
-                        <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#editRoomModal">
-                            <i class="bi bi-pencil"></i> CHỈNH SỬA
-                        </button>
-                        <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteRoomModal">
-                            <i class="bi bi-trash"></i> XOÁ
-                        </button>
-                    </div>
-                @endif
-            </div>
-
-            <div class="col-md-2 text-end">
-                <div class="d-grid gap-2 mt-2">
-                    <a href="{{ url('rooms/leave/' . $room->id) }}" class="btn btn-danger">
-                        <i class="bi bi-box-arrow-left"></i> RỜI PHÒNG
-                    </a>
-                    @if (Auth::user()->role == 'ADMIN' || Auth::user()->id == $room->owner_id)
-                        <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#confirmStartModal">
-                            <i class="bi bi-play-circle"></i> BẮT ĐẦU
-                        </button>
-                    @endif
-                </div>
-            </div>
-
             <hr class="mt-1" />
 
+            {{-- CÁC CÂU HỎI --}}
             <div class="mt-2">
-                <div class="row row-cols-1 row-cols-md-4 g-4">
-                    {{-- @foreach ($room->users as $user) --}}
-                    {{-- !: Này là phần mẫu để test --}}
-                    {{-- <div class="col">
-                      <div class="card">
-                          <div class="card-body">
-                              <div class="d-md-flex">
-                                  <img src="{{ asset('images/avatar_hutech_quiz.png') }}"
-                                      class="rounded-circle mb-3 border" width="50" height="50" alt="Avatar">
-                                  <div class="ms-2">
-                                      <h5 class="card-title fw-bold mb-0 mt-1">Alo</h5>
-                                      <p class="card-text">2080600803</p>
-                                  </div>
-                              </div>
-                          </div>
-                      </div>
-                  </div> --}}
+                <div class="row row-cols-1">
                     @foreach ($room->quizCollection->quizzes as $quiz)
-                        <div class="col">
+                        <div class="col mb-4">
                             <div class="card">
                                 <div class="card-body">
-                                    <div class="d-md-flex">
-                                        <img src="{{ asset('images/avatar_hutech_quiz.png') }}"
-                                            class="rounded-circle mb-3 border" width="50" height="50" alt="Avatar">
-                                        <div class="ms-2">
-                                            <h5 class="card-title fw-bold mb-0 mt-1">
-                                                {{ $quiz->content }}</h5>
-                                            <p class="card-text">{{ $quiz->explaination }}</p>
-                                        </div>
+                                    <h5 class="card-title fw-bold mb-2">{{ $quiz->content }}</h5>
+                                    <p class="card-text">{{ $quiz->explaination }}</p>
+                                    <div class="list-group">
                                         @foreach ($quiz->answers as $answer)
-                                            <div>{{ $answer->content }}</div>
-                                            <br />
+                                            <label class="list-group-item">
+                                                <input type="radio" name="answer_{{ $quiz->id }}"
+                                                    value="{{ $answer->id }}">
+                                                {{ $answer->content }}
+                                            </label>
                                         @endforeach
                                     </div>
                                 </div>
                             </div>
                         </div>
                     @endforeach
-                    {{-- !: Sửa lại chỗ này cho phù hợp - xoá code bên trên --}}
-                    {{-- <div class="col">
-                      <div class="card">
-                          <div class="card-body">
-                              <div class="d-md-flex">
-                                  <img src="{{ asset('images/avatar_hutech_quiz.png') }}"
-                                      class="rounded-circle mb-3 border" width="50" height="50" alt="Avatar">
-                                  <div class="ms-2">
-                                      <h5 class="card-title fw-bold mb-0 mt-1">{{ $user->last_name }} {{ $user->first_name }}</h5>
-                                      <p class="card-text">{{ $user->username }}</p>
-                                  </div>
-                              </div>
-                          </div>
-                      </div>
-                  </div> --}}
-                    {{-- @endforeach --}}
                 </div>
             </div>
 
-            <hr class="mt-1" />
+            <hr class="mt-2" />
 
+            {{-- CÁC NÚT --}}
+            <div class="d-flex justify-content-end">
+                <div>
+                    <button class="btn btn-primary px-5" disabled>
+                        LƯU BÀI
+                    </button>
+                    <button class="btn btn-success px-5" data-bs-toggle="modal" data-bs-target="#submitTestModal">
+                        NỘP BÀI
+                    </button>
+                </div>
+            </div>
 
-            {{-- MODAL CHỈNH SỬA BỘ ĐỀ THI --}}
-            <div class="modal fade" id="editRoomModal" tabindex="-1" aria-labelledby="editRoomModalLabel"
+            {{-- MODAL NỘP BÀI --}}
+            <div class="modal fade" id="submitTestModal" tabindex="-1" aria-labelledby="submitTestModalLabel"
                 aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="editRoomModalLabel">CHỈNH SỬA BỘ ĐỀ THI</h5>
+                            <h5 class="modal-title" id="submitTestModalLabel">NỘP BÀI</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            {{-- Form chỉnh sửa bộ đề thi --}}
-                            <form action="{{ url('rooms/' . $room->id) }}" method="POST">
-                                @csrf
-                                @method('PUT')
-                                <div class="mb-3">
-                                    <label for="quizCollectionId" class="form-label">Chọn Bộ Đề Thi</label>
-                                    <select class="form-select" id="quizCollectionId" name="quizCollectionId" required>
-                                        <option value="" disabled selected>Chọn bộ đề</option>
-                                        @foreach ($quizCollections as $quizCollection)
-                                            <option value="{{ $quizCollection->id }}">{{ $quizCollection->name }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                                <button type="submit" class="btn btn-primary">CẬP NHẬT</button>
-                                <a href="{{ URL::to('rooms/' . $room->id . '/edit') }}"
-                                    class="btn btn-outline-secondary">ĐẾN
-                                    TRANG</a>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            {{-- MODAL XÁC NHẬN XOÁ --}}
-            <div class="modal fade" id="deleteRoomModal" tabindex="-1" aria-labelledby="deleteRoomModalLabel"
-                aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="deleteRoomModalLabel">XÁC NHẬN XOÁ</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <p>Bạn có chắc chắn muốn xoá phòng này không?</p>
+                            <p>Bạn có chắn chắn muốn NỘP BÀI không?</p>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">HUỶ</button>
-                            <form action="{{ url('rooms/' . $room->id) }}" method="POST">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="btn btn-danger">XÁC NHẬN XOÁ</button>
+                            <form action="" method="POST">
+                                {{-- @csrf --}}
+                                <button type="submit" class="btn btn-success">XÁC NHẬN NỘP BÀI</button>
                             </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            {{-- MODAL XÁC NHẬN BẮT ĐẦU --}}
-            <div class="modal fade" id="confirmStartModal" tabindex="-1" aria-labelledby="confirmStartModalLabel"
-                aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="confirmStartModalLabel">XÁC NHẬN BẮT ĐẦU</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <p>Bạn có chắc chắn muốn bắt đầu phòng thi này không?</p>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">HUỶ</button>
-                            <a href="{{ URL::to('rooms/' . $room->id . '/play') }}" class="btn btn-success">
-                                BẮT ĐẦU
-                            </a>
                         </div>
                     </div>
                 </div>
@@ -189,6 +82,22 @@
 
                 .card:hover {
                     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+                }
+
+                .list-group-item {
+                    cursor: pointer;
+                    transition: background-color 0.3s ease;
+                }
+
+                .list-group-item:hover,
+                .list-group-item:focus {
+                    background-color: #e4ecfc;
+                    /* Màu nền khi hover hoặc focus */
+                }
+
+                .list-group-item input[type="radio"]:checked+.list-group-item {
+                    background-color: #e2f0ff;
+                    /* Màu nền khi radio button được chọn */
                 }
             </style>
         </div>

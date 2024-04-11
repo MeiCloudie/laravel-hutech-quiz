@@ -1,49 +1,33 @@
-<!DOCTYPE html>
-<html>
+@extends('layouts.app')
 
-<head>
-    <title>Quiz App</title>
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
-</head>
-
-<body>
+@section('content')
     <div class="container">
+        <h1 class="fw-bold mb-2">CHỈNH SỬA BỘ ĐỀ THI</h1>
 
-        <nav class="navbar navbar-inverse">
-            <div class="navbar-header">
-                <a class="navbar-brand" href="{{ url('quizCollection') }}">Quiz collection Alert</a>
-            </div>
-            <ul class="nav navbar-nav">
-                <li><a href="{{ url('quizCollection') }}">View All Quiz collections</a></li>
-                <li><a href="{{ url('quizCollection/create') }}">Create a Quiz collection</a></li>
-            </ul>
-        </nav>
-
-        <h1>Edit {{ $quizCollection->content }}</h1>
-
-        <!-- if there are creation errors, they will show here -->
-        @if ($errors->any())
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        @endif
+        <hr class="mb-4" />
 
         <form action="{{ route('quizCollections.update', $quizCollection->id) }}" method="POST">
             @csrf
             @method('PUT')
 
             <div class="form-group">
-                <label for="name">Name</label>
-                <input type="text" id="name" name="name" value="{{ $quizCollection->name }}"
-                    class="form-control">
+                <label for="name">Tên Bộ Đề Thi</label>
+                <input type="text" id="name" name="name" value="{{ $quizCollection->name }}" class="form-control">
             </div>
 
-            <button type="submit" class="btn btn-primary">Edit the Quiz collection!</button>
+            <!-- Hiển thị thông báo lỗi nếu có -->
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+
+            <button type="submit" class="btn btn-primary mt-4">LƯU THAY ĐỔI</button>
+            <a href="{{ URL::to('quizCollections') }}" class="btn btn-outline-secondary mt-4">HỦY THAO TÁC</a>
         </form>
-
     </div>
-</body>
-
-</html>
+@endsection

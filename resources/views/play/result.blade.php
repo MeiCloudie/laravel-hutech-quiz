@@ -31,15 +31,16 @@
         <div class="row mt-2">
             {{-- !: Chỗ này biến chưa đúng nha --}}
             {{-- Lặp qua danh sách câu --}}
-            @foreach ($answers as $index => $answer)
-                @if ($answer['correct'])
+            @foreach ($records as $index => $record)
+                @if ($record->answer->is_correct)
                     {{-- Hiển thị giao diện cho câu đúng --}}
                     <div class="col-lg-2 col-md-3 col-sm-4 col-6 mb-3">
                         <div class="card text-white bg-success">
                             <div class="card-body mb-0">
                                 <div class="d-flex justify-content-center align-items-center">
                                     <h4 class="card-title fw-bold me-2 pt-2">Câu {{ $index + 1 }}:</h4>
-                                    <h5 class="card-text me-2 pt-2">{{ $answer['selected'] }}</h5>
+                                    {{-- <h5 class="card-title fw-bold me-2 pt-2">{{ $record->quiz->content }}</h5> --}}
+                                    <h5 class="card-text me-2 pt-2">{{ $record->answer->content }}</h5>
                                     <i class="bi bi-check text-white fs-3"></i>
                                 </div>
                             </div>
@@ -52,8 +53,16 @@
                             <div class="card-body mb-0">
                                 <div class="d-flex justify-content-center align-items-center">
                                     <h4 class="card-title fw-bold me-2 pt-2">Câu {{ $index + 1 }}:</h4>
-                                    <h5 class="card-text me-2 pt-2">{{ $answer['selected'] }}</h5>
-                                    <h5 class="card-text me-2 pt-2">-> {{ $answer['correct'] }}</h5>
+                                    {{-- <h5 class="card-title fw-bold me-2 pt-2">{{ $record->quiz->content }}</h5> --}}
+                                    
+                                    <h5 class="card-text me-2 pt-2">{{ $record->answer->content }}</h5>
+                                    <h5 class="card-text me-2 pt-2">-> 
+                                        @foreach ($record->answer->quiz->answers as $answer)
+                                            @if ($answer->is_correct)
+                                            {{ $answer->content }}
+                                            @endif
+                                        @endforeach
+                                    </h5>
                                     <i class="bi bi-x text-white fs-3"></i>
                                 </div>
                             </div>

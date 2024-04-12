@@ -24,68 +24,70 @@
 
             <hr class="mt-1" />
 
-            {{-- CÁC CÂU HỎI --}}
-            <div class="mt-2" id="questionSection" style="display: none;">
-                <div class="row row-cols-1">
-                    @foreach ($room->quizCollection->quizzes as $quiz)
-                        <div class="col mb-4">
-                            <div class="card">
-                                <div class="card-body">
-                                    <h5 class="card-title fw-bold mb-2">{{ $quiz->content }}</h5>
-                                    <p class="card-text">{{ $quiz->explaination }}</p>
-                                    <div class="list-group">
-                                        @foreach ($quiz->answers as $answer)
-                                            <label class="list-group-item">
-                                                <input type="radio" name="answer_{{ $quiz->id }}"
-                                                    value="{{ $answer->id }}">
-                                                {{ $answer->content }}
-                                            </label>
-                                        @endforeach
+            <form action="{{ url('rooms/' . $room->id . '/play/submit') }}" method="POST">
+                @csrf
+                {{-- CÁC CÂU HỎI --}}
+                <div class="mt-2" id="questionSection" style="display: none;">
+                    <div class="row row-cols-1">
+                        @foreach ($room->quizCollection->quizzes as $index => $quiz)
+                            <div class="col mb-4">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h5 class="card-title fw-bold mb-2">{{ $quiz->content }}</h5>
+                                        <p class="card-text">{{ $quiz->explaination }}</p>
+                                        <div class="list-group">
+                                            @foreach ($quiz->answers as $answer)
+                                                <label class="list-group-item">
+                                                    <input type="radio" name="answers[{{ $quiz->id }}]"
+                                                        value="{{ $answer->id }}">
+                                                    {{ $answer->content }}
+                                                </label>
+                                            @endforeach
+                                        </div>
                                     </div>
                                 </div>
                             </div>
+                        @endforeach
+                    </div>
+
+                    <hr class="mt-2" />
+
+                    {{-- CÁC NÚT --}}
+                    <div class="d-flex justify-content-end">
+                        <div>
+                            <button class="btn btn-primary px-5" disabled>
+                                LƯU BÀI
+                            </button>
+                            <button class="btn btn-success px-5" data-bs-toggle="modal" data-bs-target="#submitTestModal">
+                                NỘP BÀI
+                            </button>
                         </div>
-                    @endforeach
-                </div>
-
-                <hr class="mt-2" />
-
-                {{-- CÁC NÚT --}}
-                <div class="d-flex justify-content-end">
-                    <div>
-                        <button class="btn btn-primary px-5" disabled>
-                            LƯU BÀI
-                        </button>
-                        <button class="btn btn-success px-5" data-bs-toggle="modal" data-bs-target="#submitTestModal">
-                            NỘP BÀI
-                        </button>
                     </div>
                 </div>
-            </div>
 
-            {{-- MODAL NỘP BÀI --}}
-            <div class="modal fade" id="submitTestModal" tabindex="-1" aria-labelledby="submitTestModalLabel"
-                aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="submitTestModalLabel">NỘP BÀI</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <p>Bạn có chắn chắn muốn NỘP BÀI không?</p>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">HUỶ</button>
-                            <form action="{{ url('rooms/' . $room->id . '/result') }}" method="POST">
-                                @csrf
+                {{-- MODAL NỘP BÀI --}}
+                <div class="modal fade" id="submitTestModal" tabindex="-1" aria-labelledby="submitTestModalLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="submitTestModalLabel">NỘP BÀI</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <p>Bạn có chắn chắn muốn NỘP BÀI không?</p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">HUỶ</button>
+
                                 <button type="submit" class="btn btn-success">XÁC NHẬN NỘP BÀI</button>
-                            </form>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
+            </form>
             <style>
                 .card {
                     transition: box-shadow 0.3s ease;
@@ -125,7 +127,7 @@
         // Khai báo biến để lưu trữ ID của interval
         let timerInterval;
         // Khai báo biến để lưu trữ thời gian còn lại (đơn vị: giây)
-        let currentTime = 5; // Thay đổi thành 5s/60 phút (5s/60 phút * 60 giây)
+        let currentTime = 50; // Thay đổi thành 5s/60 phút (5s/60 phút * 60 giây)
         let timerPaused = false;
 
         // Hàm cập nhật đồng hồ

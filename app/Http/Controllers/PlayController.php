@@ -29,7 +29,7 @@ class PlayController extends Controller
         $userId = Auth::user()->id;
 
         // Xóa tất cả các bản ghi của người dùng hiện tại trong bảng 'records'
-        Record::where('user_id', $userId)->delete();
+        Record::where('user_id', $userId)->where('room_id', $id)->delete();
 
         foreach ($request->answers as $quizId => $answerId) {
             $record = new Record;

@@ -46,6 +46,20 @@ class QuizSeeder extends Seeder
                 "created_at" =>  \Carbon\Carbon::now(),
                 "updated_at" => \Carbon\Carbon::now(),
             ],
+            [
+                'id' => 5,
+                'content' => '9 x 3 = ?',
+                'explaination' => 'Phép nhân',
+                "created_at" =>  \Carbon\Carbon::now(),
+                "updated_at" => \Carbon\Carbon::now(),
+            ],
+            [
+                'id' => 6,
+                'content' => '9 x 4 = ?',
+                'explaination' => 'Phép nhân',
+                "created_at" =>  \Carbon\Carbon::now(),
+                "updated_at" => \Carbon\Carbon::now(),
+            ],
         ];
         DB::table('quizzes')->truncate();
         DB::table('quizzes')->insert($data);

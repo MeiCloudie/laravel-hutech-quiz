@@ -84,6 +84,56 @@ class AnswerSeeder extends Seeder
                 "created_at" =>  \Carbon\Carbon::now(),
                 "updated_at" => \Carbon\Carbon::now(),
             ],
+
+            [
+                'id' => 9,
+                'content' => '27',
+                'is_correct' => false,
+                'quiz_id' => 5,
+                "created_at" =>  \Carbon\Carbon::now(),
+                "updated_at" => \Carbon\Carbon::now(),
+            ],
+            [
+                'id' => 10,
+                'content' => '28',
+                'is_correct' => true,
+                'quiz_id' => 5,
+                "created_at" =>  \Carbon\Carbon::now(),
+                "updated_at" => \Carbon\Carbon::now(),
+            ],
+
+            [
+                'id' => 11,
+                'content' => '36',
+                'is_correct' => true,
+                'quiz_id' => 6,
+                "created_at" =>  \Carbon\Carbon::now(),
+                "updated_at" => \Carbon\Carbon::now(),
+            ],
+            [
+                'id' => 12,
+                'content' => '35',
+                'is_correct' => false,
+                'quiz_id' => 6,
+                "created_at" =>  \Carbon\Carbon::now(),
+                "updated_at" => \Carbon\Carbon::now(),
+            ],
+            [
+                'id' => 13,
+                'content' => '34',
+                'is_correct' => false,
+                'quiz_id' => 6,
+                "created_at" =>  \Carbon\Carbon::now(),
+                "updated_at" => \Carbon\Carbon::now(),
+            ],
+            [
+                'id' => 14,
+                'content' => '33',
+                'is_correct' => false,
+                'quiz_id' => 6,
+                "created_at" =>  \Carbon\Carbon::now(),
+                "updated_at" => \Carbon\Carbon::now(),
+            ],
         ];
         DB::table('answers')->truncate();
         DB::table('answers')->insert($data);

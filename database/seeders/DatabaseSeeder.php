@@ -3,6 +3,8 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+
+use App\Models\Record;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -26,6 +28,7 @@ class DatabaseSeeder extends Seeder
             AnswerSeeder::class,
             QuizToQuizCollectionSeeder::class,
             RoomSeeder::class,
+            RecordSeeder::class,
         ]);
     }
 }

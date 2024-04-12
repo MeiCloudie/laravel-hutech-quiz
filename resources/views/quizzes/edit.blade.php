@@ -1,54 +1,88 @@
-<!DOCTYPE html>
-<html>
+@extends('layouts.app')
 
-<head>
-    <title>Quiz App</title>
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
-</head>
-
-<body>
+@section('content')
     <div class="container">
+        <div class="d-flex justify-content-between align-items-center">
+            <h1 class="fw-bold">CHỈNH SỬA BỘ CÂU HỎI #{{ $quiz->id }}</h1>
+        </div>
 
-        <nav class="navbar navbar-inverse">
-            <div class="navbar-header">
-                <a class="navbar-brand" href="{{ url('quizzes') }}">Quiz Alert</a>
-            </div>
-            <ul class="nav navbar-nav">
-                <li><a href="{{ url('quizzes') }}">View All Quizzes</a></li>
-                <li><a href="{{ url('quizzes/create') }}">Create a Quiz</a></li>
-            </ul>
-        </nav>
-
-        <h1>Edit {{ $quiz->content }}</h1>
-
-        <!-- if there are creation errors, they will show here -->
-        @if ($errors->any())
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        @endif
+        <hr class="mb-4" />
 
         <form action="{{ route('quizzes.update', $quiz->id) }}" method="POST">
             @csrf
             @method('PUT')
 
             <div class="form-group">
-                <label for="content">Content</label>
+                <label for="content">Nội dung</label>
                 <input type="text" id="content" name="content" value="{{ $quiz->content }}" class="form-control">
             </div>
 
-            <div class="form-group">
-                <label for="explaination">Explaination</label>
+            <div class="form-group mt-2">
+                <label for="explaination">Giải thích</label>
                 <input type="text" id="explaination" name="explaination" value="{{ $quiz->explaination }}"
                     class="form-control">
             </div>
 
-            <button type="submit" class="btn btn-primary">Edit the Quiz!</button>
-        </form>
+            {{-- Vòng lặp cho phần câu trả lời --}}
+            <div class="answers mt-4">
+                @foreach ($quiz->answers as $index => $answer)
+                    <div class="form-group mt-2">
+                        <label for="answer{{ $index + 1 }}">Câu trả lời {{ $index + 1 }}:</label>
+                        <input type="text" id="answer{{ $index + 1 }}" name="answers[]" value="{{ $answer->content }}"
+                            class="ms-2">
+                        <input type="checkbox" id="isCorrect{{ $index + 1 }}" name="isCorrect[]"
+                            {{ $answer->is_correct ? 'checked' : '' }} class="ms-2">
+                        <label for="isCorrect{{ $index + 1 }}">Đúng</label>
+                    </div>
+                @endforeach
+            </div>
 
+            <!-- Nút thêm câu trả lời -->
+            <div class="text-start mt-3">
+                <button type="button" class="btn btn-secondary" id="addAnswer">THÊM CÂU TRẢ LỜI</button>
+            </div>
+
+            <!-- Hiển thị thông báo lỗi nếu có -->
+            @if ($errors->any())
+                <div class="alert alert-danger mt-3">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+
+            <button type="submit" class="btn btn-primary mt-4">LƯU THAY ĐỔI</button>
+            <a href="{{ url('quizzes') }}" class="btn btn-outline-secondary mt-4">VỀ DANH SÁCH</a>
+        </form>
     </div>
-</body>
+@endsection
+
+@push('scripts')
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Lắng nghe sự kiện click nút thêm câu trả lời
+            document.getElementById('addAnswer').addEventListener('click', function() {
+                const answersContainer = document.querySelector('.answers');
+                const answerCount = answersContainer.children.length;
+                const newAnswerCount = answerCount + 1;
+
+                // Tạo phần tử input mới cho câu trả lời và checkbox
+                const newAnswerGroup = document.createElement('div');
+                newAnswerGroup.classList.add('form-group', 'mt-2');
+                newAnswerGroup.innerHTML = `
+                    <label for="answer${newAnswerCount}">Câu trả lời ${newAnswerCount}:</label>
+                    <input type="text" id="answer${newAnswerCount}" name="answers[]" class="ms-2">
+                    <input type="checkbox" id="isCorrect${newAnswerCount}" name="isCorrect[]" class="ms-2">
+                    <label for="isCorrect${newAnswerCount}">Đúng</label>
+                `;
+
+                // Thêm phần tử mới vào container
+                answersContainer.appendChild(newAnswerGroup);
+            });
+        });
+    </script>
+@endpush
 
 </html>

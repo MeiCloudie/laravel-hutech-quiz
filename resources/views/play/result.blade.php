@@ -33,17 +33,19 @@
             {{-- !: Chỗ này biến chưa đúng nha --}}
             {{-- Lặp qua danh sách câu --}}
             @foreach ($room->quizCollection->quizzes->sortby(function ($item, $key) {
-                return $item->quizToQuizCollection->order;
-            }) as $quiz)
+            return $item->quizToQuizCollection->order;
+        }) as $quiz)
                 @if ($recordsByQuizId[$quiz->id]['answer']->is_correct)
                     {{-- Hiển thị giao diện cho câu đúng --}}
                     <div class="col-lg-2 col-md-3 col-sm-4 col-6 mb-3">
                         <div class="card text-white bg-success">
                             <div class="card-body mb-0">
                                 <div class="d-flex justify-content-center align-items-center">
-                                    <h4 class="card-title fw-bold me-2 pt-2">Câu {{ $quiz->quizToQuizCollection->order }}:</h4>
+                                    <h4 class="card-title fw-bold me-2 pt-2">Câu {{ $quiz->quizToQuizCollection->order }}:
+                                    </h4>
                                     {{-- <h5 class="card-title fw-bold me-2 pt-2">{{ $record->quiz->content }}</h5> --}}
-                                    <h5 class="card-text me-2 pt-2">{{ chr($recordsByQuizId[$quiz->id]['answer']->order + 64) }}</h5>
+                                    <h5 class="card-text me-2 pt-2">
+                                        {{ chr($recordsByQuizId[$quiz->id]['answer']->order + 64) }}</h5>
                                     <i class="bi bi-check text-white fs-3"></i>
                                 </div>
                             </div>
@@ -55,14 +57,16 @@
                         <div class="card text-white bg-danger">
                             <div class="card-body mb-0">
                                 <div class="d-flex justify-content-center align-items-center">
-                                    <h4 class="card-title fw-bold me-2 pt-2">Câu {{ $quiz->quizToQuizCollection->order }}:</h4>
+                                    <h4 class="card-title fw-bold me-2 pt-2">Câu {{ $quiz->quizToQuizCollection->order }}:
+                                    </h4>
                                     {{-- <h5 class="card-title fw-bold me-2 pt-2">{{ $record->quiz->content }}</h5> --}}
 
                                     {{-- <h5 class="card-text me-2 pt-2">{{ $recordsByQuizId[$quiz->id]['answer']->content }}</h5> --}}
-                                    <h5 class="card-text me-2 pt-2">{{ chr($recordsByQuizId[$quiz->id]['answer']->order + 64) }}</h5>
+                                    <h5 class="card-text me-2 pt-2">
+                                        {{ chr($recordsByQuizId[$quiz->id]['answer']->order + 64) }}</h5>
                                     <h5 class="card-text me-2 pt-2">->
                                         @foreach ($recordsByQuizId[$quiz->id]['correctAnswers'] as $answer)
-                                        {{ chr($answer->order + 64) }}
+                                            {{ chr($answer->order + 64) }}
                                         @endforeach
                                     </h5>
                                     <i class="bi bi-x text-white fs-3"></i>
@@ -73,6 +77,38 @@
                 @endif
             @endforeach
         </div>
+
+        <hr class="mt-2" />
+
+        <div class="row row-cols-1">
+            @foreach ($room->quizCollection->quizzes->sortby(function ($item, $key) {
+            return $item->quizToQuizCollection->order;
+        }) as $index => $quiz)
+                <div class="col mb-4">
+                    <div class="card">
+                        <div class="card-body" >
+                            <h5 class="card-title fw-bold mb-2">Câu {{ $quiz->quizToQuizCollection->order }}:
+                                {{ $quiz->content }}</h5>
+                            <p class="card-text">{{ $quiz->explaination }}</p>
+                            <div class="list-group">
+                                @foreach ($quiz->answers->sortBy(function ($item, $key) {
+            return $item->order;
+        }) as $answer)
+                                    <label class="list-group-item">
+                                        <input type="radio" name="answers[{{ $quiz->id }}]"
+                                            value="{{ $answer->id }}"  {{$recordsByQuizId[$quiz->id]['answer']->id == $answer->id ? 'checked' : '' }}>
+                                        {{ chr($answer->order + 64) }}. {{ $answer->content }}
+                                    </label>
+                                @endforeach
+                                Kết quả: {{ chr($recordsByQuizId[$quiz->id]['answer']->order + 64) }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            @endforeach
+        </div>
+
+        <hr class="mt-2" />
 
         <style>
             .card {

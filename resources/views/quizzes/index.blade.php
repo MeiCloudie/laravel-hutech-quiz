@@ -42,12 +42,9 @@
                                 sửa</a>
 
                             <!-- delete this quiz -->
-                            <form action="{{ url('quizzes/' . $value->id) }}" method="POST" class="d-inline">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="btn btn-danger"><i
-                                        class="bi bi-trash-fill me-2"></i>Xoá</button>
-                            </form>
+                            <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteRoomModal">
+                                <i class="bi bi-trash-fill me-2"></i> XOÁ
+                            </button>
 
                         </td>
                     </tr>
@@ -55,5 +52,28 @@
             </tbody>
         </table>
 
+        {{-- MODAL XÁC NHẬN XOÁ --}}
+        <div class="modal fade" id="deleteRoomModal" tabindex="-1" aria-labelledby="deleteRoomModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="deleteRoomModalLabel">XÁC NHẬN XOÁ</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Bạn có chắc chắn muốn xoá BỘ CÂU HỎI này không?</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">HUỶ</button>
+                        <form action="{{ url('quizzes/' . $value->id) }}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-danger">XÁC NHẬN XOÁ</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 @endsection

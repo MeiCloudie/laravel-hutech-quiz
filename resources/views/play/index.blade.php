@@ -36,7 +36,9 @@
                                         <h5 class="card-title fw-bold mb-2">Câu {{ $quiz->quizToQuizCollection->order }}: {{ $quiz->content }}</h5>
                                         <p class="card-text">{{ $quiz->explaination }}</p>
                                         <div class="list-group">
-                                            @foreach ($quiz->answers as $answer)
+                                            @foreach ($quiz->answers->sortBy(function ($item, $key) {
+                                                return $item->order;
+                                            }) as $answer)
                                                 <label class="list-group-item">
                                                     <input type="radio" name="answers[{{ $quiz->id }}]"
                                                         value="{{ $answer->id }}">

@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('content');
             $table->boolean('is_correct')->default(false);
+            $table->integer('order')->default(1);
             $table->timestamps();
             $table->softDeletes();
 

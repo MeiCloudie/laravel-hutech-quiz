@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('quiz_to_quiz_collections', function (Blueprint $table) {
             $table->unsignedBigInteger('quiz_id');
             $table->unsignedBigInteger('quiz_collection_id');
-            $table->integer('order')->default(0);
+            $table->integer('order')->default(1);
             $table->timestamps();
             $table->softDeletes();
 

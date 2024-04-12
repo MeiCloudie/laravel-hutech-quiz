@@ -65,7 +65,7 @@ class PlayController extends Controller
                     return [
                         'answer' => $record->answer,
                         'quiz' => $record->quiz,
-                        'correctAnswers' => $record->quiz->answers->where('is_correct', true)
+                        'correctAnswers' => $record->quiz->answers->where('is_correct', true)->values()
                     ];
                 }
             );

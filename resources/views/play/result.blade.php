@@ -102,8 +102,11 @@
                                     </label>
                                 @endforeach
                                 <p
-                                    class="mb-0 mt-2 ms-2 fw-bold {{ $recordsByQuizId[$quiz->id]['answer']->is_correct ? 'text-success' : 'text-danger' }}">
-                                    => Kết quả: {{ chr($recordsByQuizId[$quiz->id]['answer']->order + 64) }}
+                                    class="mb-0 mt-2 ms-2 fw-bold">
+                                    => Kết quả: 
+                                    @foreach ($recordsByQuizId[$quiz->id]['correctAnswers'] as $correctAnswer)
+                                        {{ chr($correctAnswer->order + 64) }}
+                                    @endforeach
                                 </p>
                             </div>
                         </div>

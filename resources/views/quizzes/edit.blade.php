@@ -23,13 +23,28 @@
                     class="form-control">
             </div>
 
+            <!-- Danh sách các checkbox cho bộ đề thi -->
+            {{-- <div class="form-group mt-2">
+                <label>Bộ Đề Thi:</label>
+                <div>
+                    @foreach ($quizCollections as $quizCollection)
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="quiz_collections[]"
+                                value="{{ $quizCollection->id }}" id="quiz_collection_{{ $quizCollection->id }}">
+                            <label class="form-check-label"
+                                for="quiz_collection_{{ $quizCollection->id }}">{{ $quizCollection->name }}</label>
+                        </div>
+                    @endforeach
+                </div>
+            </div> --}}
+
             {{-- Vòng lặp cho phần câu trả lời --}}
             <div class="answers mt-4">
                 @foreach ($quiz->answers as $index => $answer)
                     <div class="form-group mt-2">
                         <label for="answer{{ $index + 1 }}">Câu trả lời {{ $index + 1 }}:</label>
-                        <input type="text" id="answer{{ $index + 1 }}" name="answers[]" value="{{ $answer->content }}"
-                            class="ms-2">
+                        <input type="text" id="answer{{ $index + 1 }}" name="answers[]"
+                            value="{{ $answer->content }}" class="ms-2">
                         <input type="checkbox" id="isCorrect{{ $index + 1 }}" name="isCorrect[]"
                             {{ $answer->is_correct ? 'checked' : '' }} class="ms-2">
                         <label for="isCorrect{{ $index + 1 }}">Đúng</label>

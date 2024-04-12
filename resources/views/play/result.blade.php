@@ -19,7 +19,8 @@
                         <h4 class="card-title fw-bold mb-2">Họ tên: {{ Auth::user()->getFullName() }}</h4>
                         <h5 class="card-text">Số câu đúng: {{ $correctAnswerCount }}</h5>
                         <h5 class="card-text">Số câu sai: {{ $incorrectAnswerCount }}</h5>
-                        <h5 class="card-text fw-bold text-danger">TỔNG ĐIỂM: ...</h5>
+                        <h5 class="card-text fw-bold text-danger">KẾT QUẢ:
+                            {{ $correctAnswerCount . '/' . ($correctAnswerCount + $incorrectAnswerCount) }}</h5>
                     </div>
                 </div>
             </div>
@@ -54,9 +55,9 @@
                                 <div class="d-flex justify-content-center align-items-center">
                                     <h4 class="card-title fw-bold me-2 pt-2">Câu {{ $index + 1 }}:</h4>
                                     {{-- <h5 class="card-title fw-bold me-2 pt-2">{{ $record->quiz->content }}</h5> --}}
-                                    
+
                                     <h5 class="card-text me-2 pt-2">{{ $record['answer']->content }}</h5>
-                                    <h5 class="card-text me-2 pt-2">-> 
+                                    <h5 class="card-text me-2 pt-2">->
                                         @foreach ($record['correctAnswers'] as $answer)
                                             {{ $answer->content }}
                                         @endforeach

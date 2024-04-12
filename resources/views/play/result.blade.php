@@ -95,15 +95,15 @@
             return $item->order;
         }) as $answer)
                                     <label class="list-group-item">
-                                        <input type="radio" name="answers[{{ $quiz->id }}]"
+                                        <input type="radio" disabled name="answers[{{ $quiz->id }}]"
                                             value="{{ $answer->id }}"
                                             {{ $recordsByQuizId[$quiz->id]['answer']->id == $answer->id ? 'checked' : '' }}>
                                         {{ chr($answer->order + 64) }}. {{ $answer->content }}
                                     </label>
                                 @endforeach
                                 <p
-                                    class="mb-0 mt-2 ms-2 fw-bold">
-                                    => Kết quả: 
+                                    class="mb-0 mt-2 ms-2 fw-bold {{ $recordsByQuizId[$quiz->id]['answer']->is_correct ? 'text-success' : 'text-danger' }}">
+                                    => Kết quả:
                                     @foreach ($recordsByQuizId[$quiz->id]['correctAnswers'] as $correctAnswer)
                                         {{ chr($correctAnswer->order + 64) }}
                                     @endforeach

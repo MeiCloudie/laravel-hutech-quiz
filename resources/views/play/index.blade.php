@@ -14,7 +14,7 @@
             <div class="col-md-4 text-end">
                 <div class="d-flex justify-content-end">
                     <h1 class="me-2">Thời gian còn lại:</h1>
-                    <h1 id="timer" class="fw-bold">00:05</h1>
+                    <h1 id="timer" class="fw-bold">01:00</h1>
                 </div>
                 <button id="startTimer" class="btn btn-primary" onclick="startTimer()">BẮT ĐẦU</button>
                 @if (Auth::user()->role == 'ADMIN' || Auth::user()->id == $room->owner_id)
@@ -33,12 +33,13 @@
                             <div class="col mb-4">
                                 <div class="card">
                                     <div class="card-body">
-                                        <h5 class="card-title fw-bold mb-2">Câu {{ $quiz->quizToQuizCollection->order }}: {{ $quiz->content }}</h5>
+                                        <h5 class="card-title fw-bold mb-2">Câu {{ $quiz->quizToQuizCollection->order }}:
+                                            {{ $quiz->content }}</h5>
                                         <p class="card-text">{{ $quiz->explaination }}</p>
                                         <div class="list-group">
                                             @foreach ($quiz->answers->sortBy(function ($item, $key) {
-                                                return $item->order;
-                                            }) as $answer)
+            return $item->order;
+        }) as $answer)
                                                 <label class="list-group-item">
                                                     <input type="radio" name="answers[{{ $quiz->id }}]"
                                                         value="{{ $answer->id }}">
@@ -60,7 +61,8 @@
                             <button class="btn btn-primary px-5" disabled>
                                 LƯU BÀI
                             </button>
-                            <button type="button" class="btn btn-success px-5" data-bs-toggle="modal" data-bs-target="#submitTestModal">
+                            <button type="button" class="btn btn-success px-5" data-bs-toggle="modal"
+                                data-bs-target="#submitTestModal">
                                 NỘP BÀI
                             </button>
                         </div>
@@ -129,7 +131,7 @@
         // Khai báo biến để lưu trữ ID của interval
         let timerInterval;
         // Khai báo biến để lưu trữ thời gian còn lại (đơn vị: giây)
-        let currentTime = 50; // Thay đổi thành 5s/60 phút (5s/60 phút * 60 giây)
+        let currentTime = 60; // Thay đổi thành 60s/60 phút (60s/60 phút * 60 giây)
         let timerPaused = false;
 
         // Hàm cập nhật đồng hồ

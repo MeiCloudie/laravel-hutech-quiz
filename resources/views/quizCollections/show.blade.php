@@ -17,7 +17,9 @@
 
         {{-- TODO: Chưa có list quiz --}}
         <div>
-
+            @foreach ($quizCollection->quizzes as $quiz)
+                <div>{{ $quiz->quizToQuizCollection->order }}. {{ $quiz->content }}</div>
+            @endforeach
         </div>
 
         <a class="btn btn-primary btn-lg mt-3" href="{{ URL::to('quizCollections') }}" role="button">VỀ DANH SÁCH</a>

@@ -8,6 +8,7 @@ use App\Models\Room;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
 
 class PlayController extends Controller
 {
@@ -27,15 +28,15 @@ class PlayController extends Controller
     {
         $userId = Auth::user()->id;
         foreach ($request->answers as $quizId => $answerId) {
-            Record::create([
-                'user_id' => $userId,
-                'room_id' => $id,
-                'quiz_id' => $quizId,
-                'answer_id' => $answerId
-            ]);
+            $record = new Record;
+            $record->user_id = $userId;
+            $record->room_id = $id;
+            $record->quiz_id = $quizId;
+            $record->answer_id = $answerId;
+            $record->save();
         }
         // dd(Record::all());
-        return redirect('rooms/' . $id . '/result');
+        return Redirect::to('rooms/' . $id . '/result');
     }
 
     public function result($id)

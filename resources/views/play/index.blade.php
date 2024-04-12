@@ -58,7 +58,7 @@
                             <button class="btn btn-primary px-5" disabled>
                                 LƯU BÀI
                             </button>
-                            <button class="btn btn-success px-5" data-bs-toggle="modal" data-bs-target="#submitTestModal">
+                            <button type="button" class="btn btn-success px-5" data-bs-toggle="modal" data-bs-target="#submitTestModal">
                                 NỘP BÀI
                             </button>
                         </div>

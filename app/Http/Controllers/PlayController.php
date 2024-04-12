@@ -23,7 +23,8 @@ class PlayController extends Controller
             ]);
     }
 
-    public function submit($id,FormRequest $request) {
+    public function submit($id, FormRequest $request)
+    {
         $userId = Auth::user()->id;
         foreach ($request->answers as $quizId => $answerId) {
             Record::create([
@@ -34,7 +35,7 @@ class PlayController extends Controller
             ]);
         }
         // dd(Record::all());
-        return redirect('rooms/'.$id. '/result');
+        return redirect('rooms/' . $id . '/result');
     }
 
     public function result($id)
@@ -42,7 +43,18 @@ class PlayController extends Controller
         $room = Room::find($id);
         $quizCollections = QuizCollection::all();
         $records = $room->records
-        ->where('user_id', Auth::user()->id);
+            ->where('user_id', Auth::user()->id)
+            ->values()
+            ->map(
+                function ($record, $index) {
+                    return [
+                        'answer' => $record->answer,
+                        'quiz' => $record->quiz,
+                        'correctAnswers' => $record->quiz->answers->where('is_correct', true)
+                    ];
+                }
+            );
+            // dd($records);
         return view('play.result')
             ->with([
                 'room' => $room,

@@ -21,6 +21,9 @@
                     </tr>
                 </thead>
                 <tbody>
+                    {{-- @foreach ($quiz->quizCollections as $quizCollection)
+                        {{ $quizCollection->quizToQuizCollection->order }}
+                    @endforeach --}}
                     @foreach ($quiz->answers as $index => $answer)
                         <tr>
                             {{-- !: Ghi chú sửa lại phần STT câu trả lời --}}

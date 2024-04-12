@@ -37,7 +37,9 @@ class User extends Authenticatable
         'remember_token',
     ];
 
-    
+    public function getFullName() {
+        return $this->last_name . ' ' . $this->first_name;
+    }
 
     protected $attributes = [
         'role' => 'USER'

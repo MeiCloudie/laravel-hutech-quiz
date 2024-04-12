@@ -8,11 +8,11 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Record extends Model
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory;
 
     protected $table = 'records';
 
-    protected $fillable = ['user_id'];
+    protected $fillable = ['user_id', 'room_id', 'answer_id', 'quiz_id'];
 
     protected $attributes = [];
 

@@ -1,40 +1,44 @@
-<!DOCTYPE html>
-<html>
+@extends('layouts.app')
 
-<head>
-    <title>Quiz App</title>
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
-</head>
-
-<body>
+@section('content')
     <div class="container">
+        <h1 class="fw-bold">CHI TIẾT BỘ CÂU HỎI #{{ $quiz->id }}</h1>
 
-        <nav class="navbar navbar-inverse">
-            <div class="navbar-header">
-                <a class="navbar-brand" href="{{ URL::to('quizzes') }}">quiz Alert</a>
-            </div>
-            <ul class="nav navbar-nav">
-                <li><a href="{{ URL::to('quizzes') }}">View All quizzes</a></li>
-                <li><a href="{{ URL::to('quizzes/create') }}">Create a quiz</a>
-            </ul>
-        </nav>
+        <hr class="my-4" />
 
-        <h1>Showing {{ $quiz->id }}</h1>
-
-        <div class="jumbotron text-center">
-            <h2>{{ $quiz->id }}</h2>
+        <div class="jumbotron">
             <p>
-                <strong>Content:</strong> {{ $quiz->content }}<br>
-                <strong>Explaination:</strong> {{ $quiz->explaination }}<br>
-                <strong>Answers:</strong>
-
-                @foreach ($quiz->answers as $answer)
-                    <div>{{ $answer->content }}</div>
-                @endforeach
+                <strong>Nội dung:</strong> {{ $quiz->content }}<br>
+                <strong>Giải thích:</strong> {{ $quiz->explaination }}<br>
+                <strong>Câu trả lời:</strong>
             </p>
+            <table class="table text-center">
+                <thead>
+                    <tr>
+                        <th scope="col">STT</th>
+                        <th scope="col">Nội dung câu trả lời</th>
+                        <th scope="col">Đúng/Sai</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($quiz->answers as $index => $answer)
+                        <tr>
+                            {{-- !: Ghi chú sửa lại phần STT câu trả lời --}}
+                            <th scope="row">{{ $index + 1 }}</th>
+                            <td>{{ $answer->content }}</td>
+                            {{-- !: Phần này chưa lấy được đúng sai ngay lúc tạo --}}
+                            <td>{{ $answer->is_correct ? 'Đúng' : 'Sai' }}</td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
         </div>
 
-    </div>
-</body>
+        {{-- TODO: Bộ câu hỏi này nằm trong Bộ đề thi nào? --}}
+        <div>
 
-</html>
+        </div>
+
+        <a href="{{ url('quizzes') }}" class="btn btn-outline-secondary mt-4">VỀ DANH SÁCH</a>
+    </div>
+@endsection

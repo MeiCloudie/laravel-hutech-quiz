@@ -1,70 +1,83 @@
-<!DOCTYPE html>
-<html>
+@extends('layouts.app')
 
-<head>
-    <title>Shark App</title>
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
-</head>
-
-<body>
+@section('content')
     <div class="container">
+        <div class="d-flex justify-content-between align-items-center">
+            <h1 class="fw-bold">TẠO MỚI BỘ CÂU HỎI</h1>
+        </div>
 
-        <nav class="navbar navbar-inverse">
-            <div class="navbar-header">
-                <a class="navbar-brand" href="{{ URL::to('quizzes') }}">quiz Alert</a>
-            </div>
-            <ul class="nav navbar-nav">
-                <li><a href="{{ URL::to('quizzes') }}">View All quizzes</a></li>
-                <li><a href="{{ URL::to('quizzes/create') }}">Create a quiz</a>
-            </ul>
-        </nav>
-
-        <h1>Create a quiz</h1>
-
-        <!-- if there are creation errors, they will show here -->
-        @if ($errors->any())
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        @endif
+        <hr class="mb-4" />
 
         <form action="{{ url('quizzes') }}" method="POST">
             @csrf
 
             <div class="form-group">
-                <label for="content">Content</label>
+                <label for="content">Nội dung</label>
                 <input type="text" id="content" name="content" value="{{ old('content') }}" class="form-control">
             </div>
 
-            <div class="form-group">
-                <label for="explaination">Explaination</label>
+            <div class="form-group mt-2">
+                <label for="explaination">Giải thích</label>
                 <input type="text" id="explaination" name="explaination" value="{{ old('explaination') }}"
                     class="form-control">
             </div>
 
-            <div class="answers">
-                <div class="form-group">
-                    <label for="answer1">Answer 1:</label>
-                    <input type="text" id="answer1" name="answers[]">
-                    <input type="checkbox" id="isCorrect1" name="isCorrect[]">
-                    <label for="isCorrect1">Is Correct</label>
-                </div>
-
-                <div class="form-group">
-                    <label for="answer2">Answer 2:</label>
-                    <input type="text" id="answer2" name="answers[]">
-                    <input type="checkbox" id="isCorrect2" name="isCorrect[]">
-                    <label for="isCorrect2">Is Correct</label>
-                </div>
+            {{-- Vòng lặp cho phần câu trả lời --}}
+            <div class="answers mt-4">
+                @for ($i = 1; $i <= 1; $i++)
+                    <div class="form-group mt-2">
+                        <label for="answer{{ $i }}">Câu trả lời {{ $i }}:</label>
+                        <input type="text" id="answer{{ $i }}" name="answers[]" class="ms-2">
+                        <input type="checkbox" id="isCorrect{{ $i }}" name="isCorrect[]" class="ms-2">
+                        <label for="isCorrect{{ $i }}">Đúng</label>
+                    </div>
+                @endfor
             </div>
 
-            <button type="submit" class="btn btn-primary">Create</button>
+            <!-- Nút thêm câu trả lời -->
+            <div class="text-start mt-3">
+                <button type="button" class="btn btn-secondary" id="addAnswer">THÊM CÂU TRẢ LỜI</button>
+            </div>
+
+            <!-- Hiển thị thông báo lỗi nếu có -->
+            @if ($errors->any())
+                <div class="alert alert-danger mt-3">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+
+            <button type="submit" class="btn btn-primary mt-4">XÁC NHẬN TẠO MỚI</button>
+            <a href="{{ url('quizzes') }}" class="btn btn-outline-secondary mt-4">VỀ DANH SÁCH</a>
         </form>
-
-
     </div>
-</body>
+@endsection
 
-</html>
+@push('scripts')
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Lắng nghe sự kiện click nút thêm câu trả lời
+            document.getElementById('addAnswer').addEventListener('click', function() {
+                const answersContainer = document.querySelector('.answers');
+                const answerCount = answersContainer.children.length;
+                const newAnswerCount = answerCount + 1;
+
+                // Tạo phần tử input mới cho câu trả lời và checkbox
+                const newAnswerGroup = document.createElement('div');
+                newAnswerGroup.classList.add('form-group', 'mt-2');
+                newAnswerGroup.innerHTML = `
+                    <label for="answer${newAnswerCount}">Câu trả lời ${newAnswerCount}:</label>
+                    <input type="text" id="answer${newAnswerCount}" name="answers[]" class="ms-2">
+                    <input type="checkbox" id="isCorrect${newAnswerCount}" name="isCorrect[]" class="ms-2">
+                    <label for="isCorrect${newAnswerCount}">Đúng</label>
+                `;
+
+                // Thêm phần tử mới vào container
+                answersContainer.appendChild(newAnswerGroup);
+            });
+        });
+    </script>
+@endpush

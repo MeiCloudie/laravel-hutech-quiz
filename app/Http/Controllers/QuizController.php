@@ -61,6 +61,9 @@ class QuizController extends Controller
             $quiz->content       = $request->content;
             $quiz->explaination      = $request->explaination;
             $quiz->save();
+            $quizCollection = QuizCollection::find($request->quiz_collection_id);
+            $quiz->quizCollections()->attach($quizCollection);
+            
 
             foreach ($request->answers as $index => $answer) {
                 $quiz->answers()->create([

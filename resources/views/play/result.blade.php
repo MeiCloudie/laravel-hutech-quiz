@@ -32,7 +32,9 @@
         <div class="row mt-2">
             {{-- !: Chỗ này biến chưa đúng nha --}}
             {{-- Lặp qua danh sách câu --}}
-            @foreach ($room->quizCollection->quizzes as $quiz)
+            @foreach ($room->quizCollection->quizzes->sortby(function ($item, $key) {
+                return $item->quizToQuizCollection->order;
+            }) as $quiz)
                 @if ($recordsByQuizId[$quiz->id]['answer']->is_correct)
                     {{-- Hiển thị giao diện cho câu đúng --}}
                     <div class="col-lg-2 col-md-3 col-sm-4 col-6 mb-3">

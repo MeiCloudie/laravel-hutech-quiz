@@ -30,7 +30,12 @@ class QuizController extends Controller
     public function create()
     {
         //
-        return view('quizzes.create');
+        $quizCollections = QuizCollection::all();
+        return view('quizzes.create')->with(
+            [
+                'quizCollections' => $quizCollections
+            ]
+        );
     }
 
     /**

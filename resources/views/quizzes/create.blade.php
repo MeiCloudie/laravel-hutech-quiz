@@ -22,6 +22,17 @@
                     class="form-control">
             </div>
 
+            {{-- Select Option Quiz Collection --}}
+            <div class="form-group mt-2">
+                <label for="quiz_collection_id">Bộ Đề Thi</label>
+                <select id="quiz_collection_id" name="quiz_collection_id" class="form-control">
+                    <option value="" selected disabled>Chọn Bộ Đề Thi</option>
+                    @foreach ($quizCollections as $quizCollection)
+                        <option value="{{ $quizCollection->id }}">{{ $quizCollection->name }}</option>
+                    @endforeach
+                </select>
+            </div>
+
             {{-- Vòng lặp cho phần câu trả lời --}}
             <div class="answers mt-4">
                 @for ($i = 1; $i <= 1; $i++)

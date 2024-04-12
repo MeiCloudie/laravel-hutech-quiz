@@ -86,7 +86,7 @@
         }) as $index => $quiz)
                 <div class="col mb-4">
                     <div class="card">
-                        <div class="card-body" >
+                        <div class="card-body">
                             <h5 class="card-title fw-bold mb-2">Câu {{ $quiz->quizToQuizCollection->order }}:
                                 {{ $quiz->content }}</h5>
                             <p class="card-text">{{ $quiz->explaination }}</p>
@@ -96,11 +96,15 @@
         }) as $answer)
                                     <label class="list-group-item">
                                         <input type="radio" name="answers[{{ $quiz->id }}]"
-                                            value="{{ $answer->id }}"  {{$recordsByQuizId[$quiz->id]['answer']->id == $answer->id ? 'checked' : '' }}>
+                                            value="{{ $answer->id }}"
+                                            {{ $recordsByQuizId[$quiz->id]['answer']->id == $answer->id ? 'checked' : '' }}>
                                         {{ chr($answer->order + 64) }}. {{ $answer->content }}
                                     </label>
                                 @endforeach
-                                Kết quả: {{ chr($recordsByQuizId[$quiz->id]['answer']->order + 64) }}
+                                <p
+                                    class="mb-0 mt-2 ms-2 fw-bold {{ $recordsByQuizId[$quiz->id]['answer']->is_correct ? 'text-success' : 'text-danger' }}">
+                                    => Kết quả: {{ chr($recordsByQuizId[$quiz->id]['answer']->order + 64) }}
+                                </p>
                             </div>
                         </div>
                     </div>

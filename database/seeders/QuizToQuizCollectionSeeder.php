@@ -20,26 +20,32 @@ class QuizToQuizCollectionSeeder extends Seeder
             [
                 'quiz_id' => 1,
                 'quiz_collection_id' => 3,
+                'order' => 1,
             ],
             [
                 'quiz_id' => 2,
                 'quiz_collection_id' => 4,
+                'order' => 1,
             ],
             [
                 'quiz_id' => 3,
                 'quiz_collection_id' => 3,
+                'order' => 2,
             ],
             [
                 'quiz_id' => 4,
                 'quiz_collection_id' => 3,
+                'order' => 3,
             ],
             [
                 'quiz_id' => 5,
                 'quiz_collection_id' => 4,
+                'order' => 2,
             ],
             [
                 'quiz_id' => 6,
                 'quiz_collection_id' => 4,
+                'order' => 3,
             ],
         ];
         DB::table('quiz_to_quiz_collections')->truncate();

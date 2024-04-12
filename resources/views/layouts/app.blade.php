@@ -85,6 +85,20 @@
                                     href="{{ route('rooms.index') }}"><i class="bi bi-mortarboard-fill me-1"></i>Phòng
                                     thi</a>
                             </li>
+                            @if (Auth::user()->role == 'ADMIN')
+                                <li class="nav-item">
+                                    <a class="nav-link{{ Request::is('quizCollections') ? ' active' : '' }}"
+                                        href="{{ route('quizCollections.index') }}"><i
+                                            class="bi bi-clipboard-check-fill me-1"></i>Bộ đề
+                                        thi</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link{{ Request::is('quizzes') ? ' active' : '' }}"
+                                        href="{{ route('quizzes.index') }}"><i class="bi bi-bookmark-star-fill me-1"></i>Bộ
+                                        câu
+                                        hỏi</a>
+                                </li>
+                            @endif
                         </ul>
                     @endguest
 

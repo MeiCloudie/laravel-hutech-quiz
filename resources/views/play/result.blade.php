@@ -41,7 +41,7 @@
                                 <div class="d-flex justify-content-center align-items-center">
                                     <h4 class="card-title fw-bold me-2 pt-2">Câu {{ $quiz->quizToQuizCollection->order }}:</h4>
                                     {{-- <h5 class="card-title fw-bold me-2 pt-2">{{ $record->quiz->content }}</h5> --}}
-                                    <h5 class="card-text me-2 pt-2">{{ $recordsByQuizId[$quiz->id]['answer']->content }}</h5>
+                                    <h5 class="card-text me-2 pt-2">{{ chr($recordsByQuizId[$quiz->id]['answer']->order + 64) }}</h5>
                                     <i class="bi bi-check text-white fs-3"></i>
                                 </div>
                             </div>
@@ -56,10 +56,11 @@
                                     <h4 class="card-title fw-bold me-2 pt-2">Câu {{ $quiz->quizToQuizCollection->order }}:</h4>
                                     {{-- <h5 class="card-title fw-bold me-2 pt-2">{{ $record->quiz->content }}</h5> --}}
 
-                                    <h5 class="card-text me-2 pt-2">{{ $recordsByQuizId[$quiz->id]['answer']->content }}</h5>
+                                    {{-- <h5 class="card-text me-2 pt-2">{{ $recordsByQuizId[$quiz->id]['answer']->content }}</h5> --}}
+                                    <h5 class="card-text me-2 pt-2">{{ chr($recordsByQuizId[$quiz->id]['answer']->order + 64) }}</h5>
                                     <h5 class="card-text me-2 pt-2">->
                                         @foreach ($recordsByQuizId[$quiz->id]['correctAnswers'] as $answer)
-                                            {{ $answer->content }}
+                                        {{ chr($answer->order + 64) }}
                                         @endforeach
                                     </h5>
                                     <i class="bi bi-x text-white fs-3"></i>

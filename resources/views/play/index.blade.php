@@ -42,7 +42,7 @@
                                                 <label class="list-group-item">
                                                     <input type="radio" name="answers[{{ $quiz->id }}]"
                                                         value="{{ $answer->id }}">
-                                                    {{ $answer->content }}
+                                                    {{ chr($answer->order + 64) }}. {{ $answer->content }}
                                                 </label>
                                             @endforeach
                                         </div>

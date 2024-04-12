@@ -33,7 +33,7 @@
                             <div class="col mb-4">
                                 <div class="card">
                                     <div class="card-body">
-                                        <h5 class="card-title fw-bold mb-2">{{ $quiz->content }}</h5>
+                                        <h5 class="card-title fw-bold mb-2">Câu {{ $quiz->quizToQuizCollection->order }}: {{ $quiz->content }}</h5>
                                         <p class="card-text">{{ $quiz->explaination }}</p>
                                         <div class="list-group">
                                             @foreach ($quiz->answers as $answer)

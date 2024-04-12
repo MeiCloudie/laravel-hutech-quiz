@@ -32,16 +32,16 @@
         <div class="row mt-2">
             {{-- !: Chỗ này biến chưa đúng nha --}}
             {{-- Lặp qua danh sách câu --}}
-            @foreach ($records as $index => $record)
-                @if ($record['answer']->is_correct)
+            @foreach ($room->quizCollection->quizzes as $quiz)
+                @if ($recordsByQuizId[$quiz->id]['answer']->is_correct)
                     {{-- Hiển thị giao diện cho câu đúng --}}
                     <div class="col-lg-2 col-md-3 col-sm-4 col-6 mb-3">
                         <div class="card text-white bg-success">
                             <div class="card-body mb-0">
                                 <div class="d-flex justify-content-center align-items-center">
-                                    <h4 class="card-title fw-bold me-2 pt-2">Câu {{ $index + 1 }}:</h4>
+                                    <h4 class="card-title fw-bold me-2 pt-2">Câu {{ $quiz->quizToQuizCollection->order }}:</h4>
                                     {{-- <h5 class="card-title fw-bold me-2 pt-2">{{ $record->quiz->content }}</h5> --}}
-                                    <h5 class="card-text me-2 pt-2">{{ $record['answer']->content }}</h5>
+                                    <h5 class="card-text me-2 pt-2">{{ $recordsByQuizId[$quiz->id]['answer']->content }}</h5>
                                     <i class="bi bi-check text-white fs-3"></i>
                                 </div>
                             </div>
@@ -53,12 +53,12 @@
                         <div class="card text-white bg-danger">
                             <div class="card-body mb-0">
                                 <div class="d-flex justify-content-center align-items-center">
-                                    <h4 class="card-title fw-bold me-2 pt-2">Câu {{ $index + 1 }}:</h4>
+                                    <h4 class="card-title fw-bold me-2 pt-2">Câu {{ $quiz->quizToQuizCollection->order }}:</h4>
                                     {{-- <h5 class="card-title fw-bold me-2 pt-2">{{ $record->quiz->content }}</h5> --}}
 
-                                    <h5 class="card-text me-2 pt-2">{{ $record['answer']->content }}</h5>
+                                    <h5 class="card-text me-2 pt-2">{{ $recordsByQuizId[$quiz->id]['answer']->content }}</h5>
                                     <h5 class="card-text me-2 pt-2">->
-                                        @foreach ($record['correctAnswers'] as $answer)
+                                        @foreach ($recordsByQuizId[$quiz->id]['correctAnswers'] as $answer)
                                             {{ $answer->content }}
                                         @endforeach
                                     </h5>

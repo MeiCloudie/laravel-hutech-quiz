@@ -26,6 +26,8 @@ return new class extends Migration
             ->references('id')
             ->on('quiz_collections')
             ->onDelete('cascade');
+
+            $table->primary(['quiz_id', 'quiz_collection_id']);
         });
     }
 

@@ -42,12 +42,23 @@ class PlayController extends Controller
     public function result($id)
     {
         $room = Room::find($id);
-        $quizCollections = QuizCollection::all();
         $records = $room->records
             ->where('user_id', Auth::user()->id)
             ->values();
         $correctAnswerCount = $records->where('answer.is_correct', true)->count();
         $incorrectAnswerCount = $records->where('answer.is_correct', false)->count();
+        $recordsByQuizId = $records->map(
+            function ($record, $index) {
+                return [
+                    'answer' => $record->answer,
+                    'quiz' => $record->quiz,
+                    'correctAnswers' => $record->quiz->answers->where('is_correct', true)
+                ];
+            }
+        )->keyBy(function ($item) {
+            return $item['quiz']->id;
+        });
+        
         $recordViewModel = $records
             ->map(
                 function ($record, $index) {
@@ -62,10 +73,10 @@ class PlayController extends Controller
         return view('play.result')
             ->with([
                 'room' => $room,
-                'quizCollections' => $quizCollections,
                 'correctAnswerCount' => $correctAnswerCount,
                 'incorrectAnswerCount' => $incorrectAnswerCount,
-                'records' => $recordViewModel
+                'records' => $recordViewModel,
+                'recordsByQuizId' => $recordsByQuizId
             ]);
     }
 }

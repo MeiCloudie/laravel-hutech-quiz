@@ -22,24 +22,24 @@
                     class="form-control">
             </div>
 
-            {{-- TODO: Cần làm lại chỗ này --}}
+            {{-- Vòng lặp cho phần câu trả lời --}}
             <div class="answers mt-4">
-                <div class="form-group mt-2">
-                    <label for="answer1">Câu trả lời 1:</label>
-                    <input type="text" id="answer1" name="answers[]" class="ms-2">
-                    <input type="checkbox" id="isCorrect1" name="isCorrect[]" class="ms-2">
-                    <label for="isCorrect1">Đúng</label>
-                </div>
-
-                <div class="form-group mt-2">
-                    <label for="answer2">Câu trả lời 2:</label>
-                    <input type="text" id="answer2" name="answers[]" class="ms-2">
-                    <input type="checkbox" id="isCorrect2" name="isCorrect[]" class="ms-2">
-                    <label for="isCorrect2">Đúng</label>
-                </div>
+                @for ($i = 1; $i <= 1; $i++)
+                    <div class="form-group mt-2">
+                        <label for="answer{{ $i }}">Câu trả lời {{ $i }}:</label>
+                        <input type="text" id="answer{{ $i }}" name="answers[]" class="ms-2">
+                        <input type="checkbox" id="isCorrect{{ $i }}" name="isCorrect[]" class="ms-2">
+                        <label for="isCorrect{{ $i }}">Đúng</label>
+                    </div>
+                @endfor
             </div>
 
-            <!-- if there are creation errors, they will show here -->
+            <!-- Nút thêm câu trả lời -->
+            <div class="text-start mt-3">
+                <button type="button" class="btn btn-secondary" id="addAnswer">THÊM CÂU TRẢ LỜI</button>
+            </div>
+
+            <!-- Hiển thị thông báo lỗi nếu có -->
             @if ($errors->any())
                 <div class="alert alert-danger mt-3">
                     <ul>
@@ -55,3 +55,29 @@
         </form>
     </div>
 @endsection
+
+@push('scripts')
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Lắng nghe sự kiện click nút thêm câu trả lời
+            document.getElementById('addAnswer').addEventListener('click', function() {
+                const answersContainer = document.querySelector('.answers');
+                const answerCount = answersContainer.children.length;
+                const newAnswerCount = answerCount + 1;
+
+                // Tạo phần tử input mới cho câu trả lời và checkbox
+                const newAnswerGroup = document.createElement('div');
+                newAnswerGroup.classList.add('form-group', 'mt-2');
+                newAnswerGroup.innerHTML = `
+                    <label for="answer${newAnswerCount}">Câu trả lời ${newAnswerCount}:</label>
+                    <input type="text" id="answer${newAnswerCount}" name="answers[]" class="ms-2">
+                    <input type="checkbox" id="isCorrect${newAnswerCount}" name="isCorrect[]" class="ms-2">
+                    <label for="isCorrect${newAnswerCount}">Đúng</label>
+                `;
+
+                // Thêm phần tử mới vào container
+                answersContainer.appendChild(newAnswerGroup);
+            });
+        });
+    </script>
+@endpush

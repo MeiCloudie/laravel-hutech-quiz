@@ -1,34 +1,25 @@
-<!DOCTYPE html>
-<html>
+@extends('layouts.app')
 
-<head>
-    <title>Quiz App</title>
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
-</head>
-
-<body>
+@section('content')
     <div class="container">
-
-        <nav class="navbar navbar-inverse">
-            <div class="navbar-header">
-                <a class="navbar-brand" href="{{ URL::to('quizCollections') }}">quiz Alert</a>
+        <h1 class="fw-bold">CHI TIẾT BỘ ĐỀ THI</h1>
+        <hr class="my-4">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">ID: {{ $quizCollection->id }}</h5>
+                        <p class="card-text">Tên Bộ Đề Thi: {{ $quizCollection->name }}</p>
+                    </div>
+                </div>
             </div>
-            <ul class="nav navbar-nav">
-                <li><a href="{{ URL::to('quizCollections') }}">View All quiz collections</a></li>
-                <li><a href="{{ URL::to('quizCollections/create') }}">Create a quiz collection</a>
-            </ul>
-        </nav>
-
-        <h1>Showing {{ $quizCollection->id }}</h1>
-
-        <div class="jumbotron text-center">
-            <h2>{{ $quizCollection->id }}</h2>
-            <p>
-                <strong>Content:</strong> {{ $quizCollection->name }}<br>
-            </p>
         </div>
 
-    </div>
-</body>
+        {{-- TODO: Chưa có list quiz --}}
+        <div>
 
-</html>
+        </div>
+
+        <a class="btn btn-primary btn-lg mt-3" href="{{ URL::to('quizCollections') }}" role="button">VỀ DANH SÁCH</a>
+    </div>
+@endsection

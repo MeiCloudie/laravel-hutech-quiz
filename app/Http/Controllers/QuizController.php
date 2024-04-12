@@ -60,7 +60,7 @@ class QuizController extends Controller
             foreach ($request->answers as $index => $answer) {
                 $quiz->answers()->create([
                     'content' => $answer,
-                    'isCorrect' => isset($request->isCorrect[$index]),
+                    'is_correct' => isset($request->isCorrect[$index]),
                 ]);
             }
 

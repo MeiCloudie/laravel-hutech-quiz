@@ -27,6 +27,10 @@ class PlayController extends Controller
     public function submit($id, FormRequest $request)
     {
         $userId = Auth::user()->id;
+
+        // Xóa tất cả các bản ghi của người dùng hiện tại trong bảng 'records'
+        Record::where('user_id', $userId)->delete();
+
         foreach ($request->answers as $quizId => $answerId) {
             $record = new Record;
             $record->user_id = $userId;
@@ -58,7 +62,7 @@ class PlayController extends Controller
         )->keyBy(function ($item) {
             return $item['quiz']->id;
         });
-        
+
         $recordViewModel = $records
             ->map(
                 function ($record, $index) {
@@ -69,7 +73,7 @@ class PlayController extends Controller
                     ];
                 }
             );
-            // dd($records);
+        // dd($records);
         return view('play.result')
             ->with([
                 'room' => $room,

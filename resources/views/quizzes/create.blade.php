@@ -22,15 +22,19 @@
                     class="form-control">
             </div>
 
-            {{-- Select Option Quiz Collection --}}
+            <!-- Danh sách các checkbox cho bộ đề thi -->
             <div class="form-group mt-2">
-                <label for="quiz_collection_id">Bộ Đề Thi</label>
-                <select id="quiz_collection_id" name="quiz_collection_id" class="form-control">
-                    <option value="" selected disabled>Chọn Bộ Đề Thi</option>
+                <label>Bộ Đề Thi:</label>
+                <div>
                     @foreach ($quizCollections as $quizCollection)
-                        <option value="{{ $quizCollection->id }}">{{ $quizCollection->name }}</option>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="quiz_collections[]"
+                                value="{{ $quizCollection->id }}" id="quiz_collection_{{ $quizCollection->id }}">
+                            <label class="form-check-label"
+                                for="quiz_collection_{{ $quizCollection->id }}">{{ $quizCollection->name }}</label>
+                        </div>
                     @endforeach
-                </select>
+                </div>
             </div>
 
             {{-- Vòng lặp cho phần câu trả lời --}}

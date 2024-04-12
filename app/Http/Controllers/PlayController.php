@@ -44,7 +44,10 @@ class PlayController extends Controller
         $quizCollections = QuizCollection::all();
         $records = $room->records
             ->where('user_id', Auth::user()->id)
-            ->values()
+            ->values();
+        $correctAnswerCount = $records->where('answer.is_correct', true)->count();
+        $incorrectAnswerCount = $records->where('answer.is_correct', false)->count();
+        $recordViewModel = $records
             ->map(
                 function ($record, $index) {
                     return [
@@ -59,7 +62,9 @@ class PlayController extends Controller
             ->with([
                 'room' => $room,
                 'quizCollections' => $quizCollections,
-                'records' => $records
+                'correctAnswerCount' => $correctAnswerCount,
+                'incorrectAnswerCount' => $incorrectAnswerCount,
+                'records' => $recordViewModel
             ]);
     }
 }

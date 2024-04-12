@@ -17,8 +17,8 @@
                 <div class="card">
                     <div class="card-body mb-0">
                         <h4 class="card-title fw-bold mb-2">Họ tên: {{ Auth::user()->getFullName() }}</h4>
-                        <h5 class="card-text">Số câu đúng: ...</h5>
-                        <h5 class="card-text">Số câu sai: ...</h5>
+                        <h5 class="card-text">Số câu đúng: {{ $correctAnswerCount }}</h5>
+                        <h5 class="card-text">Số câu sai: {{ $incorrectAnswerCount }}</h5>
                         <h5 class="card-text fw-bold text-danger">TỔNG ĐIỂM: ...</h5>
                     </div>
                 </div>

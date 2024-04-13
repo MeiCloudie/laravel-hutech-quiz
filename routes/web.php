@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,4 +20,22 @@ Route::get('/', function () {
 
 Auth::routes();
 
+Route::prefix('rooms')->group(function () {
+    Route::get('{id}/play', [App\Http\Controllers\PlayController::class, 'index'])->name('play.index');
+    Route::post('{id}/play/submit', [App\Http\Controllers\PlayController::class, 'submit'])->name('play.submit');
+    Route::get('{id}/result', [App\Http\Controllers\PlayController::class, 'result'])->name('play.result');
+
+    Route::post('find', [App\Http\Controllers\RoomController::class, 'find'])->name('find');
+    Route::get('close/{id}', [App\Http\Controllers\RoomController::class, 'close'])->name('close');
+    Route::get('open/{id}', [App\Http\Controllers\RoomController::class, 'open'])->name('open');
+    Route::get('join/{id}', [App\Http\Controllers\RoomController::class, 'join'])->name('join');
+    Route::get('leave/{id}', [App\Http\Controllers\RoomController::class, 'leave'])->name('leave');
+})->middleware('auth');
+
+Route::resource('quizzes', App\Http\Controllers\QuizController::class)->middleware('auth.admin');
+Route::resource('quizCollections', App\Http\Controllers\QuizCollectionController::class)->middleware('auth.admin');
+Route::resource('answers', App\Http\Controllers\AnswerController::class)->middleware('auth');
+Route::resource('rooms', App\Http\Controllers\RoomController::class)->middleware('auth');
+
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/profile', [App\Http\Controllers\ProfileController::class, 'index'])->name('profile');

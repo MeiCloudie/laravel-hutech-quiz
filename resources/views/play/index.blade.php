@@ -148,7 +148,7 @@
         // Khai báo biến để lưu trữ ID của interval
         let timerInterval;
         // Khai báo biến để lưu trữ thời gian còn lại (đơn vị: giây)
-        let currentTime = 60; // Thay đổi thành 60s/60 phút (60s/60 phút * 60 giây)
+        let currentTime = {{ $room->duration }}; // Thay đổi thành 60s/60 phút (60s/60 phút * 60 giây)
         let timerPaused = false;
 
         // Hàm cập nhật đồng hồ

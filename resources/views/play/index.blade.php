@@ -1,5 +1,18 @@
 @extends('layouts.app')
+@php
+    function formatTime($seconds)
+    {
+        $hours = floor($seconds / 3600);
+        $mins = floor(($seconds / 60) % 60);
+        $secs = floor($seconds % 60);
 
+        if ($hours > 0) {
+            return sprintf('%02d:%02d:%02d', $hours, $mins, $secs);
+        } else {
+            return sprintf('%02d:%02d', $mins, $secs);
+        }
+    }
+@endphp
 @section('content')
     <div class="container">
         <div class="row">
@@ -14,7 +27,11 @@
             <div class="col-md-4 text-end">
                 <div class="d-flex justify-content-end">
                     <h1 class="me-2">Thời gian còn lại:</h1>
-                    <h1 id="timer" class="fw-bold">01:00</h1>
+
+
+                    <h1 id="timer" class="fw-bold">{{ formatTime($room->duration) }}</h1>
+
+
                 </div>
                 <button id="startTimer" class="btn btn-primary" onclick="startTimer()">BẮT ĐẦU</button>
                 @if (Auth::user()->role == 'ADMIN' || Auth::user()->id == $room->owner_id)

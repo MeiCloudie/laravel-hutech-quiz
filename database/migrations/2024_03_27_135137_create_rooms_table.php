@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('code')->unique();
             $table->boolean('is_closed')->default(false);
+            $table->integer('duration')->default(30);
             $table->timestamps();
             $table->softDeletes();
             

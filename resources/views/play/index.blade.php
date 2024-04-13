@@ -35,7 +35,7 @@
                 </div>
                 <button id="startTimer" class="btn btn-primary" onclick="startTimer()">BẮT ĐẦU</button>
                 @if (Auth::user()->role == 'ADMIN' || Auth::user()->id == $room->owner_id)
-                    <button id="pauseTimer" class="btn btn-danger" onclick="pauseTimer()" disabled>TẠM NGỪNG</button>
+                    <button id="pauseTimer" class="btn btn-danger" onclick="pauseTimer()" hidden disabled>TẠM NGỪNG</button>
                 @endif
             </div>
 
@@ -215,7 +215,7 @@
         function pauseTimer() {
             timerPaused = !timerPaused;
             let pauseButton = document.getElementById('pauseTimer');
-            pauseButton.textContent = timerPaused ? 'TIẾP TỤC THỜI GIAN' : 'TẠM NGỪNG THỜI GIAN';
+            pauseButton.textContent = timerPaused ? 'TIẾP TỤC' : 'TẠM NGỪNG';
         }
     </script>
 @endpush

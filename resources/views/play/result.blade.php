@@ -39,14 +39,14 @@
                     {{-- Hiển thị giao diện cho câu đúng --}}
                     <div class="col-lg-2 col-md-3 col-sm-4 col-6 mb-3">
                         <div class="card text-white bg-success">
-                            <div class="card-body mb-0">
+                            <div class="card-body m-0 p-0">
                                 <div class="d-flex justify-content-center align-items-center">
-                                    <h4 class="card-title fw-bold me-2 pt-2">Câu {{ $quiz->quizToQuizCollection->order }}:
-                                    </h4>
+                                    <h6 class="card-title fw-bold me-2 pt-2">Câu {{ $quiz->quizToQuizCollection->order }}:
+                                    </h6>
                                     {{-- <h5 class="card-title fw-bold me-2 pt-2">{{ $record->quiz->content }}</h5> --}}
-                                    <h5 class="card-text me-2 pt-2">
-                                        {{ chr($recordsByQuizId[$quiz->id]['answer']->order + 64) }}</h5>
-                                    <i class="bi bi-check text-white fs-3"></i>
+                                    <h6 class="card-text me-2 pt-2">
+                                        {{ chr($recordsByQuizId[$quiz->id]['answer']->order + 64) }}</h6>
+                                    <i class="bi bi-check text-white text-end fs-3"></i>
                                 </div>
                             </div>
                         </div>
@@ -55,21 +55,22 @@
                     {{-- Hiển thị giao diện cho câu sai --}}
                     <div class="col-lg-2 col-md-3 col-sm-4 col-6 mb-3">
                         <div class="card text-white bg-danger">
-                            <div class="card-body mb-0">
+                            <div class="card-body m-0 p-0">
                                 <div class="d-flex justify-content-center align-items-center">
-                                    <h4 class="card-title fw-bold me-2 pt-2">Câu {{ $quiz->quizToQuizCollection->order }}:
-                                    </h4>
+                                    <h6 class="card-title fw-bold me-2 pt-2">Câu {{ $quiz->quizToQuizCollection->order }}:
+                                    </h6>
                                     {{-- <h5 class="card-title fw-bold me-2 pt-2">{{ $record->quiz->content }}</h5> --}}
 
                                     {{-- <h5 class="card-text me-2 pt-2">{{ $recordsByQuizId[$quiz->id]['answer']->content }}</h5> --}}
-                                    <h5 class="card-text me-2 pt-2">
-                                        {{ isset($recordsByQuizId[$quiz->id]['answer']) ? chr($recordsByQuizId[$quiz->id]['answer']->order + 64) : 'Không chọn'}}</h5>
-                                    <h5 class="card-text me-2 pt-2">->
+                                    <h6 class="card-text me-2 pt-2">
+                                        {{ isset($recordsByQuizId[$quiz->id]['answer']) ? chr($recordsByQuizId[$quiz->id]['answer']->order + 64) : 'Trống' }}
+                                    </h6>
+                                    <h6 class="card-text me-2 pt-2">->
                                         @foreach ($recordsByQuizId[$quiz->id]['correctAnswers'] as $answer)
                                             {{ chr($answer->order + 64) }}
                                         @endforeach
-                                    </h5>
-                                    <i class="bi bi-x text-white fs-3"></i>
+                                    </h6>
+                                    <i class="bi bi-x text-white text-end fs-3"></i>
                                 </div>
                             </div>
                         </div>
@@ -97,7 +98,7 @@
                                     <label class="list-group-item">
                                         <input type="radio" disabled name="answers[{{ $quiz->id }}]"
                                             value="{{ $answer->id }}"
-                                            {{ isset($recordsByQuizId[$quiz->id]['answer']) &&  $recordsByQuizId[$quiz->id]['answer']->id == $answer->id ? 'checked' : '' }}>
+                                            {{ isset($recordsByQuizId[$quiz->id]['answer']) && $recordsByQuizId[$quiz->id]['answer']->id == $answer->id ? 'checked' : '' }}>
                                         {{ chr($answer->order + 64) }}. {{ $answer->content }}
                                     </label>
                                 @endforeach

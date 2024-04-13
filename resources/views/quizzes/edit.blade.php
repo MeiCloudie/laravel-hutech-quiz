@@ -43,9 +43,9 @@
                 @foreach ($quiz->answers as $index => $answer)
                     <div class="form-group mt-2">
                         <label for="answer{{ $index + 1 }}">Câu trả lời {{ $index + 1 }}:</label>
-                        <input type="text" id="answer{{ $index + 1 }}" name="answers[]"
+                        <input type="text" id="answer{{ $index + 1 }}" name="answers[{{ $answer->id }}]"
                             value="{{ $answer->content }}" class="ms-2">
-                        <input type="checkbox" id="isCorrect{{ $index + 1 }}" name="isCorrect[]"
+                        <input type="checkbox" id="isCorrect{{ $index + 1 }}" name="isCorrect[{{ $answer->id }}]"
                             {{ $answer->is_correct ? 'checked' : '' }} class="ms-2">
                         <label for="isCorrect{{ $index + 1 }}">Đúng</label>
                     </div>

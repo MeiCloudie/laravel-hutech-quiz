@@ -126,6 +126,7 @@ class QuizController extends Controller
      */
     public function update(UpdateQuizRequest $request, $id)
     {
+
         //
         $rules = array(
             'content'       => 'required',
@@ -144,6 +145,14 @@ class QuizController extends Controller
             $quiz->content       = $request->content;
             $quiz->explaination      = $request->explaination;
             $quiz->save();
+            foreach ($request->answers as $answerId => $content) {
+                $isCorrect = isset($request->isCorrect[$answerId]);
+                $quiz->answers()->where('id', $answerId)->update([
+                    'content' => $content,
+                    'is_correct' => $isCorrect,
+                ]);
+            }
+
 
             // redirect
             // Session::flash('message', 'Successfully updated quiz!');

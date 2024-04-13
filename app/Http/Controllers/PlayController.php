@@ -30,16 +30,16 @@ class PlayController extends Controller
 
         // Xóa tất cả các bản ghi của người dùng hiện tại trong bảng 'records'
         Record::where('user_id', $userId)->where('room_id', $id)->delete();
-
-        foreach ($request->answers as $quizId => $answerId) {
+        $room = Room::find($id);
+        foreach ($room->quizCollection->quizzes as $quiz) {
             $record = new Record;
             $record->user_id = $userId;
             $record->room_id = $id;
-            $record->quiz_id = $quizId;
-            $record->answer_id = $answerId;
+            $record->quiz_id = $quiz->id;
+            $record->answer_id = isset($request->answers) && array_key_exists($quiz->id, $request->answers) ? $request->answers[$quiz->id] : null;
             $record->save();
         }
-        // dd(Record::all());
+
         return Redirect::to('rooms/' . $id . '/result');
     }
 

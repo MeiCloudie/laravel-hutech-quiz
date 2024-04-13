@@ -32,8 +32,8 @@ Route::prefix('rooms')->group(function () {
     Route::get('leave/{id}', [App\Http\Controllers\RoomController::class, 'leave'])->name('leave');
 })->middleware('auth');
 
-Route::resource('quizzes', App\Http\Controllers\QuizController::class)->middleware('auth');
-Route::resource('quizCollections', App\Http\Controllers\QuizCollectionController::class)->middleware('auth');
+Route::resource('quizzes', App\Http\Controllers\QuizController::class)->middleware('auth.admin');
+Route::resource('quizCollections', App\Http\Controllers\QuizCollectionController::class)->middleware('auth.admin');
 Route::resource('answers', App\Http\Controllers\AnswerController::class)->middleware('auth');
 Route::resource('rooms', App\Http\Controllers\RoomController::class)->middleware('auth');
 

@@ -20,6 +20,7 @@ class RoomSeeder extends Seeder
             [
                 'id' => 1,
                 'code' => '12345',
+                'duration' => 60,
                 'current_quiz_id' => 1,
                 'quiz_collection_id' => 3,
                 'owner_id' => 1,
@@ -29,6 +30,7 @@ class RoomSeeder extends Seeder
             [
                 'id' => 2,
                 'code' => '12346',
+                'duration' => 60,
                 'current_quiz_id' => 2,
                 'quiz_collection_id' => 3,
                 'owner_id' => 2,

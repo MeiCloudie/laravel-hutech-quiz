@@ -2,8 +2,20 @@
 
 @section('content')
     <div class="">
+        
         <div class="row justify-content-center m-0">
+            
             <div class="col-md-8">
+                @if ($errors->any())
+                    <div class="alert alert-danger mt-0 mb-0">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                    <br>
+                @endif
                 <!-- Giới thiệu hệ thống -->
                 <div class="mb-4">
                     <h2 class="fw-bold">GIỚI THIỆU HỆ THỐNG</h2>

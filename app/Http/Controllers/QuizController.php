@@ -30,7 +30,12 @@ class QuizController extends Controller
     public function create()
     {
         //
-        return view('quizzes.create');
+        $quizCollections = QuizCollection::all();
+        return view('quizzes.create')->with(
+            [
+                'quizCollections' => $quizCollections
+            ]
+        );
     }
 
     /**
@@ -52,17 +57,32 @@ class QuizController extends Controller
                 ->withInput();
         } else {
             // store
-            $quiz = new Quiz();
+            $quiz = new Quiz;
             $quiz->content       = $request->content;
             $quiz->explaination      = $request->explaination;
             $quiz->save();
-
             foreach ($request->answers as $index => $answer) {
                 $quiz->answers()->create([
                     'content' => $answer,
-                    'isCorrect' => isset($request->isCorrect[$index]),
+                    'is_correct' => isset($request->isCorrect[$index]),
                 ]);
             }
+            if ($request->quiz_collections)
+                foreach ($request->quiz_collections as $quizCollectionId) {
+                    $quizCollection = QuizCollection::find($quizCollectionId);
+                    $maxOrder = 1;
+                    foreach ($quizCollection->quizzes as $q) {
+                        if ($q->quizToQuizCollection->order > $maxOrder) {
+                            $maxOrder = $q->quizToQuizCollection->order;
+                        }
+                    }
+
+                    $quiz->quizCollections()->attach($quizCollection, [
+                        'order' => $maxOrder + 1
+                    ]);
+                }
+
+
 
             // redirect
             // Session::flash('message', 'Successfully created quiz!');
@@ -95,10 +115,11 @@ class QuizController extends Controller
     {
         //
         $quiz = Quiz::find($id);
+        $quizCollections = QuizCollection::all();
 
         // show the view and pass the quiz to it
         return view('quizzes.edit')
-            ->with('quiz', $quiz);
+            ->with(['quiz' => $quiz, 'quizCollections' => $quizCollections]);
     }
 
     /**
@@ -106,6 +127,7 @@ class QuizController extends Controller
      */
     public function update(UpdateQuizRequest $request, $id)
     {
+
         //
         $rules = array(
             'content'       => 'required',
@@ -124,6 +146,16 @@ class QuizController extends Controller
             $quiz->content       = $request->content;
             $quiz->explaination      = $request->explaination;
             $quiz->save();
+            foreach ($request->answers as $answerId => $content) {
+                $isCorrect = isset($request->isCorrect[$answerId]);
+                $quiz->answers()->where('id', $answerId)->update([
+                    'content' => $content,
+                    'is_correct' => $isCorrect,
+                ]);
+            }
+
+            $quiz->quizCollections()->sync(array_keys($request->quiz_collections));
+
 
             // redirect
             // Session::flash('message', 'Successfully updated quiz!');

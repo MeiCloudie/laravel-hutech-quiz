@@ -12,7 +12,7 @@ class Room extends Model
 
     protected $table = 'rooms';
 
-    protected $fillable = ['code', 'is_closed', 'owner_id'];
+    protected $fillable = ['code', 'is_closed', 'duration', 'owner_id'];
 
     protected $attributes = [
     ];

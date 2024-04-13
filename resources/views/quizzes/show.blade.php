@@ -37,9 +37,15 @@
             </table>
         </div>
 
+        <hr class="my-4" />
         {{-- TODO: Bộ câu hỏi này nằm trong Bộ đề thi nào? --}}
         <div>
-
+            <h4 class="fw-bold">Câu hỏi được áp dụng vào BỘ ĐỀ THI:</h4>
+            <ul>
+                @foreach ($quiz->quizCollections as $quizCollection)
+                    <li>{{ $quizCollection->name }}</li>
+                @endforeach
+            </ul>
         </div>
 
         <a href="{{ url('quizzes') }}" class="btn btn-outline-secondary mt-4">VỀ DANH SÁCH</a>

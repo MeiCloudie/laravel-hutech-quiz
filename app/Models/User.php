@@ -8,6 +8,9 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
+/**
+ * @method bool isAdmin();
+ */
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
@@ -39,6 +42,10 @@ class User extends Authenticatable
 
     public function getFullName() {
         return $this->last_name . ' ' . $this->first_name;
+    }
+
+    public function isAdmin() {
+        return $this->role === "ADMIN";
     }
 
     protected $attributes = [

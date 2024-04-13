@@ -24,19 +24,25 @@
             </div>
 
             <!-- Danh sách các checkbox cho bộ đề thi -->
-            {{-- <div class="form-group mt-2">
+            <div class="form-group mt-2">
                 <label>Bộ Đề Thi:</label>
                 <div>
                     @foreach ($quizCollections as $quizCollection)
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" name="quiz_collections[]"
-                                value="{{ $quizCollection->id }}" id="quiz_collection_{{ $quizCollection->id }}">
+                            <input class="form-check-input" type="checkbox"
+                                name="quiz_collections[{{ $quizCollection->id }}]" value="{{ $quizCollection->id }}"
+                                id="quiz_collection_{{ $quizCollection->id }}"
+                                {{ collect($quiz->quizCollections)->contains(function ($value) use ($quizCollection) {
+                                    return $value->id == $quizCollection->id;
+                                })
+                                    ? 'checked'
+                                    : '' }}>
                             <label class="form-check-label"
                                 for="quiz_collection_{{ $quizCollection->id }}">{{ $quizCollection->name }}</label>
                         </div>
                     @endforeach
                 </div>
-            </div> --}}
+            </div>
 
             {{-- Vòng lặp cho phần câu trả lời --}}
             <div class="answers mt-4">

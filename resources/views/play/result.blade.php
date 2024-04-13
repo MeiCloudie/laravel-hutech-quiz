@@ -35,7 +35,7 @@
             @foreach ($room->quizCollection->quizzes->sortby(function ($item, $key) {
             return $item->quizToQuizCollection->order;
         }) as $quiz)
-                @if ($recordsByQuizId[$quiz->id]['answer']->is_correct)
+                @if (isset($recordsByQuizId[$quiz->id]['answer']) && $recordsByQuizId[$quiz->id]['answer']->is_correct)
                     {{-- Hiển thị giao diện cho câu đúng --}}
                     <div class="col-lg-2 col-md-3 col-sm-4 col-6 mb-3">
                         <div class="card text-white bg-success">
@@ -63,7 +63,7 @@
 
                                     {{-- <h5 class="card-text me-2 pt-2">{{ $recordsByQuizId[$quiz->id]['answer']->content }}</h5> --}}
                                     <h5 class="card-text me-2 pt-2">
-                                        {{ chr($recordsByQuizId[$quiz->id]['answer']->order + 64) }}</h5>
+                                        {{ isset($recordsByQuizId[$quiz->id]['answer']) ? chr($recordsByQuizId[$quiz->id]['answer']->order + 64) : 'Không chọn'}}</h5>
                                     <h5 class="card-text me-2 pt-2">->
                                         @foreach ($recordsByQuizId[$quiz->id]['correctAnswers'] as $answer)
                                             {{ chr($answer->order + 64) }}
@@ -97,12 +97,12 @@
                                     <label class="list-group-item">
                                         <input type="radio" disabled name="answers[{{ $quiz->id }}]"
                                             value="{{ $answer->id }}"
-                                            {{ $recordsByQuizId[$quiz->id]['answer']->id == $answer->id ? 'checked' : '' }}>
+                                            {{ isset($recordsByQuizId[$quiz->id]['answer']) &&  $recordsByQuizId[$quiz->id]['answer']->id == $answer->id ? 'checked' : '' }}>
                                         {{ chr($answer->order + 64) }}. {{ $answer->content }}
                                     </label>
                                 @endforeach
                                 <p
-                                    class="mb-0 mt-2 ms-2 fw-bold {{ $recordsByQuizId[$quiz->id]['answer']->is_correct ? 'text-success' : 'text-danger' }}">
+                                    class="mb-0 mt-2 ms-2 fw-bold {{ isset($recordsByQuizId[$quiz->id]['answer']) && $recordsByQuizId[$quiz->id]['answer']->is_correct ? 'text-success' : 'text-danger' }}">
                                     => Kết quả:
                                     @foreach ($recordsByQuizId[$quiz->id]['correctAnswers'] as $correctAnswer)
                                         {{ chr($correctAnswer->order + 64) }}

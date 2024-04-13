@@ -13,7 +13,7 @@
                         <!-- Họ và tên -->
                         <h4 class="card-title fw-bold">{{ $user->last_name }} {{ $user->first_name }}</h4>
                         <!-- Khoa -->
-                        <p class="card-text">Khoa {{ $user->faculty->name }}</p>
+                        <p class="card-text">Khoa {{ isset($user->faculty) ? $user->faculty->name : '' }}</p>
                     </div>
                 </div>
             </div>
@@ -45,7 +45,7 @@
                             </div>
                             <div class="mb-3">
                                 <label for="faculty" class="form-label">Khoa</label>
-                                <input type="text" class="form-control" id="faculty" value="{{ $user->faculty->name }}"
+                                <input type="text" class="form-control" id="faculty" value="{{ isset($user->faculty) ? $user->faculty->name : '' }}"
                                     readonly>
                             </div>
                         </form>

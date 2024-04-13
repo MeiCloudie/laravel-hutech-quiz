@@ -57,20 +57,32 @@ class QuizController extends Controller
                 ->withInput();
         } else {
             // store
-            $quiz = new Quiz();
+            $quiz = new Quiz;
             $quiz->content       = $request->content;
             $quiz->explaination      = $request->explaination;
             $quiz->save();
-            $quizCollection = QuizCollection::find($request->quiz_collection_id);
-            $quiz->quizCollections()->attach($quizCollection);
-            
-
             foreach ($request->answers as $index => $answer) {
                 $quiz->answers()->create([
                     'content' => $answer,
                     'is_correct' => isset($request->isCorrect[$index]),
                 ]);
             }
+            if ($request->quiz_collections)
+                foreach ($request->quiz_collections as $quizCollectionId) {
+                    $quizCollection = QuizCollection::find($quizCollectionId);
+                    $maxOrder = 1;
+                    foreach ($quizCollection->quizzes as $q) {
+                        if ($q->quizToQuizCollection->order > $maxOrder) {
+                            $maxOrder = $q->quizToQuizCollection->order;
+                        }
+                    }
+
+                    $quiz->quizCollections()->attach($quizCollection, [
+                        'order' => $maxOrder + 1
+                    ]);
+                }
+
+
 
             // redirect
             // Session::flash('message', 'Successfully created quiz!');
